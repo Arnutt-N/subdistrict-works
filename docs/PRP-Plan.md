@@ -1,4 +1,4 @@
-# PRP-Plan — อบต.หัวงัว Citizen-Help Web App
+# PRP-Plan — Subdistrict Works Citizen-Help Web App
 
 > **เอกสารวางแผน (planning artifact)** — ไม่ใช่ code/scaffold
 > Source-of-truth: `D:\toppublic\per\docs\context-package.md` + `D:\toppublic\per\docs\PRD.md`
@@ -108,7 +108,7 @@ Plan แบ่งเป็น **5 เฟสหลัก + 1 เฟส scale** �
 | P0.1 | DB schema + migration + RLS policy ทุกตาราง + **policy test per role ใน staging (R-PL-2 CRITICAL gate)** | `complaint`, `complainant` (CHECK mutual exclusion C4), `assignment`, `action`, `outcome`, `budget`, `address`, `taxonomy`, `book_receipt` (`book_no text` M-D3), `audit_log` (REVOKE+trigger+partition C1), `person`, `agency` (EXCLUDE H5), `person_tenure` (EXCLUDE H5), `consent` (H1) |
 | P0.2 | `audit_log` append-only policy + PII strip + partition (C1+C5) | REVOKE UPDATE/DELETE จาก authenticated/anon/service_role; trigger BEFORE UPDATE OR DELETE RAISE EXCEPTION; range-partition รายเดือน/ปี; trigger strip CID/PII จาก jsonb before INSERT; field-level masking (CID→masked, phone→last 4, address→village); column-level RLS `before/after`; allow-list field ที่ log ได้; migration role แยกจาก service_role |
 | P0.3 | Supabase Auth + MFA (admin/sysadmin/intake) + httpOnly cookie session | TOTP สำหรับ admin/sysadmin/intake; assignee/citizen ทางเลือก; ห้ามเก็บ token ใน localStorage |
-| P0.4 | Address/taxonomy seed + RLS global shared (L-D3) | ~30 หมวด + 13 หมู่บ้านตำบลหัวงัว ผ่านกรมการปกครอง API; SELECT `USING (true)` + INSERT/UPDATE/DELETE `USING (auth.role() = 'service_role')` |
+| P0.4 | Address/taxonomy seed + RLS global shared (L-D3) | ~30 หมวด + 13 หมู่บ้านตำบลเดโม ผ่านกรมการปกครอง API; SELECT `USING (true)` + INSERT/UPDATE/DELETE `USING (auth.role() = 'service_role')` |
 | P0.5 | PDPA consent flow + withdrawal (H1) | `consent` table (version, scope, granted_at, withdrawn_at) + endpoint `/api/consent/withdraw` trigger pseudonymize + `audit_log.action='consent_withdrawn'` + แจ้ง citizen |
 | P0.6 | งบ กก.ทร. structured field + validation + composite index (L-D1) | `numeric(14,2)` + `ggor_code` index + composite `(fiscal_year, ggor_code) INCLUDE (amount, complaint_id)` |
 | P0.7 | บัตร 13 หลัก checksum server-side + **CID keyed HMAC (C2)** + pgcrypto encrypt-at-rest + mask + column-level RLS | validate algorithm กรมการปกครองฝั่ง server; `pgcrypto hmac(cid, pgp_sym_decrypt(CID_HMAC_KEY), 'sha256')` → `cid_hmac`; `CID_HMAC_KEY` ≥ 32 char env Sensitive; ห้าม deterministic hash; hash index สำหรับค้น; mask `x-xxxx-xxxxxx-x` ใน UI/log |
@@ -385,7 +385,7 @@ src/
 - **Output Directory:** `.next`
 - **Install Command:** `pnpm install --frozen-lockfile`
 - **Node.js Version:** 20.x LTS
-- **Function Region:** `sin1` (Singapore) — ใกล้ผู้ใช้ตำบลหัวงัว + ลด RTT ไป Supabase pooler ap-southeast-1
+- **Function Region:** `sin1` (Singapore) — ใกล้ผู้ใช้ตำบลเดโม + ลด RTT ไป Supabase pooler ap-southeast-1
 - **Function Duration:** webhook receiver (QStash) `maxDuration=30` (รองรับ retry backoff)
 
 **Edge Runtime placement (H7 — ใช้ PostgREST เท่านั้น ไม่ใช่ pg protocol):**
@@ -422,7 +422,7 @@ src/
 - `supabase/migrations/0006_consent_table.sql` (consent table H1)
 - `supabase/migrations/0007_materialized_views.sql` (รายงานเดือน/ไตรมาส refresh ผ่าน QStash H9)
 - `supabase/seed/taxonomy.sql` (~30 หมวด)
-- `supabase/seed/address.sql` (13 หมู่บ้านตำบลหัวงัว ผ่านกรมการปกครอง API)
+- `supabase/seed/address.sql` (13 หมู่บ้านตำบลเดโม ผ่านกรมการปกครอง API)
 - `src/lib/supabase/{server,client,admin}.ts` (admin.ts = service_role registry C3)
 - `src/lib/upstash/{redis,qstash}.ts`
 - `src/lib/thai-date.ts` (พ.ศ.+543, BE locale)

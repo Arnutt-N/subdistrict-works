@@ -5,7 +5,7 @@ import { cases, categories, consentRecords, users } from '../src/lib/db/schema';
 import { generateId } from '../src/lib/id';
 
 const TEST_USER_EMAIL = 'e2e-track-test@placeholder.local';
-const TEST_TRACKING_CODE = 'HN888888881'; // fixed code สำหรับ e2e
+const TEST_TRACKING_CODE = 'DEMO888888881'; // fixed code สำหรับ e2e
 let testUserId: string;
 let testCaseId: string;
 let testConsentId: string;
@@ -42,7 +42,7 @@ test.beforeAll(async () => {
     priority: 'normal',
     title: 'เคสทดสอบหน้า track (E2E)',
     description: 'รายละเอียดทดสอบ',
-    location: 'ทดสอบ ตำบลหัวงัว',
+    location: 'ทดสอบ ตำบลเดโม',
     categoryId: category.id,
     submittedBy: testUserId,
     trackingCode: TEST_TRACKING_CODE,
@@ -74,7 +74,7 @@ test('manual search by tracking code returns the correct result', async ({ page 
 
 test('shows a friendly error for a non-existent tracking code', async ({ page }) => {
   await page.goto('/track');
-  await page.getByLabel('เลขติดตามเรื่อง').fill('HN000000000');
+  await page.getByLabel('เลขติดตามเรื่อง').fill('DEMO000000000');
   await page.getByRole('button', { name: 'ค้นหาเรื่อง' }).click();
   await expect(page.getByText('ไม่พบเรื่องนี้')).toBeVisible();
 });

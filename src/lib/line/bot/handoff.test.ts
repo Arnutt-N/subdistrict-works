@@ -58,8 +58,8 @@ describe('isHandoffRequest', () => {
     it('ignores "แจ้งเรื่อง"', async () => {
       expect(await isHandoffRequest('แจ้งเรื่อง')).toBe(false);
     });
-    it('ignores "ติดตาม HN123456789"', async () => {
-      expect(await isHandoffRequest('ติดตาม HN123456789')).toBe(false);
+    it('ignores "ติดตาม DEMO123456789"', async () => {
+      expect(await isHandoffRequest('ติดตาม DEMO123456789')).toBe(false);
     });
     it('ignores empty string', async () => {
       expect(await isHandoffRequest('')).toBe(false);

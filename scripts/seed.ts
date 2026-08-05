@@ -229,7 +229,7 @@ const clerkDept = (
   await db.select().from(departments).where(eq(departments.slug, 'clerk-office')).limit(1)
 )[0];
 
-const superadminEmail = 'admin@huangua.go.th';
+const superadminEmail = 'admin@sw.demo';
 const superadminPassword = 'ChangeMe123!'; // local dev เท่านั้น — เปลี่ยนก่อนใช้งานจริง
 
 const existingSuperadmin = (
@@ -259,7 +259,7 @@ if (existingSuperadmin?.passwordHash) {
       departmentId: clerkDept?.id,
       isActive: true,
       fullName: 'ผู้ดูแลระบบ',
-      phoneNumber: '043-000-0000',
+      phoneNumber: '0-0000-0000',
       metadata: JSON.stringify({ createdBy: 'seed' }),
       passwordHash,
     });

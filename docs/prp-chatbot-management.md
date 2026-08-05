@@ -2,7 +2,7 @@
 
 > **Implementation plan** คู่กับ `docs/prd-chatbot-management.md` · ทำตาม `AGENT.md` §3 (PRP-Plan) + §4 (Review Gate)
 > ⚠️ **Review Gate ก่อนเขียนโค้ด:** ตรวจ PRP นี้กับ codebase จริง (path/pattern ถูกต้อง), flag สมมติฐาน, รอ user confirm
-> Convention huangua: หน้า admin = `page.tsx` (server, `requireStaff`) + `*-client.tsx` (client) · API = `route.ts` (`requireStaffApi`) · branch ต่อ tranche (`feat/<tranche>`)
+> Convention subdistrict-works: หน้า admin = `page.tsx` (server, `requireStaff`) + `*-client.tsx` (client) · API = `route.ts` (`requireStaffApi`) · branch ต่อ tranche (`feat/<tranche>`)
 
 ---
 

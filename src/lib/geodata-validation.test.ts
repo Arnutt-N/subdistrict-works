@@ -26,7 +26,7 @@ describe('geodataIdSchema', () => {
 
 describe('villageSchema', () => {
   test('accepts normal village name', () => {
-    expect(villageSchema.parse('บ้านหัวงัว หมู่ 5')).toBe('บ้านหัวงัว หมู่ 5');
+    expect(villageSchema.parse('บ้านเดโม หมู่ 5')).toBe('บ้านเดโม หมู่ 5');
   });
 
   test('trims whitespace', () => {
@@ -62,15 +62,15 @@ describe('submitCaseSchema — geography fields', () => {
       provinceId: 46,
       districtId: 4607,
       subDistrictId: 460701,
-      village: 'บ้านหัวงัว หมู่ 5',
-      location: 'หน้าวัดหัวงัว',
+      village: 'บ้านเดโม หมู่ 5',
+      location: 'หน้าวัดเดโม',
     });
     expect(result.success).toBe(true);
     if (result.success) {
       expect(result.data.provinceId).toBe(46);
       expect(result.data.districtId).toBe(4607);
       expect(result.data.subDistrictId).toBe(460701);
-      expect(result.data.village).toBe('บ้านหัวงัว หมู่ 5');
+      expect(result.data.village).toBe('บ้านเดโม หมู่ 5');
     }
   });
 

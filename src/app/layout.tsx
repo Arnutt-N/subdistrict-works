@@ -21,24 +21,23 @@ const baseUrl = process.env.AUTH_URL || 'http://localhost:3000';
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: 'อบต.หัวงัว — แจ้งเหตุ/ติดตามงานบริการสาธารณูปโภค',
-    template: '%s · อบต.หัวงัว',
+    default: 'Subdistrict Works — แจ้งเหตุ/ติดตามงานบริการสาธารณูปโภค',
+    template: '%s · Subdistrict Works',
   },
   description:
-    'ระบบแจ้งเหตุ/ติดตามงานบริการสาธารณูปโภค องค์การบริหารส่วนตำบลหัวงัว (อ.ยางตลาด จ.กาฬสินธุ์) — แจ้งเรื่องได้ ติดตามได้ ตรวจสอบได้',
-  applicationName: 'อบต.หัวงัว Citizen Help',
+    'ระบบแจ้งเหตุ/ติดตามงานบริการสาธารณูปโภค Subdistrict Works (อ.เดโม จ.เดโม) — แจ้งเรื่องได้ ติดตามได้ ตรวจสอบได้',
+  applicationName: 'Subdistrict Works Citizen Help',
   keywords: [
-    'อบต.หัวงัว',
+    'Subdistrict Works',
+    'SW',
     'แจ้งเหตุ',
     'ติดตามงาน',
     'บริการสาธารณูปโภค',
-    'ยางตลาด',
-    'กาฬสินธุ์',
     'ร้องเรียก',
     'ร้องทุกข์',
   ],
-  authors: [{ name: 'องค์การบริหารส่วนตำบลหัวงัว' }],
-  creator: 'องค์การบริหารส่วนตำบลหัวงัว',
+  authors: [{ name: 'Subdistrict Works' }],
+  creator: 'Subdistrict Works',
   icons: {
     icon: [
       { url: '/icon.svg', type: 'image/svg+xml' },
@@ -50,10 +49,10 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'th_TH',
     url: baseUrl,
-    siteName: 'อบต.หัวงัว Citizen Help',
-    title: 'อบต.หัวงัว — แจ้งเหตุ/ติดตามงานบริการสาธารณูปโภค',
+    siteName: 'Subdistrict Works Citizen Help',
+    title: 'Subdistrict Works — แจ้งเหตุ/ติดตามงานบริการสาธารณูปโภค',
     description:
-      'ระบบแจ้งเหตุ/ติดตามงานบริการสาธารณูปโภค องค์การบริหารส่วนตำบลหัวงัว (อ.ยางตลาด จ.กาฬสินธุ์)',
+      'ระบบแจ้งเหตุ/ติดตามงานบริการสาธารณูปโภค Subdistrict Works (อ.เดโม จ.เดโม)',
   },
   robots: {
     index: true,

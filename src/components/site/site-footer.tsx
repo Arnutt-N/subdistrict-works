@@ -9,7 +9,7 @@ export function SiteFooter({ children }: { children?: ReactNode }) {
     <footer className="border-t bg-surface-raised">
       <div className="mx-auto w-full max-w-6xl px-4 py-10 text-sm text-muted sm:px-6 sm:py-12">
         <p className="font-semibold text-ink">
-          องค์การบริหารส่วนตำบลหัวงัว · อำเภอยางตลาด · จังหวัดกาฬสินธุ์
+          Subdistrict Works · อำเภอเดโม · จังหวัดเดโม
         </p>
         <p className="mt-1">
           ข้อมูลของท่านอยู่ภายใต้กฎหมายว่าด้วยการคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562

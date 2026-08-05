@@ -475,7 +475,7 @@ export function IntakeForm({ categories }: { categories: IntakeCategory[] }) {
             <Input
               id="village"
               name="village"
-              placeholder="เช่น บ้านหัวงัว หมู่ 5"
+              placeholder="เช่น บ้านเดโม หมู่ 5"
               value={form.village}
               onChange={(e) => updateField('village', e.target.value)}
             />
@@ -485,7 +485,7 @@ export function IntakeForm({ categories }: { categories: IntakeCategory[] }) {
             <Input
               id="addr"
               name="addr"
-              placeholder="เช่น หน้าวัดหัวงัว ติดกับร้านสะดวกซื้อ"
+              placeholder="เช่น หน้าวัดเดโม ติดกับร้านสะดวกซื้อ"
               value={form.addr}
               onChange={(e) => updateField('addr', e.target.value)}
             />
@@ -513,7 +513,7 @@ export function IntakeForm({ categories }: { categories: IntakeCategory[] }) {
             onChange={(e) => updateField('consent', e.target.checked)}
           />
           <span className="text-sm text-ink">
-            ฉันยินยอมให้ อบต.หัวงัว เก็บรวบรวมและใช้ข้อมูลข้างต้นเพื่อดำเนินการเรื่องแจ้งเหตุ
+            ฉันยินยอมให้ Subdistrict Works เก็บรวบรวมและใช้ข้อมูลข้างต้นเพื่อดำเนินการเรื่องแจ้งเหตุ
             ตามกฎหมายว่าด้วยการคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562
           </span>
         </label>

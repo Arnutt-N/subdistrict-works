@@ -1,9 +1,9 @@
 # 📗 คู่มือ Deploy สำหรับมือใหม่ (Non-IT)
 
-> **ระบบรับเรื่องร้องเรียน อบต.หัวงัว**
+> **ระบบรับเรื่องร้องเรียน Subdistrict Works**
 > คู่มือนี้เขียนให้คนที่ **ไม่เคยเขียนโปรแกรม / ไม่เคย deploy** มาก่อน ทำตามได้ทีละขั้น ใช้เวลาประมาณ 1–2 ชั่วโมง
 >
-> เมื่อทำเสร็จ เว็บไซต์จะออนไลน์ให้ประชาชนใช้งานได้ผ่านลิงก์ เช่น `https://huangua-citizen-help.vercel.app`
+> เมื่อทำเสร็จ เว็บไซต์จะออนไลน์ให้ประชาชนใช้งานได้ผ่านลิงก์ เช่น `https://subdistrict-works.vercel.app`
 
 ---
 
@@ -29,7 +29,7 @@
 
 ให้เตรียมสิ่งเหล่านี้ให้พร้อม:
 
-- [ ] **อีเมล** (แนะนำอีเมลองค์กร เช่น `@huangua.go.th`) — ใช้สมัครบริการทั้งหมด
+- [ ] **อีเมล** (แนะนำอีเมลองค์กร เช่น `@sw.demo`) — ใช้สมัครบริการทั้งหมด
 - [ ] **เบอร์โทรศัพท์** (บางบริการขอยืนยันตัวตน)
 - [ ] **เว็บเบราว์เซอร์** เช่น Google Chrome หรือ Microsoft Edge (เวอร์ชันล่าสุด)
 - [ ] **ไฟล์โค้ด** — อยู่ในโฟลเดอร์โปรเจกต์นี้ (เดี๋ยวเราจะอัปโหลดขึ้น GitHub)
@@ -51,7 +51,7 @@ GitHub คือที่เก็บไฟล์โค้ดบนคลาว�
 ### 1.2 สร้าง "Repository" (ที่เก็บโค้ด)
 
 1. หลังล็อกอินแล้ว คลิกปุ่มเขียว **`+`** มุมขวาบน → เลือก **New repository**
-2. ตั้งชื่อ เช่น `huangua-citizen-help`
+2. ตั้งชื่อ เช่น `subdistrict-works`
 3. เลือก **Private** (ส่วนตัว — เพื่อความปลอดภัย) ❌ อย่าเลือก Public
 4. คลิกปุ่มเขียว **Create repository**
 
@@ -86,7 +86,7 @@ Supabase คือที่เก็บข้อมูลทั้งหมด�
 ### 2.2 สร้าง "Project" (ฐานข้อมูลใหม่)
 
 1. คลิก **New project**
-2. ตั้งชื่อ เช่น `huangua-citizen-help`
+2. ตั้งชื่อ เช่น `subdistrict-works`
 3. ตั้งรหัสผ่านฐานข้อมูล:
    - คลิกปุ่ม **Generate a password** (ให้ระบบสุ่มให้)
    - 📝 **จดรหัสผ่านนี้เก็บไว้ดี ๆ** — ถ้าหายจะกู้คืนไม่ได้!
@@ -101,16 +101,22 @@ Supabase คือที่เก็บข้อมูลทั้งหมด�
 4. เลือกโหมด **Transaction** (พอร์ต `6543`) — เหมาะกับ serverless ของ Vercel
 5. คัดลอกลิงก์ทั้งบรรทัด เช่น:
    ```
-   postgresql://postgres.huangua:[YOUR-PASSWORD]@aws-0-ap-southeast-1.pooler.supabase.com:6543/postgres
+   postgresql://postgres.subdistrict-works:[YOUR-PASSWORD]@aws-0-ap-southeast-1.pooler.supabase.com:6543/postgres
    ```
 6. 📝 **แทนที่ `[YOUR-PASSWORD]` ด้วยรหัสผ่านที่จดไว้ในขั้น 2.2**
+7. ⚠️ **เติม `?sslmode=require` ต่อท้ายลิงก์** — ลิงก์ที่คัดลอกมาจากหน้าเว็บจะไม่มีส่วนนี้
+   ติดมาด้วย ถ้าไม่เติม เว็บจะ deploy ไม่ผ่านพร้อมข้อความ
+   *"DATABASE_URL — production ต้องบังคับ TLS"*
 
 ลิงก์สุดท้ายจะหน้าตาประมาณนี้ (ตัวอย่าง):
 ```
-postgresql://postgres.huangua:abc123XYZ@aws-0-ap-southeast-1.pooler.supabase.com:6543/postgres
+postgresql://postgres.subdistrict-works:abc123XYZ@aws-0-ap-southeast-1.pooler.supabase.com:6543/postgres?sslmode=require
 ```
 
 > 📝 **จดค่านี้ชื่อ `DATABASE_URL`** — จะใช้ในขั้นที่ 5
+>
+> ⚠️ อย่าลืมส่วน `?sslmode=require` ท้ายลิงก์ — เป็นการบังคับให้เข้ารหัสการเชื่อมต่อ
+> ระหว่างเว็บกับฐานข้อมูล ซึ่งจำเป็นเพราะระบบเก็บข้อมูลส่วนบุคคลของประชาชน
 
 ### 2.4 (เสร็จสิ้นส่วน Supabase ชั่วคราว)
 
@@ -131,7 +137,7 @@ Upstash Redis ช่วย **จำกัดอัตราการส่งฟ
 ### 3.2 สร้าง Redis Database
 
 1. คลิก **Create Database**
-2. ตั้งชื่อ: `huangua-redis`
+2. ตั้งชื่อ: `subdistrict-works-redis`
 3. เลือก Region: **AWS ap-southeast-1 (Singapore)**
 4. คลิก **Create**
 
@@ -213,7 +219,7 @@ cron-job.org คือบริการฟรีที่จะ **เรีย�
 
 ```
 Title:           close-stale
-URL:             https://huangua-citizen-help.vercel.app/api/cron/close-stale
+URL:             https://subdistrict-works.vercel.app/api/cron/close-stale
 Schedule:        0 8 * * *
 Request Method:  GET
 Headers:
@@ -272,7 +278,7 @@ Vercel คือบริการที่ **ทำให้เว็บออ�
 ### 6.2 นำเข้าโปรเจกต์ (Import)
 
 1. คลิก **Add New...** → **Project**
-2. ในส่วน "Import Git Repository" จะเห็นโปรเจกต์ `huangua-citizen-help` ของคุณ
+2. ในส่วน "Import Git Repository" จะเห็นโปรเจกต์ `subdistrict-works` ของคุณ
 3. คลิก **Import**
 4. **ห้ามคลิก Deploy ทันที!** ⚠️ — ต้องตั้งค่า Environment Variables ก่อน (ขั้น 6.3)
 
@@ -286,7 +292,7 @@ Vercel คือบริการที่ **ทำให้เว็บออ�
 
 | Name (ชื่อ) | Value (ค่า) | มาจากขั้นที่ |
 |------|------|------|
-| `DATABASE_URL` | (ลิงก์ connection string จาก Supabase ขั้น 2.3) | 2️⃣ |
+| `DATABASE_URL` | (ลิงก์ connection string จาก Supabase ขั้น 2.3 — **ต้องลงท้ายด้วย `?sslmode=require`**) | 2️⃣ |
 | `UPSTASH_REDIS_REST_URL` | (จาก Upstash Redis ขั้น 3.3) | 3️⃣ |
 | `UPSTASH_REDIS_REST_TOKEN` | (จาก Upstash Redis ขั้น 3.3) | 3️⃣ |
 | `AUTH_SECRET` | (สร้างเอง ขั้น 5.1) | 5️⃣ |
@@ -300,7 +306,7 @@ Vercel คือบริการที่ **ทำให้เว็บออ�
 
 1. คลิกปุ่ม **Deploy** (สีน้ำเงิน)
 2. รอประมาณ 3–5 นาที ระบบจะ build อัตโนมัติ
-3. ถ้าสำเร็จ จะขึ้นข้อความ **Congratulations** และได้ลิงก์เว็บ เช่น `https://huangua-citizen-help.vercel.app`
+3. ถ้าสำเร็จ จะขึ้นข้อความ **Congratulations** และได้ลิงก์เว็บ เช่น `https://subdistrict-works.vercel.app`
 4. 📝 **จดลิงก์นี้** — คือเว็บไซต์ของคุณ!
 
 > ❌ **ถ้าขึ้น Error**: ดูส่วน **🔧 แก้ปัญหา** ด้านล่าง ส่วนใหญ่เกิดจากกรอก env var ผิด
@@ -315,7 +321,7 @@ Vercel คือบริการที่ **ทำให้เว็บออ�
 
 1. ในแดชบอร์ด Vercel คลิกชื่อโปรเจกต์
 2. ไปที่ **Settings** → **Environment Variables**
-3. หา `AUTH_URL` → แก้ค่าเป็นลิงก์เว็บจริงของคุณ เช่น `https://huangua-citizen-help.vercel.app`
+3. หา `AUTH_URL` → แก้ค่าเป็นลิงก์เว็บจริงของคุณ เช่น `https://subdistrict-works.vercel.app`
    - ❌ ห้ามมี `/` ปิดท้าย
    - ❌ ห้ามใช้ `http://localhost`
 4. คลิก **Save**
@@ -366,7 +372,7 @@ ON CONFLICT (slug) DO NOTHING;
 INSERT INTO users (id, email, role, department_id, is_active, full_name, password_hash)
 VALUES (
   'user-001',
-  'admin@huangua.go.th',
+  'admin@sw.demo',
   'superadmin',
   'dept-001',
   true,
@@ -393,7 +399,7 @@ VALUES (
 
 ### 8.1 ทดสอบหน้าประชาชน
 
-1. เปิดลิงก์เว็บของคุณ เช่น `https://huangua-citizen-help.vercel.app`
+1. เปิดลิงก์เว็บของคุณ เช่น `https://subdistrict-works.vercel.app`
 2. ✅ ควรเห็นหน้าแรกของระบบรับเรื่องร้องเรียน
 3. ลองกดเข้าหน้า "แจ้งเรื่อง" → กรอกทดสอบ → ส่ง
    - ✅ ถ้าขึ้นว่า "ส่งสำเร็จ" = ฐานข้อมูลทำงานปกติ
@@ -401,7 +407,7 @@ VALUES (
 
 ### 8.2 ทดสอบหน้าเจ้าหน้าที่
 
-1. เปิดลิงก์ `/admin/login` เช่น `https://huangua-citizen-help.vercel.app/admin/login`
+1. เปิดลิงก์ `/admin/login` เช่น `https://subdistrict-works.vercel.app/admin/login`
 2. ลอกอินด้วยบัญชีที่สร้างในขั้น 7.4
 3. ✅ ควรเข้าสู่หน้า admin ได้ และเห็นเคสทดสอบที่ส่งในขั้น 8.1
 
@@ -529,7 +535,7 @@ pnpm db:studio            # เปิดเครื่องมือดู/แ
 ### ตัวแปรทั้งหมดที่ต้องตั้งใน Vercel (รวม 7 ตัว)
 1. `AUTH_SECRET` (≥32)
 2. `AUTH_URL` (https://... เว็บจริง)
-3. `DATABASE_URL` (connection string จาก Supabase)
+3. `DATABASE_URL` (connection string จาก Supabase — ลงท้ายด้วย `?sslmode=require`)
 4. `UPSTASH_REDIS_REST_URL`
 5. `UPSTASH_REDIS_REST_TOKEN` (≥16)
 6. `CID_HMAC_KEY` (≥32)
@@ -564,6 +570,6 @@ pnpm db:studio            # เปิดเครื่องมือดู/แ
 
 ---
 
-> 🎉 **ยินดีด้วย!** หากทำครบทุกขั้น เว็บไซต์ระบบรับเรื่องร้องเรียนของ อบต.หัวงัว พร้อมใช้งานจริงแล้ว
+> 🎉 **ยินดีด้วย!** หากทำครบทุกขั้น เว็บไซต์ระบบรับเรื่องร้องเรียนของ Subdistrict Works พร้อมใช้งานจริงแล้ว
 >
 > หากมีปัญหา ดูส่วน **🔧 แก้ปัญหา** ด้านบน หรือติดต่อผู้ดูแลระบบพร้อมแนบภาพหน้าจอ error

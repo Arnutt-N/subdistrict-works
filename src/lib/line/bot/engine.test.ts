@@ -147,12 +147,33 @@ describe('routeBotMessage — existing behavior (TDD safety net)', () => {
       const event = makeEvent('ติดตาม');
       const replies = await routeBotMessage(mockDb, event, 'ติดตาม', 'user-pk', 'conv-1');
       expect(replies).toHaveLength(1);
-      expect((replies[0] as { text: string }).text).toContain('HN');
+      expect((replies[0] as { text: string }).text).toContain('DEMO');
     });
 
     it('returns not-found for unknown tracking code', async () => {
-      const event = makeEvent('ติดตาม HN000000000');
-      const replies = await routeBotMessage(mockDb, event, 'ติดตาม HN000000000', 'user-pk', 'conv-1');
+      const event = makeEvent('ติดตาม DEMO000000000');
+      const replies = await routeBotMessage(mockDb, event, 'ติดตาม DEMO000000000', 'user-pk', 'conv-1');
+      expect(replies).toHaveLength(1);
+      expect((replies[0] as { text: string }).text).toContain('ไม่พบ');
+    });
+
+    // § รหัสที่ผู้ใช้เห็นบนหน้าจอ/คัดลอกมา มักติดเว้นวรรคหรือขีดมาด้วย
+    // บอทต้อง normalize เหมือนฝั่งเว็บ ไม่งั้นรหัสเดียวกันใช้ได้ที่หนึ่งแต่ไม่ได้อีกที่หนึ่ง
+    it('normalizes a spaced tracking code before lookup', async () => {
+      const text = 'ติดตาม DEMO 0000 0000 0';
+      const replies = await routeBotMessage(mockDb, makeEvent(text), text, 'user-pk', 'conv-1');
+      expect((replies[0] as { text: string }).text).toContain('DEMO000000000');
+    });
+
+    it('normalizes a dashed tracking code before lookup', async () => {
+      const text = 'ติดตาม demo-000000000';
+      const replies = await routeBotMessage(mockDb, makeEvent(text), text, 'user-pk', 'conv-1');
+      expect((replies[0] as { text: string }).text).toContain('DEMO000000000');
+    });
+
+    it('rejects a malformed code without querying the database', async () => {
+      const text = 'ติดตาม ABC';
+      const replies = await routeBotMessage(mockDb, makeEvent(text), text, 'user-pk', 'conv-1');
       expect(replies).toHaveLength(1);
       expect((replies[0] as { text: string }).text).toContain('ไม่พบ');
     });

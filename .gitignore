@@ -1,5 +1,5 @@
 # ============================================================================
-# .gitignore — อบต.หัวงัว citizen-help web app
+# .gitignore — Subdistrict Works citizen-help web app
 # HARD rule: secrets + credentials + PII source ต้องไม่ติด commit
 # ============================================================================
 

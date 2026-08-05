@@ -1,4 +1,5 @@
 import { eq, sql } from 'drizzle-orm';
+import { normalizeTrackingCode } from '@/lib/case-tracking';
 import { getDb } from '@/lib/db';
 import { lineUsers, chatConversations, chatMessages, cases } from '@/lib/db/schema';
 import { generateId } from '@/lib/id';
@@ -197,9 +198,21 @@ export async function routeBotMessage(
   }
 
   if (normalized.startsWith('ติดตาม')) {
-    const code = text.replace(/ติดตาม\s*/i, '').trim().toUpperCase();
-    if (code) return trackCase(db, code);
-    return [{ type: 'text', text: 'กรุณาระบุรหัสติดตาม เช่น "ติดตาม HN123456789"' }];
+    const raw = text.replace(/ติดตาม\s*/i, '').trim();
+    if (!raw) {
+      return [{ type: 'text', text: 'กรุณาระบุรหัสติดตาม เช่น "ติดตาม DEMO123456789"' }];
+    }
+
+    // § ใช้ normalizeTrackingCode ตัวเดียวกับฝั่งเว็บ
+    // เดิมบอททำ trim + toUpperCase เอง ไม่ตัดเว้นวรรค/ขีด ทำให้รหัสที่ผู้ใช้คัดลอกมา
+    // ตามรูปแบบที่แสดงบนหน้าจอ ("DEMO 1234 5678 9") ใช้ได้ทางเว็บแต่บอทตอบว่าไม่พบ
+    // ผลพลอยได้: รูปแบบผิดถูกตัดตั้งแต่ต้น ไม่ต้องยิง query ไปหา DB เปล่า ๆ
+    const code = normalizeTrackingCode(raw);
+    if (!code) {
+      return [{ type: 'text', text: `ไม่พบเรื่องรหัส ${raw} กรุณาตรวจสอบรหัสอีกครั้ง` }];
+    }
+
+    return trackCase(db, code);
   }
 
   const [user] = await db.select().from(lineUsers).where(eq(lineUsers.id, lineUserPk)).limit(1);
@@ -230,7 +243,7 @@ export async function routeBotMessage(
 
   return [{
     type: 'text',
-    text: 'ขออภัยครับ ไม่เข้าใจคำถาม\n\nลองพิมพ์:\n• "แจ้งเรื่อง" — แจ้งเรื่องร้องเรียน\n• "ติดตาม HNxxxxxxxxx" — ตรวจสอบสถานะ\n• "ติดต่อเจ้าหน้าที่" — พูดคุยกับเจ้าหน้าที่',
+    text: 'ขออภัยครับ ไม่เข้าใจคำถาม\n\nลองพิมพ์:\n• "แจ้งเรื่อง" — แจ้งเรื่องร้องเรียน\n• "ติดตาม DEMOxxxxxxxxx" — ตรวจสอบสถานะ\n• "ติดต่อเจ้าหน้าที่" — พูดคุยกับเจ้าหน้าที่',
   }];
 }
 

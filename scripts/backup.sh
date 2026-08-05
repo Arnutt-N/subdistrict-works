@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# backup.sh — สำรองข้อมูล PostgreSQL สำหรับ อบต.หัวงัว citizen-help
+# backup.sh — สำรองข้อมูล PostgreSQL สำหรับ Subdistrict Works citizen-help
 # PDPA critical — ข้อมูลประชาชนต้องมีสำเนาสำรองเผื่อกรณี DB พัง/ถูกลบ
 #
 # วิธีใช้:
@@ -27,7 +27,7 @@ BACKUP_DIR="${BACKUP_DIR:-./backups}"
 RETENTION_DAYS="${BACKUP_RETENTION_DAYS:-7}"
 TIMESTAMP=$(date +"%Y%m%d-%H%M%S")
 DATE=$(date +"%Y-%m-%d")
-FILE="$BACKUP_DIR/huangua-$TIMESTAMP.sql.gz"
+FILE="$BACKUP_DIR/subdistrict-works-$TIMESTAMP.sql.gz"
 
 mkdir -p "$BACKUP_DIR"
 
@@ -68,10 +68,10 @@ fi
 
 # ─── rotate (ลบไฟล์เก่ากว่า RETENTION_DAYS) ───
 echo "[$(date)] Rotating backups older than $RETENTION_DAYS days..."
-find "$BACKUP_DIR" -name "huangua-*.sql.gz*" -type f -mtime +"$RETENTION_DAYS" -delete
+find "$BACKUP_DIR" -name "subdistrict-works-*.sql.gz*" -type f -mtime +"$RETENTION_DAYS" -delete
 echo "[$(date)] Rotation done"
 
 # ─── summary ───
-REMAINING=$(find "$BACKUP_DIR" -name "huangua-*.sql.gz" -type f | wc -l | tr -d ' ')
+REMAINING=$(find "$BACKUP_DIR" -name "subdistrict-works-*.sql.gz" -type f | wc -l | tr -d ' ')
 echo "[$(date)] Backup complete — $REMAINING files retained in $BACKUP_DIR"
 exit 0

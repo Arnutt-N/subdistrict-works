@@ -1,7 +1,7 @@
 /**
  * scripts/generate-rich-menu.ts
  *
- * สร้าง Rich Menu PNG (2500x1686) สำหรับ LINE OA อบต.หัวงัว
+ * สร้าง Rich Menu PNG (2500x1686) สำหรับ LINE OA Subdistrict Works
  * — ไม่ต้องใช้ dependency เพิ่ม (ใช้ zlib built-in + manual PNG encode)
  * — ผลลัพธ์: scripts/rich-menu.png
  *

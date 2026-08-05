@@ -1,44 +1,30 @@
 import { describe, expect, it, vi } from 'vitest';
 
+// § getWelcomeMessages เป็น pass-through ล้วน — ไม่ได้ตัดสินใจอะไรเกี่ยวกับ "เนื้อหา"
+// ข้อความเลย เนื้อหาจริงมาจาก DEFAULTS ใน ../settings (หรือค่าที่แอดมินตั้งไว้ใน DB)
+//
+// เดิมไฟล์นี้ mock ให้คืนข้อความเต็มรูปแบบแล้ว assert ว่ามีชื่อหน่วยงาน/มี prefix ของ
+// รหัสติดตาม ซึ่งเท่ากับทดสอบสตริงที่ไฟล์เทสต์เขียนขึ้นเอง ไม่ใช่ค่า default จริง —
+// เทสต์แบบนั้นผ่านเสมอแม้ค่า default จริงจะไม่มีข้อความเหล่านั้น (ซึ่งเป็นกรณีจริง:
+// DEFAULTS.welcome_message ไม่เคยพูดถึงรูปแบบรหัสติดตามเลย ทั้งก่อนและหลังเปลี่ยนชื่อ)
+//
+// จึงเปลี่ยนมาใช้ค่า sentinel เพื่อทดสอบเฉพาะสัญญาที่ฟังก์ชันนี้รับผิดชอบจริง
+// คือการห่อข้อความที่ได้มาเป็น LINE text message โดยไม่ดัดแปลง
+const SENTINEL = '<<welcome-message-from-settings>>';
+
 vi.mock('../settings', () => ({
-  getChatSetting: vi.fn(async (key: string) => {
-    if (key === 'welcome_message') {
-      return 'สวัสดีครับ ยินดีต้อนรับสู่ อบต.หัวงัว 🏛️\n\nเลือกบริการที่ต้องการ:\n\n📢 แจ้งเรื่อง — พิมพ์ "แจ้งเรื่อง"\n🔍 ติดตามสถานะ — พิมพ์ "ติดตาม HNxxxxxxxxx"\n❓ คำถามที่พบบ่อย — พิมพ์คำถามได้เลย\n🙋 ติดต่อเจ้าหน้าที่ — พิมพ์ "ติดต่อเจ้าหน้าที่"';
-    }
-    return null;
-  }),
+  getChatSetting: vi.fn(async (key: string) => (key === 'welcome_message' ? SENTINEL : null)),
 }));
 
 import { getWelcomeMessages } from './welcome';
 
 describe('getWelcomeMessages', () => {
-  it('returns an array with at least one message', async () => {
-    const msgs = await getWelcomeMessages();
-    expect(msgs.length).toBeGreaterThanOrEqual(1);
+  it('returns exactly one message', async () => {
+    expect(await getWelcomeMessages()).toHaveLength(1);
   });
 
-  it('first message is a text message', async () => {
-    const msgs = await getWelcomeMessages();
-    expect(msgs[0]?.type).toBe('text');
-  });
-
-  it('greets with the organization name', async () => {
-    const first = (await getWelcomeMessages())[0];
-    const text = (first as { text: string }).text;
-    expect(text).toContain('อบต.หัวงัว');
-  });
-
-  it('lists the 4 main commands', async () => {
-    const first = (await getWelcomeMessages())[0];
-    const text = (first as { text: string }).text;
-    expect(text).toContain('แจ้งเรื่อง');
-    expect(text).toContain('ติดตาม');
-    expect(text).toContain('ติดต่อเจ้าหน้าที่');
-  });
-
-  it('mentions tracking code format (HN prefix)', async () => {
-    const first = (await getWelcomeMessages())[0];
-    const text = (first as { text: string }).text;
-    expect(text).toMatch(/HNx+/);
+  it('wraps the configured welcome text as a LINE text message, unmodified', async () => {
+    const [first] = await getWelcomeMessages();
+    expect(first).toEqual({ type: 'text', text: SENTINEL });
   });
 });

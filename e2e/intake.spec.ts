@@ -66,7 +66,7 @@ test('golden path: filling and submitting creates a real case', async ({ page })
   await page.getByRole('option').first().click();
   await page.getByLabel('หัวเรื่อง').fill(`ทดสอบ E2E intake ${Date.now()}`);
   await page.getByLabel('รายละเอียด', { exact: true }).fill('ทดสอบฟอร์มแจ้งเรื่องผ่าน Playwright E2E ถาวร');
-  await page.getByLabel('รายละเอียดเพิ่มเติม / จุดสังเกต').fill('ทดสอบ ตำบลหัวงัว');
+  await page.getByLabel('รายละเอียดเพิ่มเติม / จุดสังเกต').fill('ทดสอบ ตำบลเดโม');
 
   await page.locator('#province').click();
   await page.getByRole('option', { name: geoProvince }).click();
@@ -84,10 +84,10 @@ test('golden path: filling and submitting creates a real case', async ({ page })
     timeout: 30_000,
   });
 
-  // § อ่าน tracking code (HN...) และ caseId (UUID — เก็บไว้ใน data attribute สำหรับ cleanup)
+  // § อ่าน tracking code (DEMO...) และ caseId (UUID — เก็บไว้ใน data attribute สำหรับ cleanup)
   const trackingCodeEl = page.getByTestId('tracking-code');
   const trackingCode = (await trackingCodeEl.textContent())?.trim();
-  expect(trackingCode).toMatch(/^HN\d{9}$/);
+  expect(trackingCode).toMatch(/^DEMO\d{9}$/);
   const caseId = await trackingCodeEl.getAttribute('data-case-id');
   expect(caseId).toBeTruthy();
   if (caseId) createdCaseIds.push(caseId);

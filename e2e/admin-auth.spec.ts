@@ -2,7 +2,7 @@ import { expect, test, type Page } from '@playwright/test';
 import { decode } from 'next-auth/jwt';
 import { resetRateLimits } from './helpers/reset-rate-limits';
 
-const ADMIN_EMAIL = 'admin@huangua.go.th';
+const ADMIN_EMAIL = 'admin@sw.demo';
 const ADMIN_PASSWORD = 'ChangeMe123!'; // local dev seed password (scripts/seed.ts)
 
 /**

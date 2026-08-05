@@ -1,8 +1,8 @@
 {
-  "name": "huangua-citizen-help",
+  "name": "subdistrict-works",
   "version": "0.0.0",
   "private": true,
-  "description": "ระบบรับเรื่องร้องเรียก/ร้องทุกข์ อบต.หัวงัว (อ.ยางตลาด จ.กาฬสินธุ์) — Traffy-style ท้องถิ่น",
+  "description": "ระบบรับเรื่องร้องเรียก/ร้องทุกข์ Subdistrict Works (อ.เดโม จ.เดโม) — Traffy-style ท้องถิ่น",
   "license": "UNLICENSED",
   "type": "module",
   "packageManager": "pnpm@11.0.8",
@@ -11,7 +11,7 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "next build && tsx scripts/verify-env.ts",
+    "build": "tsx scripts/verify-env.ts && next build",
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
@@ -23,6 +23,7 @@
     "verify-env": "tsx scripts/verify-env.ts",
     "check-contrast": "tsx scripts/check-contrast.ts",
     "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
     "db:seed": "tsx scripts/seed.ts",
     "db:seed-geodata": "tsx scripts/seed-geodata.ts",

@@ -1,4 +1,4 @@
-# Project Rules — huangua-works
+# Project Rules — subdistrict-works
 
 ## New Task / New Phase Workflow (MANDATORY)
 

@@ -1,4 +1,4 @@
-# Implementation Plan — ปิดวงจรระบบ อบต.หัวงัว ให้สมบูรณ์
+# Implementation Plan — ปิดวงจรระบบ Subdistrict Works ให้สมบูรณ์
 
 > **เอกสารแผนปฏิบัติการ (execution plan)** — อนุมัติ 2026-07-20
 > Source: audit จริงของ codebase + cross-check กับ `docs/PRD.md`, `docs/PRP-Plan.md`, `docs/tracking-issues.md`
@@ -14,7 +14,7 @@
 
 **✅ ทำเสร็จแล้ว (จริง):**
 - `/intake` + `POST /api/cases/submit` — rate-limit, dedup 7 วัน, CID checksum, PDPA consent, tracking code
-- `/track` + `GET /api/cases/[id]` — lookup by trackingCode (HN+9), PII stripped, timeline
+- `/track` + `GET /api/cases/[id]` — lookup by trackingCode (DEMO+9), PII stripped, timeline
 - `/admin/login` + Auth.js v5 — Credentials, dual rate-limit (per-IP + per-email), JWT 1h
 - `/admin` (dashboard) — ดึงจาก DB จริง, SLA calc, re-check role ทุก request (defense in depth)
 - Postgres schema + 2 migrations + seed (superadmin)
@@ -203,7 +203,7 @@
 
 6. **Error monitoring** — Sentry free tier (dep `@sentry/nextjs`)
 
-7. **Clean scratch dirs** (`_unp1/`, `_unp2/`, `dev.log`, `nb.log`, `data/huangua.db` artifact SQLite เก่า)
+7. **Clean scratch dirs** (`_unp1/`, `_unp2/`, `dev.log`, `nb.log`, `data/subdistrict-works.db` artifact SQLite เก่า)
 
 ### เกณฑ์สำเร็จ
 - ไม่มี 404
@@ -411,4 +411,4 @@ PR #4 (PDPA/security)  ──────────┘ (อิสระ แต
 - **Vercel config**: region `sin1` only, no `functions.maxDuration` (10s SSE cap on free tier), no `crons` (ใช้ cron-job.org)
 - **Env vars**: UPPER_SNAKE_CASE, verify ที่ build time ผ่าน `scripts/verify-env.ts`
 - **ไม่มี admin layout** — แต่ละ admin page ต้องเรียก `auth()` + re-check เอง
-- **Seed**: superadmin `admin@huangua.go.th` / `ChangeMe123!` (local dev only)
+- **Seed**: superadmin `admin@sw.demo` / `ChangeMe123!` (local dev only)

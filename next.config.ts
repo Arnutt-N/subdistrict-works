@@ -1,7 +1,7 @@
 import type { NextConfig } from 'next';
 
 /**
- * next.config.ts — อบต.หัวงัว citizen-help
+ * next.config.ts — Subdistrict Works citizen-help
  *
  * Security headers (เพิ่มใน PR #4 — PDPA hardening):
  *  - CSP: default-src 'self' + img 'self' data: + style 'self' 'unsafe-inline'

@@ -61,7 +61,7 @@ export function LoginForm() {
           type="email"
           icon={Mail}
           autoComplete="username"
-          placeholder="officer@huangua.go.th"
+          placeholder="officer@sw.demo"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required

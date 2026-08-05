@@ -1,4 +1,4 @@
-# Tracking Issues — อบต.หัวงัว Citizen-Help Web App
+# Tracking Issues — Subdistrict Works Citizen-Help Web App
 
 > **Planning artifact (backlog)** — ไม่ใช่ code/scaffold
 > Source: `context-package.md` + `PRP-Plan.md` + `reviews.md`
@@ -51,7 +51,7 @@
 | P0-12 | Citizen auth P1 กำหนด (H3 / A3) | P0 | P0 | sec | กำหนด citizen auth ใน P1: email magic link / phone OTP ผ่าน Supabase Auth หรือ signed tracking token ผูกกับ `book_no` — ห้าม anonymous intake | design doc ระบุกลไก citizen auth; ห้าม anonymous intake; signed token ผูก book_no | P0-11 | M |
 | P0-13 | CID keyed HMAC (CRITICAL C2 / A6) | P0 | P0 | sec | ใช้ keyed HMAC `pgcrypto hmac(cid, pgp_sym_decrypt(secret_key), 'sha256')` → `cid_hmac` คอลัมน์; `CID_HMAC_KEY` env Sensitive ≥ 32 char; ห้าม plain SHA-256; hash index สำหรับค้น | HMAC ใช้งาน; `CID_HMAC_KEY` ใน env; `verify-env.ts` ตรวจ ≥ 32 char; ไม่มี deterministic hash ลำดับ | P0-01, M0-15 | M |
 | P0-14 | CID checksum algorithm กรมการปกครอง + mask UI/log (P0.7) | P0 | P0 | sec | validate algorithm บัตร 13 หลักฝั่ง server; mask `x-xxxx-xxxxxx-x` ใน UI/log; pgcrypto encrypt-at-rest + column-level RLS | checksum ทำงาน server-side; mask ทุกจุด; encrypt-at-rest; column-level RLS | P0-13 | M |
-| P0-15 | Address/taxonomy seed (P0.4) | P0 | P0 | db | ~30 หมวด taxonomy + 13 หมู่บ้านตำบลหัวงัว ผ่านกรมการปกครอง API | seed ครบ; ผ่านกรมปกครอง API; taxonomy 30 หมวด; 13 หมู่บ้าน | P0-01 | M |
+| P0-15 | Address/taxonomy seed (P0.4) | P0 | P0 | db | ~30 หมวด taxonomy + 13 หมู่บ้านตำบลเดโม ผ่านกรมการปกครอง API | seed ครบ; ผ่านกรมปกครอง API; taxonomy 30 หมวด; 13 หมู่บ้าน | P0-01 | M |
 | P0-16 | PDPA consent flow + withdrawal (H1 / A1) | P0 | P0 | sec | `consent` table (version, scope, granted_at, withdrawn_at) + endpoint `/api/consent/withdraw` trigger pseudonymize pipeline + บันทึก `audit_log.action='consent_withdrawn'` + แจ้ง citizen | consent table สร้าง; withdraw endpoint ทำงาน; pseudonymize pipeline รัน; audit บันทึก; แจ้ง citizen | P0-01 | L |
 | P0-17 | งบ กก.ทร. structured field + validation (P0.6) | P0 | P0 | db | `numeric(14,2)` + `ggor_code` index + budget validation lib | validation ทำงาน; `numeric(14,2)`; ggor_code index | P0-01 | S |
 | P0-18 | Realtime Authorization ผูก RLS (H2 / A2) | P0 | P0 | sec | เปิด Realtime Authorization ผูกกับ RLS policy ของ `complaint` + `postgres_changes` filter `org_id`/`created_by` แทน `broadcast` + payload server sanitize (ห้ามส่ง CID/name ใน event) | Realtime ผ่าน RLS; ใช้ `postgres_changes` filter; payload ไม่มี PII; ทดสอบ cross-org ไม่รั่ว | P0-07 | M |

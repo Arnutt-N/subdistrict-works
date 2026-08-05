@@ -1,5 +1,6 @@
 import { drizzle, type PostgresJsDatabase } from 'drizzle-orm/postgres-js';
-import postgres from 'postgres';
+import type postgres from 'postgres';
+import { createPgClient } from './client';
 import * as schema from './schema';
 
 /**
@@ -7,7 +8,7 @@ import * as schema from './schema';
  *
  * Migrated from better-sqlite3 (sync) → postgres-js (async).
  * - lazy-init: สร้าง pool เมื่อเรียกครั้งแรกเท่านั้น (avoid build-time connect)
- * - pool size 10 (mitigate postgres-js pure-JS overhead vs native)
+ * - การสร้าง client (resolve URL + option + redact error) อยู่ใน client.ts ที่เดียว
  * - foreign_keys pragma ถูกลบ (SQLite-only — PG enforce FK ที่ column definition)
  * - WAL pragma ถูกลบ (PG ใช้ MVCC ไม่ใช้ WAL mode toggle)
  */
@@ -18,13 +19,7 @@ let pgClient: postgres.Sql | null = null;
 export async function getDb(): Promise<PostgresJsDatabase<typeof schema>> {
   if (dbInstance) return dbInstance;
 
-  const url = process.env.DATABASE_URL;
-  if (!url) {
-    throw new Error('DATABASE_URL is not set (expected postgresql://...)');
-  }
-
-  // prepare=true รวม parse cache; max=10 จำกัด pool; ssl ตาม connection string
-  pgClient = postgres(url, { max: 10, prepare: true });
+  pgClient = createPgClient();
   dbInstance = drizzle(pgClient, { schema });
 
   return dbInstance;

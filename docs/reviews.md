@@ -1,4 +1,4 @@
-# Reviews — อบต.หัวงัว (ระบบรับเรื่องร้องเรียก/ร้องทุกข์)
+# Reviews — Subdistrict Works (ระบบรับเรื่องร้องเรียก/ร้องทุกข์)
 
 > Planning artifact — รวม verdicts จาก 5 reviewer (security, code/architecture, database, a11y, perf) สำหรับ `PRD.md` + `PRP-Plan.md` อิง `context-package.md` เป็น source of truth. HARD-GATE: ไม่มีโค้ด/scaffold — เป็น planning artifact เท่านั้น.
 > วันที่สร้าง: 2026-06-28
@@ -55,7 +55,7 @@
 #### C4 — `complainant` polymorphic ไม่มี CHECK constraint บังคับ mutual exclusion
 - **Reviewer**: Database (CRITICAL)
 - **ที่**: PRD 6.1 `complainant`
-- **ปัญหา**: มีเพียง `person_id NULL` / `agency_id NULL` ไม่มี CHECK → ใส่ทั้งสองคอลัมน์หรือทั้งสอง NULL ได้ ทำลาย referential integrity ของ citizen vs agency (รายการ 344 อำเภอยางตลาด vs นายวิชิต)
+- **ปัญหา**: มีเพียง `person_id NULL` / `agency_id NULL` ไม่มี CHECK → ใส่ทั้งสองคอลัมน์หรือทั้งสอง NULL ได้ ทำลาย referential integrity ของ citizen vs agency (รายการ 344 อำเภอเดโม vs นายวิชิต)
 - **ข้อแก้ concrete**:
   1. ใน `0001_init_schema.sql` เพิ่ม:
      ```sql

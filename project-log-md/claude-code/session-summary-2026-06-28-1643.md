@@ -1,4 +1,4 @@
-# Session Summary — อบต.หัวงัว (HARD-GATE PASSED → ready scaffold M0)
+# Session Summary — Subdistrict Works (HARD-GATE PASSED → ready scaffold M0)
 
 > Snapshot สุดท้ายก่อน scaffold Milestone 0 — workflow fan-out **สำเร็จ** + artifacts ครบ + HARD-GATE **อนุมัติแล้ว**
 
@@ -25,7 +25,7 @@
 | รอบ 3 (DNS กลับ) | w7j11pazg | ✅ **สำเร็จ** — 4 artifacts | 706k |
 | รอบ 4 (resume + Phase E revision) | wgh1xt5hj | ✅ **PRP revised** (cache A-D) | 89k |
 
-**Script:** `C:\Users\arnutt.n\.claude\projects\D--toppublic-per\02056b3d-ab21-4e58-870c-8a85dac6d90d\workflows\scripts\huangua-prd-prp-reviews-issues-wf_0efc1e45-2a6.js` (มี 5 phases แล้ว: PRD/PRP-Plan/Reviews/Tracking/PRP-Revision)
+**Script:** `C:\Users\arnutt.n\.claude\projects\D--toppublic-per\02056b3d-ab21-4e58-870c-8a85dac6d90d\workflows\scripts\subdistrict-works-prd-prp-reviews-issues-wf_0efc1e45-2a6.js` (มี 5 phases แล้ว: PRD/PRP-Plan/Reviews/Tracking/PRP-Revision)
 
 ---
 
