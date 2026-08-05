@@ -134,24 +134,38 @@ function validateDatabaseUrl(): void {
 
 validateDatabaseUrl();
 
-// § Production-only: AUTH_URL ต้องเป็น https:// + canonical domain (ไม่ใช่ localhost)
-// กัน deploy จริงที่ AUTH_URL ยังเป็น placeholder localhost → secure-cookie flag off + callback URL พัง
-if (process.env.NODE_ENV === 'production') {
-  const u = process.env.AUTH_URL;
-  if (!u) {
+/**
+ * AUTH_URL — production ต้องเป็น https:// + canonical domain (ไม่ใช่ localhost)
+ * กัน deploy จริงที่ AUTH_URL ยังเป็น placeholder localhost → secure-cookie flag off
+ * + callback URL พัง
+ */
+function validateAuthUrl(): void {
+  if (process.env.NODE_ENV !== 'production') return;
+
+  const raw = process.env.AUTH_URL;
+  if (!raw) {
     fail('✗ AUTH_URL — production ต้องระบุ canonical https URL');
   }
+
+  // § try ครอบเฉพาะ new URL() ไม่ครอบทั้งบล็อก — ถ้าครอบทั้งบล็อก แล้ววันหน้ามีใคร
+  // เปลี่ยน fail() จาก process.exit ไปเป็น throw (ซึ่งสมเหตุสมผลถ้าอยากให้ stderr
+  // ที่ buffer ไว้ถูก flush ครบ) ข้อผิดพลาดเรื่อง protocol/localhost จะถูก catch นี้
+  // กลืนแล้วรายงานผิดเป็น "parse ไม่ผ่าน"
+  let parsed: URL;
   try {
-    const parsed = new URL(u);
-    if (parsed.protocol !== 'https:') {
-      fail(`✗ AUTH_URL — production ต้องเป็น https:// (ปัจจุบัน: ${parsed.protocol}//)`);
-    }
-    if (isLocalHost(parsed.hostname)) {
-      fail('✗ AUTH_URL — production ห้ามใช้ localhost (ตั้งเป็น canonical domain)');
-    }
+    parsed = new URL(raw);
   } catch {
-    fail(`✗ AUTH_URL — URL ไม่ถูกต้อง (parse ไม่ผ่าน): ${u}`);
+    fail(`✗ AUTH_URL — URL ไม่ถูกต้อง (parse ไม่ผ่าน): ${raw}`);
+  }
+
+  if (parsed.protocol !== 'https:') {
+    fail(`✗ AUTH_URL — production ต้องเป็น https:// (ปัจจุบัน: ${parsed.protocol}//)`);
+  }
+  if (isLocalHost(parsed.hostname)) {
+    fail('✗ AUTH_URL — production ห้ามใช้ localhost (ตั้งเป็น canonical domain)');
   }
 }
+
+validateAuthUrl();
 
 console.log('[verify-env] ✓ env vars ครบและถูกต้อง');

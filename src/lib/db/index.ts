@@ -32,13 +32,17 @@ export async function getDb(): Promise<PostgresJsDatabase<typeof schema>> {
   // แค่ "Invalid URL" ไม่ echo ค่า URL กลับมา แต่ error ชนิดอื่นจาก postgres-js หรือ
   // Node เวอร์ชันอื่นอาจแนบ input มาด้วย — ราคาถูกกว่ารหัสผ่านหลุดลง build log มาก
   //
-  // cause เก็บ stack เดิมและ property ของ postgres-js ไว้ — โดยเฉพาะ .code ที่
-  // lib/db/errors.ts ใช้แยก unique violation ถ้าไม่แนบไว้ข้อมูลวินิจฉัยจะเหลือแค่ string
+  // § จงใจไม่แนบ { cause: error }
+  // util.inspect พิมพ์ cause chain ออกมาทั้งสาย (ทดสอบแล้ว) ซึ่งเป็นสิ่งที่ Vercel log
+  // และ error tracker ใช้ — การแนบ cause ที่ยังไม่ถูก redact จึงเปิดช่องรั่วช่องเดียว
+  // กับที่บรรทัดข้างบนเพิ่งปิดไป และ error บนเส้นทางนี้เป็น TypeError ของ URL ล้วน
+  // ไม่มี SQLSTATE ให้เก็บ (isUniqueViolation ใน lib/db/errors.ts อ่านจาก error ของ
+  // query ไม่ใช่ของการสร้าง client และไม่ได้ unwrap .cause อยู่แล้ว)
   try {
-    // option อยู่ใน pg-options.ts; ssl ตาม connection string
-    pgClient = postgres(url, pgClientOptions);
+    // option อยู่ใน pg-options.ts; spread เพื่อไม่ให้ postgres-js แตะ object ต้นฉบับ
+    pgClient = postgres(url, { ...pgClientOptions });
   } catch (error: unknown) {
-    throw new Error(`เชื่อมต่อฐานข้อมูลไม่สำเร็จ: ${redactErrorMessage(error)}`, { cause: error });
+    throw new Error(`เชื่อมต่อฐานข้อมูลไม่สำเร็จ: ${redactErrorMessage(error)}`);
   }
 
   dbInstance = drizzle(pgClient, { schema });

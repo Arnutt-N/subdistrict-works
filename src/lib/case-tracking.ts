@@ -16,9 +16,12 @@ const PREFIX = 'DEMO';
 const DIGITS = 9;
 const MAX_VALUE = 10 ** DIGITS; // 1_000_000_000
 
-// § derive regex จาก PREFIX/DIGITS แทนการ hardcode
-// เดิมรูปแบบนี้ถูกเขียนซ้ำเป็น literal หลายจุด ทำให้ตอนเปลี่ยน prefix ต้องไล่แก้มือ
-// ทีละที่และเสี่ยงตกหล่น — ผูกกับค่าคงที่ตัวเดียวแล้วเปลี่ยนที่เดียวจบ
+// § derive regex จาก PREFIX/DIGITS แทน hardcode เพื่อให้ตรรกะ generate กับ validate
+// ผูกกับค่าคงที่ชุดเดียวกัน (มีเทสต์ round-trip ใน case-tracking.test.ts คุมไว้อีกชั้น)
+//
+// หมายเหตุ: prefix ยังถูก hardcode ในข้อความที่ผู้ใช้เห็นอีกหลายจุด (LINE bot,
+// หน้า /track, FAQ, Hero) และในเทสต์ซึ่งควรอิสระจาก implementation อยู่แล้ว
+// การเปลี่ยน prefix จึงยังต้องไล่ทั้ง repo ไม่ใช่แก้ไฟล์นี้ไฟล์เดียวจบ
 const CODE_PATTERN = new RegExp(`^${PREFIX}\\d{${DIGITS}}$`);
 
 /**

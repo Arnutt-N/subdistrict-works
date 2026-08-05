@@ -6,7 +6,7 @@ import { chatFaq } from '../src/lib/db/schema';
 import { generateId } from '../src/lib/id';
 
 const DATABASE_URL = process.env.DATABASE_URL!;
-const client = postgres(DATABASE_URL, pgClientOptions);
+const client = postgres(DATABASE_URL, { ...pgClientOptions });
 const db = drizzle(client);
 
 const FAQ_ENTRIES = [

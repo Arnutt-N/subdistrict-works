@@ -104,13 +104,19 @@ Supabase คือที่เก็บข้อมูลทั้งหมด�
    postgresql://postgres.subdistrict-works:[YOUR-PASSWORD]@aws-0-ap-southeast-1.pooler.supabase.com:6543/postgres
    ```
 6. 📝 **แทนที่ `[YOUR-PASSWORD]` ด้วยรหัสผ่านที่จดไว้ในขั้น 2.2**
+7. ⚠️ **เติม `?sslmode=require` ต่อท้ายลิงก์** — ลิงก์ที่คัดลอกมาจากหน้าเว็บจะไม่มีส่วนนี้
+   ติดมาด้วย ถ้าไม่เติม เว็บจะ deploy ไม่ผ่านพร้อมข้อความ
+   *"DATABASE_URL — production ต้องบังคับ TLS"*
 
 ลิงก์สุดท้ายจะหน้าตาประมาณนี้ (ตัวอย่าง):
 ```
-postgresql://postgres.subdistrict-works:abc123XYZ@aws-0-ap-southeast-1.pooler.supabase.com:6543/postgres
+postgresql://postgres.subdistrict-works:abc123XYZ@aws-0-ap-southeast-1.pooler.supabase.com:6543/postgres?sslmode=require
 ```
 
 > 📝 **จดค่านี้ชื่อ `DATABASE_URL`** — จะใช้ในขั้นที่ 5
+>
+> ⚠️ อย่าลืมส่วน `?sslmode=require` ท้ายลิงก์ — เป็นการบังคับให้เข้ารหัสการเชื่อมต่อ
+> ระหว่างเว็บกับฐานข้อมูล ซึ่งจำเป็นเพราะระบบเก็บข้อมูลส่วนบุคคลของประชาชน
 
 ### 2.4 (เสร็จสิ้นส่วน Supabase ชั่วคราว)
 
@@ -286,7 +292,7 @@ Vercel คือบริการที่ **ทำให้เว็บออ�
 
 | Name (ชื่อ) | Value (ค่า) | มาจากขั้นที่ |
 |------|------|------|
-| `DATABASE_URL` | (ลิงก์ connection string จาก Supabase ขั้น 2.3) | 2️⃣ |
+| `DATABASE_URL` | (ลิงก์ connection string จาก Supabase ขั้น 2.3 — **ต้องลงท้ายด้วย `?sslmode=require`**) | 2️⃣ |
 | `UPSTASH_REDIS_REST_URL` | (จาก Upstash Redis ขั้น 3.3) | 3️⃣ |
 | `UPSTASH_REDIS_REST_TOKEN` | (จาก Upstash Redis ขั้น 3.3) | 3️⃣ |
 | `AUTH_SECRET` | (สร้างเอง ขั้น 5.1) | 5️⃣ |
@@ -529,7 +535,7 @@ pnpm db:studio            # เปิดเครื่องมือดู/แ
 ### ตัวแปรทั้งหมดที่ต้องตั้งใน Vercel (รวม 7 ตัว)
 1. `AUTH_SECRET` (≥32)
 2. `AUTH_URL` (https://... เว็บจริง)
-3. `DATABASE_URL` (connection string จาก Supabase)
+3. `DATABASE_URL` (connection string จาก Supabase — ลงท้ายด้วย `?sslmode=require`)
 4. `UPSTASH_REDIS_REST_URL`
 5. `UPSTASH_REDIS_REST_TOKEN` (≥16)
 6. `CID_HMAC_KEY` (≥32)

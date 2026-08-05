@@ -1,4 +1,4 @@
-import { describe, expect, test, vi } from 'vitest';
+import { beforeEach, describe, expect, test, vi } from 'vitest';
 
 // § mock randomInt เพื่อให้ assert รูปแบบผลลัพธ์ได้แน่นอน (โดยเฉพาะเคส zero-padding
 // ที่สุ่มเองแทบไม่มีวันเจอ) — case-tracking ใช้ node:crypto เฉพาะ randomInt ตัวเดียว
@@ -6,6 +6,12 @@ const randomInt = vi.hoisted(() => vi.fn());
 vi.mock('node:crypto', () => ({ randomInt }));
 
 import { generateTrackingCode, normalizeTrackingCode } from './case-tracking';
+
+// § เคลียร์ประวัติการเรียกทุกเทสต์ — vitest ไม่ได้ตั้ง clearMocks ไว้ ทำให้ assertion
+// แบบ toHaveBeenCalledWith จับ call ที่สะสมจากเทสต์ก่อนหน้าได้
+beforeEach(() => {
+  randomInt.mockClear();
+});
 
 describe('generateTrackingCode', () => {
   test('produces the DEMO prefix followed by exactly 9 digits', () => {

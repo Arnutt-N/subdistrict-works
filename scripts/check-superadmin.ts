@@ -14,7 +14,7 @@ if (!email) {
   process.exit(1);
 }
 
-const sql = postgres(process.env.DATABASE_URL!, pgClientOptions);
+const sql = postgres(process.env.DATABASE_URL!, { ...pgClientOptions });
 
 async function main(email: string) {
   // Check both the secret email and the default seed email

@@ -20,11 +20,13 @@ import type postgres from 'postgres';
 const POOL_MAX = 5;
 const IDLE_TIMEOUT_SECONDS = 20;
 
-// § freeze เพราะ object นี้ถูกส่งเข้า postgres() แบบ by-reference จาก 4 จุด และ
-// parseOptions ของ postgres-js เขียนทับ option ที่รับมาในบางเงื่อนไข
+// § freeze กันโค้ดฝั่งแอปแก้ค่ากลางนี้โดยไม่ตั้งใจ
+//
+// ⚠️ ผู้เรียกต้อง spread ก่อนส่งเข้า postgres() เสมอ — `postgres(url, { ...pgClientOptions })`
+// เพราะ parseOptions ของ postgres-js เขียนทับ object ที่รับมาในบางเงื่อนไข
 // (`o.no_prepare && (o.prepare = false)`, `'timeout' in o && (o.idle_timeout = o.timeout)`)
-// วันนี้ยังไม่มี key พวกนั้นจึงไม่เกิดขึ้น แต่ถ้าวันหน้าเติมเข้ามา การกลายพันธุ์จะ
-// ลามไปทุก call site แบบเงียบ ๆ — freeze ทำให้พังดัง ๆ ตรงจุดแทน
+// ถ้าส่ง object ที่ freeze ไว้ตรง ๆ แล้ววันหน้ามีใครเติม key พวกนั้น จะกลายเป็น
+// TypeError กลางทางแทนที่จะทำงานได้ตามปกติ — spread ตัดปัญหาทั้งสองทางในบรรทัดเดียว
 export const pgClientOptions = Object.freeze({
   max: POOL_MAX,
   prepare: false,
