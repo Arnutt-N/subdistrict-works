@@ -23,6 +23,7 @@
     "verify-env": "tsx scripts/verify-env.ts",
     "check-contrast": "tsx scripts/check-contrast.ts",
     "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
     "db:seed": "tsx scripts/seed.ts",
     "db:seed-geodata": "tsx scripts/seed-geodata.ts",

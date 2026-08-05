@@ -1,11 +1,12 @@
 import 'dotenv/config';
 import { drizzle } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
+import { pgClientOptions } from '../src/lib/db/pg-options';
 import { chatFaq } from '../src/lib/db/schema';
 import { generateId } from '../src/lib/id';
 
 const DATABASE_URL = process.env.DATABASE_URL!;
-const client = postgres(DATABASE_URL);
+const client = postgres(DATABASE_URL, pgClientOptions);
 const db = drizzle(client);
 
 const FAQ_ENTRIES = [

@@ -1,9 +1,10 @@
 import { config } from 'dotenv';
 import postgres from 'postgres';
+import { pgClientOptions } from '../src/lib/db/pg-options';
 
 config({ path: '.env.local' });
 
-const sql = postgres(process.env.DATABASE_URL!);
+const sql = postgres(process.env.DATABASE_URL!, pgClientOptions);
 
 async function main() {
   const users = await sql`SELECT id, line_user_id, bot_state, created_at FROM line_users ORDER BY created_at DESC LIMIT 5`;

@@ -1,5 +1,7 @@
 import { drizzle, type PostgresJsDatabase } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
+import { pgClientOptions } from './pg-options';
+import { redactErrorMessage } from './redact';
 import * as schema from './schema';
 
 /**
@@ -7,7 +9,7 @@ import * as schema from './schema';
  *
  * Migrated from better-sqlite3 (sync) → postgres-js (async).
  * - lazy-init: สร้าง pool เมื่อเรียกครั้งแรกเท่านั้น (avoid build-time connect)
- * - pool size 10 (mitigate postgres-js pure-JS overhead vs native)
+ * - pool/prepare/idle_timeout อยู่ใน pg-options.ts (ใช้ร่วมกับ scripts ที่สร้าง client เอง)
  * - foreign_keys pragma ถูกลบ (SQLite-only — PG enforce FK ที่ column definition)
  * - WAL pragma ถูกลบ (PG ใช้ MVCC ไม่ใช้ WAL mode toggle)
  */
@@ -23,8 +25,16 @@ export async function getDb(): Promise<PostgresJsDatabase<typeof schema>> {
     throw new Error('DATABASE_URL is not set (expected postgresql://...)');
   }
 
-  // prepare=true รวม parse cache; max=10 จำกัด pool; ssl ตาม connection string
-  pgClient = postgres(url, { max: 10, prepare: true });
+  // § ห่อด้วย try/catch เพราะ postgres() throw ตอน parse connection string ไม่ผ่าน
+  // และ error ตัวนั้นฝัง URL เต็ม ๆ (มีรหัสผ่าน) มาด้วย — ต้อง redact ก่อนถึงจะโยนต่อ
+  // (การต่อ DB จริงเป็น lazy จึงไม่ throw ตรงนี้ — จุดนี้ดัก URL ผิดรูปแบบอย่างเดียว)
+  try {
+    // option อยู่ใน pg-options.ts; ssl ตาม connection string
+    pgClient = postgres(url, pgClientOptions);
+  } catch (error: unknown) {
+    throw new Error(`[db] เชื่อมต่อฐานข้อมูลไม่สำเร็จ: ${redactErrorMessage(error)}`);
+  }
+
   dbInstance = drizzle(pgClient, { schema });
 
   return dbInstance;
