@@ -23,6 +23,16 @@ type Spec = {
   serverOnly?: boolean;
 };
 
+/** พิมพ์ error แล้วหยุด build ทันที — คู่ console.error+process.exit(1) ซ้ำ 8 จุดในไฟล์นี้ */
+function fail(message: string): never {
+  console.error(message);
+  process.exit(1);
+}
+
+function isLocalHost(hostname: string): boolean {
+  return hostname === 'localhost' || hostname === '127.0.0.1';
+}
+
 const required: Spec[] = [
   {
     key: 'AUTH_SECRET',
@@ -70,76 +80,77 @@ if (errors.length > 0) {
   process.exit(1);
 }
 
-// § DATABASE_URL — ตรวจรูปแบบ ไม่ใช่แค่ว่ามีค่า
-// ใส่ค่าผิดชนิด (เช่น direct endpoint แทน pooled) จะไปพังตอน runtime บน production
-// แทนที่จะพังตอน build ซึ่งแก้ได้ถูกกว่ามาก
-//
-// ⚠️ ทุกข้อความ error ต้องผ่าน redactConnectionString ก่อน — build log ของ Vercel คนอื่น
-//    อ่านได้ และ connection string มีรหัสผ่านฐานข้อมูลประชาชนอยู่ (PDPA)
-//
-// block scope กัน raw/parsed ชนกับ const u ในบล็อก AUTH_URL ด้านล่าง
-{
+// § sslmode ที่ถือว่าบังคับ TLS แล้ว — require คือขั้นต่ำ ส่วน verify-ca/verify-full
+// เข้มกว่า (ตรวจ certificate ด้วย) จึงต้องผ่านทั้งคู่ ไม่ใช่รับแค่ค่าเดียวตายตัว
+const TLS_SSLMODES = new Set(['require', 'verify-ca', 'verify-full']);
+
+/**
+ * DATABASE_URL — ตรวจรูปแบบ ไม่ใช่แค่ว่ามีค่า
+ *
+ * ใส่ค่าผิดชนิด (เช่น direct endpoint แทน pooled) จะไปพังตอน runtime บน production
+ * แทนที่จะพังตอน build ซึ่งแก้ได้ถูกกว่ามาก
+ *
+ * ⚠️ ทุกข้อความ error ต้องผ่าน redactConnectionString ก่อน — build log ของ Vercel คนอื่น
+ *    อ่านได้ และ connection string มีรหัสผ่านฐานข้อมูลประชาชนอยู่ (PDPA)
+ */
+function validateDatabaseUrl(): void {
   const raw = process.env.DATABASE_URL;
-  if (raw) {
-    let parsed: URL;
-    try {
-      parsed = new URL(raw);
-    } catch {
-      console.error(`✗ DATABASE_URL — parse ไม่ผ่าน: ${redactConnectionString(raw)}`);
-      process.exit(1);
-    }
+  if (!raw) return; // ค่าว่าง/ขาดถูกดักไปแล้วใน required[] ด้านบน
 
-    if (parsed.protocol !== 'postgres:' && parsed.protocol !== 'postgresql:') {
-      console.error(
-        `✗ DATABASE_URL — ต้องขึ้นต้นด้วย postgresql:// (ปัจจุบัน: ${parsed.protocol}//)`,
-      );
-      process.exit(1);
-    }
+  let parsed: URL;
+  try {
+    parsed = new URL(raw);
+  } catch {
+    fail(`✗ DATABASE_URL — parse ไม่ผ่าน: ${redactConnectionString(raw)}`);
+  }
 
-    if (process.env.NODE_ENV === 'production') {
-      if (parsed.hostname === 'localhost' || parsed.hostname === '127.0.0.1') {
-        console.error('✗ DATABASE_URL — production ห้ามชี้ไป localhost');
-        process.exit(1);
-      }
-      if (parsed.searchParams.get('sslmode') !== 'require') {
-        console.error(
-          '✗ DATABASE_URL — production ต้องมี ?sslmode=require (managed Postgres บังคับ TLS)',
-        );
-        process.exit(1);
-      }
-      // § เตือนอย่างเดียว ไม่บล็อก — ยังไม่ยืนยันว่า managed provider ตั้งชื่อ pooled host
-      // ว่า "-pooler" เสมอไหม การ fail ตรงนี้เสี่ยงบล็อก deploy ที่ถูกต้องมากกว่า
-      // เสี่ยงปล่อยของผิดผ่าน
-      if (parsed.hostname.includes('neon.tech') && !parsed.hostname.includes('-pooler')) {
-        console.warn(
-          '[verify-env] ⚠ DATABASE_URL ดูเหมือนเป็น direct endpoint ของ Neon — app ควรใช้ pooled endpoint',
-        );
-      }
-    }
+  if (parsed.protocol !== 'postgres:' && parsed.protocol !== 'postgresql:') {
+    fail(`✗ DATABASE_URL — ต้องขึ้นต้นด้วย postgresql:// (ปัจจุบัน: ${parsed.protocol}//)`);
+  }
+
+  if (process.env.NODE_ENV !== 'production') return;
+
+  if (isLocalHost(parsed.hostname)) {
+    fail('✗ DATABASE_URL — production ห้ามชี้ไป localhost');
+  }
+
+  const sslmode = parsed.searchParams.get('sslmode');
+  if (!sslmode || !TLS_SSLMODES.has(sslmode)) {
+    fail(
+      `✗ DATABASE_URL — production ต้องบังคับ TLS: เติม ?sslmode=require ต่อท้าย connection string ` +
+        `(รับ verify-ca/verify-full ด้วย) — ปัจจุบัน: ${sslmode ?? 'ไม่ได้ระบุ'}`,
+    );
+  }
+
+  // § เตือนอย่างเดียว ไม่บล็อก — ยังไม่ยืนยันว่า managed provider ตั้งชื่อ pooled host
+  // ว่า "-pooler" เสมอไหม การ fail ตรงนี้เสี่ยงบล็อก deploy ที่ถูกต้องมากกว่า
+  // เสี่ยงปล่อยของผิดผ่าน
+  if (parsed.hostname.includes('neon.tech') && !parsed.hostname.includes('-pooler')) {
+    console.warn(
+      '[verify-env] ⚠ DATABASE_URL ดูเหมือนเป็น direct endpoint ของ Neon — app ควรใช้ pooled endpoint',
+    );
   }
 }
+
+validateDatabaseUrl();
 
 // § Production-only: AUTH_URL ต้องเป็น https:// + canonical domain (ไม่ใช่ localhost)
 // กัน deploy จริงที่ AUTH_URL ยังเป็น placeholder localhost → secure-cookie flag off + callback URL พัง
 if (process.env.NODE_ENV === 'production') {
   const u = process.env.AUTH_URL;
   if (!u) {
-    console.error('✗ AUTH_URL — production ต้องระบุ canonical https URL');
-    process.exit(1);
+    fail('✗ AUTH_URL — production ต้องระบุ canonical https URL');
   }
   try {
     const parsed = new URL(u);
     if (parsed.protocol !== 'https:') {
-      console.error(`✗ AUTH_URL — production ต้องเป็น https:// (ปัจจุบัน: ${parsed.protocol}//)`);
-      process.exit(1);
+      fail(`✗ AUTH_URL — production ต้องเป็น https:// (ปัจจุบัน: ${parsed.protocol}//)`);
     }
-    if (parsed.hostname === 'localhost' || parsed.hostname === '127.0.0.1') {
-      console.error('✗ AUTH_URL — production ห้ามใช้ localhost (ตั้งเป็น canonical domain)');
-      process.exit(1);
+    if (isLocalHost(parsed.hostname)) {
+      fail('✗ AUTH_URL — production ห้ามใช้ localhost (ตั้งเป็น canonical domain)');
     }
   } catch {
-    console.error(`✗ AUTH_URL — URL ไม่ถูกต้อง (parse ไม่ผ่าน): ${u}`);
-    process.exit(1);
+    fail(`✗ AUTH_URL — URL ไม่ถูกต้อง (parse ไม่ผ่าน): ${u}`);
   }
 }
 

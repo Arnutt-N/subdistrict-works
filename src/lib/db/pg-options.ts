@@ -10,8 +10,9 @@ import type postgres from 'postgres';
  *   pgpool) แลกกับ query plan cache ที่หายไปเล็กน้อย ดีกว่าเสี่ยงพังทั้งระบบ
  * - max ต่ำ — serverless มีหลาย instance พร้อมกัน และ pooler จัดการ concurrency ให้
  *   อยู่แล้ว การถือ 10 connection ต่อ instance ทำให้ชน connection limit เร็วเปล่า ๆ
- * - idle_timeout — postgres-js default = 0 (ไม่ปิด connection เลย) ซึ่งบน serverless
- *   ทำให้ connection ค้างกิน slot ของ pooler จนกว่า instance จะตาย
+ * - idle_timeout — postgres-js default = null (ดู src/index.js ของ lib) คือไม่ปิด
+ *   connection ที่ว่างเลย ซึ่งบน serverless ทำให้ connection ค้างกิน slot ของ pooler
+ *   จนกว่า instance จะตาย
  */
 
 // § ค่าเริ่มต้นที่ยังไม่ได้วัดจริง — PRD ระบุว่า pool tuning ต้องรอ baseline จาก
@@ -19,8 +20,13 @@ import type postgres from 'postgres';
 const POOL_MAX = 5;
 const IDLE_TIMEOUT_SECONDS = 20;
 
-export const pgClientOptions = {
+// § freeze เพราะ object นี้ถูกส่งเข้า postgres() แบบ by-reference จาก 4 จุด และ
+// parseOptions ของ postgres-js เขียนทับ option ที่รับมาในบางเงื่อนไข
+// (`o.no_prepare && (o.prepare = false)`, `'timeout' in o && (o.idle_timeout = o.timeout)`)
+// วันนี้ยังไม่มี key พวกนั้นจึงไม่เกิดขึ้น แต่ถ้าวันหน้าเติมเข้ามา การกลายพันธุ์จะ
+// ลามไปทุก call site แบบเงียบ ๆ — freeze ทำให้พังดัง ๆ ตรงจุดแทน
+export const pgClientOptions = Object.freeze({
   max: POOL_MAX,
   prepare: false,
   idle_timeout: IDLE_TIMEOUT_SECONDS,
-} satisfies postgres.Options<Record<string, postgres.PostgresType>>;
+}) satisfies postgres.Options<Record<string, postgres.PostgresType>>;

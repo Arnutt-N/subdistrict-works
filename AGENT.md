@@ -1,4 +1,4 @@
-# Project Rules — subdistrict-works-works
+# Project Rules — subdistrict-works
 
 ## New Task / New Phase Workflow (MANDATORY)
 

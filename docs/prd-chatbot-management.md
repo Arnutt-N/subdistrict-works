@@ -1,8 +1,8 @@
 # PRD — Chatbot Management Suite (port จาก jsk-app)
 
 > **เอกสารวางแผน (planning artifact)** — ไม่ใช่ code/scaffold · ทำตาม workflow ใน `AGENT.md` (§2 PRD → §3 PRP-Plan → §4 Review Gate)
-> แหล่งอ้างอิง: บทวิเคราะห์ jsk-app ที่ `D:\topbliz\public\subdistrict-works-works\research\jsk-reviews\` (00-overview / 01-frontend-admin / 02-backend / 03-remediation-plan)
-> Stack ปัจจุบันของ subdistrict-works-works: **Next.js 16 (App Router) + Drizzle ORM (postgres-js) + Auth.js v5 + Upstash Redis (REST) + SSE + Tailwind v4 + Radix UI** — ดู `docs/PRD.md` (หมายเหตุสถานะ: stack จริงเปลี่ยนจาก Supabase เป็น self-host Postgres แล้ว)
+> แหล่งอ้างอิง: บทวิเคราะห์ jsk-app ที่ `D:\topbliz\public\subdistrict-works\research\jsk-reviews\` (00-overview / 01-frontend-admin / 02-backend / 03-remediation-plan)
+> Stack ปัจจุบันของ subdistrict-works: **Next.js 16 (App Router) + Drizzle ORM (postgres-js) + Auth.js v5 + Upstash Redis (REST) + SSE + Tailwind v4 + Radix UI** — ดู `docs/PRD.md` (หมายเหตุสถานะ: stack จริงเปลี่ยนจาก Supabase เป็น self-host Postgres แล้ว)
 
 ---
 
@@ -11,7 +11,7 @@
 ### 1.1 ที่มา
 `jsk-app` (`D:\genAI\jsk-app`) คือระบบ LINE Official Account สำหรับ Community Justice Services ที่มี **ชุดเครื่องมือจัดการ chatbot ครบ** (broadcast, intent/auto-reply, reply-objects, rich-menu, file manager, settings, health) เราได้ศึกษาวิเคราะห์ทั้ง frontend (14 เมนู admin) และ backend (FastAPI) แล้ว
 
-`subdistrict-works-works` (โปรเจกต์นี้) คือระบบรับเรื่องร้องทุกข์ Subdistrict Works ซึ่งมี **พื้นฐาน LINE chat ที่แข็งแรงอยู่แล้ว** (webhook + dedup, SSE real-time, live-chat agent console, canned responses, tags) แต่ **ขาดชุดเครื่องมือ "จัดการ chatbot"** — ปัจจุบัน bot brain ถูก hardcode ใน `src/lib/line/bot/engine.ts` และ rich menu เป็นแค่ CLI script
+`subdistrict-works` (โปรเจกต์นี้) คือระบบรับเรื่องร้องทุกข์ Subdistrict Works ซึ่งมี **พื้นฐาน LINE chat ที่แข็งแรงอยู่แล้ว** (webhook + dedup, SSE real-time, live-chat agent console, canned responses, tags) แต่ **ขาดชุดเครื่องมือ "จัดการ chatbot"** — ปัจจุบัน bot brain ถูก hardcode ใน `src/lib/line/bot/engine.ts` และ rich menu เป็นแค่ CLI script
 
 ### 1.2 ปัญหาที่ต้องการแก้
 | ปัญหา | สถานะปัจจุบันใน subdistrict-works | ผลกระทบ |
@@ -166,7 +166,7 @@
 
 ## 6. RBAC + การปรับ Stack (jsk → subdistrict-works)
 
-| มิติ | jsk-app | subdistrict-works-works (ปรับ) |
+| มิติ | jsk-app | subdistrict-works (ปรับ) |
 |---|---|---|
 | Backend | FastAPI + SQLAlchemy (async) | **Next.js API routes + Drizzle ORM** |
 | Auth | JWT cookie/bearer + CSRF | **Auth.js v5** (`auth()` session) + `requireStaff`/`requireStaffApi` |

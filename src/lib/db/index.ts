@@ -25,14 +25,20 @@ export async function getDb(): Promise<PostgresJsDatabase<typeof schema>> {
     throw new Error('DATABASE_URL is not set (expected postgresql://...)');
   }
 
-  // § ห่อด้วย try/catch เพราะ postgres() throw ตอน parse connection string ไม่ผ่าน
-  // และ error ตัวนั้นฝัง URL เต็ม ๆ (มีรหัสผ่าน) มาด้วย — ต้อง redact ก่อนถึงจะโยนต่อ
-  // (การต่อ DB จริงเป็น lazy จึงไม่ throw ตรงนี้ — จุดนี้ดัก URL ผิดรูปแบบอย่างเดียว)
+  // § ห่อด้วย try/catch เพราะ postgres() throw แบบ synchronous ตอน parse connection
+  // string ไม่ผ่าน (การต่อ DB จริงเป็น lazy จึงไม่ throw ตรงนี้)
+  //
+  // redact ไว้เป็น defense-in-depth: ทดสอบกับ Node ที่โปรเจกต์ใช้แล้วพบว่า error คืน
+  // แค่ "Invalid URL" ไม่ echo ค่า URL กลับมา แต่ error ชนิดอื่นจาก postgres-js หรือ
+  // Node เวอร์ชันอื่นอาจแนบ input มาด้วย — ราคาถูกกว่ารหัสผ่านหลุดลง build log มาก
+  //
+  // cause เก็บ stack เดิมและ property ของ postgres-js ไว้ — โดยเฉพาะ .code ที่
+  // lib/db/errors.ts ใช้แยก unique violation ถ้าไม่แนบไว้ข้อมูลวินิจฉัยจะเหลือแค่ string
   try {
     // option อยู่ใน pg-options.ts; ssl ตาม connection string
     pgClient = postgres(url, pgClientOptions);
   } catch (error: unknown) {
-    throw new Error(`[db] เชื่อมต่อฐานข้อมูลไม่สำเร็จ: ${redactErrorMessage(error)}`);
+    throw new Error(`เชื่อมต่อฐานข้อมูลไม่สำเร็จ: ${redactErrorMessage(error)}`, { cause: error });
   }
 
   dbInstance = drizzle(pgClient, { schema });

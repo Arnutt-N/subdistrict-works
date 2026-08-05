@@ -15,7 +15,11 @@ import { randomInt } from 'node:crypto';
 const PREFIX = 'DEMO';
 const DIGITS = 9;
 const MAX_VALUE = 10 ** DIGITS; // 1_000_000_000
-const CODE_LENGTH = PREFIX.length + DIGITS; // 13
+
+// § derive regex จาก PREFIX/DIGITS แทนการ hardcode
+// เดิมรูปแบบนี้ถูกเขียนซ้ำเป็น literal หลายจุด ทำให้ตอนเปลี่ยน prefix ต้องไล่แก้มือ
+// ทีละที่และเสี่ยงตกหล่น — ผูกกับค่าคงที่ตัวเดียวแล้วเปลี่ยนที่เดียวจบ
+const CODE_PATTERN = new RegExp(`^${PREFIX}\\d{${DIGITS}}$`);
 
 /**
  * สุ่ม tracking code รูปแบบ `DEMO` + 9 หลัก
@@ -35,21 +39,10 @@ export function generateTrackingCode(): string {
 export function normalizeTrackingCode(input: string): string | null {
   const cleaned = input.replace(/[\s-]/g, '').toUpperCase();
 
-  // § ตรวจรูปแบบเข้ม: DEMO + ตัวเลข 9 หลัก รวม 13 ตัว ไม่งั้น reject เป็น "ไม่พบเรื่อง"
-  if (!/^DEMO\d{9}$/.test(cleaned)) {
+  // § ตรวจรูปแบบเข้ม ไม่งั้น reject เป็น "ไม่พบเรื่อง"
+  if (!CODE_PATTERN.test(cleaned)) {
     return null;
   }
 
   return cleaned;
-}
-
-/**
- * Format tracking code ให้อ่านง่ายบนหน้าจอ: `DEMO 4837 2915 6`
- * (เว้นวรรคทุก 4 ตัว หลัง prefix)
- */
-export function formatTrackingCode(code: string): string {
-  // ถ้าเป็น raw code (DEMOxxxxxxxxx) ให้เติมช่องว่าง ถ้า format แล้วคืนตามเดิม
-  const cleaned = code.replace(/\s/g, '');
-  // DEMO + 4 + 4 + 1
-  return cleaned.replace(/^(DEMO)(\d{4})(\d{4})(\d{1})$/, '$1 $2 $3 $4');
 }
