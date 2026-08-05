@@ -1,4 +1,4 @@
-# Session Summary — อบต.หัวงัว Citizen Help / Complaint Web App
+# Session Summary — Subdistrict Works Citizen Help / Complaint Web App
 
 | ฟิลด์ | ค่า |
 |------|-----|
@@ -18,7 +18,7 @@
 
 ## 1. บริบทโปรเจกต์ (สั้น)
 
-ออกแบบเว็บแอปสำหรับ **องค์การบริหารส่วนตำบลหัวงัว** (อ.ยางตลาด จ.กาฬสินธุ์) จัดการงาน **สรุปผลการให้ความช่วยเหลือประชาชน / ร้องเรียก ร้องทุกข์** อิงจาก `.docx` 2 ไฟล์ → ระบบ citizen-facing + admin full-stack ตามมาตรฐานราชการไทย (รหัส กก.ทร., บัตรประชาชน 13 หลัก, ปีงบพ.ศ., PDPA พ.ร.บ. 2562) เทียบเท่า Traffy Fondue แต่ท้องถิ่นจริง
+ออกแบบเว็บแอปสำหรับ **Subdistrict Works** (อ.เดโม จ.เดโม) จัดการงาน **สรุปผลการให้ความช่วยเหลือประชาชน / ร้องเรียก ร้องทุกข์** อิงจาก `.docx` 2 ไฟล์ → ระบบ citizen-facing + admin full-stack ตามมาตรฐานราชการไทย (รหัส กก.ทร., บัตรประชาชน 13 หลัก, ปีงบพ.ศ., PDPA พ.ร.บ. 2562) เทียบเท่า Traffy Fondue แต่ท้องถิ่นจริง
 
 ---
 
@@ -95,7 +95,7 @@
 | **D: Tracking** | general-purpose | รวม PRP+reviews → backlog (ID/ชื่อ/milestone/priority/ประเภท/AC/dependency/estimate) → **tracking-issues.md** | Tools:* (Write) | `docs\tracking-issues.md` | ❌ ไม่มี |
 
 ### 3.4 Workflow script path (persisted)
-`C:\Users\arnutt.n\.claude\projects\D--toppublic-per\02056b3d-ab21-4e58-870c-8a85dac6d90d\workflows\scripts\huangua-prd-prp-reviews-issues-wf_0efc1e45-2a6.js`
+`C:\Users\arnutt.n\.claude\projects\D--toppublic-per\02056b3d-ab21-4e58-870c-8a85dac6d90d\workflows\scripts\subdistrict-works-prd-prp-reviews-issues-wf_0efc1e45-2a6.js`
 
 **หาก re-run:** `Workflow({scriptPath: "...", resumeFromRunId: "wf_0efc1e45-2a6"})` — completed agents return cached results, เฉพาะ new/failed calls รันใหม่
 
@@ -170,7 +170,7 @@
 | `D:\toppublic\per\.claude\settings.local.json` | project-local Claude settings (มี credential) | ต้องอยู่ใน `.gitignore` |
 | `D:\toppublic\per\project-log-md\claude-code\session-summary-2026-06-28-0441.md` | snapshot 04:41 | ✅ มี (D15) |
 | `D:\toppublic\per\project-log-md\claude-code\session-summary-2026-06-28-0923.md` | **ไฟล์นี้** | ✅ มี (D19) |
-| `...workflows\scripts\huangua-prd-prp-reviews-issues-wf_0efc1e45-2a6.js` | workflow script (persisted) | ✅ มี |
+| `...workflows\scripts\subdistrict-works-prd-prp-reviews-issues-wf_0efc1e45-2a6.js` | workflow script (persisted) | ✅ มี |
 | *(ยังไม่มี `package.json`)* | greenfield — จะ scaffold หลัง HARD-GATE approval | — |
 
 ---

@@ -1,7 +1,7 @@
 import { cn } from '@/lib/cn';
 
 /**
- * BrandMark — ตราสัญลักษณ์ "อบต" แบบ gradient tile
+ * BrandMark — ตราสัญลักษณ์ "SW" (Subdistrict Works) แบบ gradient tile
  *
  * เดิม landing Navbar สร้าง tile นี้แบบ inline style ในไฟล์ตัวเอง ส่วนแอดมินใช้ไอคอน
  * LayoutDashboard คนละตัว → สองฝั่งดูเป็นคนละผลิตภัณฑ์ แยกออกมาเป็น component เดียว
@@ -26,7 +26,7 @@ export function BrandMark({
       )}
       style={{ boxShadow: '0 6px 16px -8px var(--color-accent-strong)' }}
     >
-      อบต
+      SW
     </span>
   );
 }

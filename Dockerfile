@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.7
-# Dockerfile — อบต.หัวงัว citizen-help (Next.js 16 standalone)
+# Dockerfile — Subdistrict Works citizen-help (Next.js 16 standalone)
 # multi-stage: deps -> builder -> runner (production-style, รัน local ได้)
 # รัน: docker compose up --build  → http://localhost:3000
 

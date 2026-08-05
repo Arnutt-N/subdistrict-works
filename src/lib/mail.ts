@@ -10,7 +10,7 @@ import nodemailer from 'nodemailer';
  * sending (no SMTP required locally). Production must configure real SMTP.
  */
 
-const MAIL_FROM = process.env.MAIL_FROM || 'อบต.หัวงัว <no-reply@huangua.go.th>';
+const MAIL_FROM = process.env.MAIL_FROM || 'Subdistrict Works <no-reply@sw.demo>';
 
 function getTransport() {
   const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS } = process.env;

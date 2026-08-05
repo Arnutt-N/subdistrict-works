@@ -7,7 +7,7 @@ import { generateId } from '@/lib/id';
 import { GET } from './route';
 
 const TEST_USER_EMAIL = 'integration-test-case-detail@placeholder.local';
-const TEST_TRACKING_CODE = 'HN999999991'; // fixed code เพื่อให้ assertion ตรงได้
+const TEST_TRACKING_CODE = 'DEMO999999991'; // fixed code เพื่อให้ assertion ตรงได้
 let testUserId: string;
 let testCaseId: string;
 let categoryId: string;
@@ -53,7 +53,7 @@ beforeAll(async () => {
     priority: 'normal',
     title: 'เคสทดสอบ GET /api/cases/[id]',
     description: 'รายละเอียดทดสอบ',
-    location: 'ทดสอบ ตำบลหัวงัว',
+    location: 'ทดสอบ ตำบลเดโม',
     categoryId,
     submittedBy: testUserId,
     trackingCode: TEST_TRACKING_CODE,
@@ -122,14 +122,14 @@ describe('GET /api/cases/[id] (lookup via trackingCode)', () => {
   });
 
   test('returns 404 for a non-existent tracking code', async () => {
-    const res = await GET(buildRequest('HN000000000'), {
-      params: Promise.resolve({ id: 'HN000000000' }),
+    const res = await GET(buildRequest('DEMO000000000'), {
+      params: Promise.resolve({ id: 'DEMO000000000' }),
     });
 
     expect(res.status).toBe(404);
   });
 
-  test('returns 404 for malformed input (not HN + 9 digits)', async () => {
+  test('returns 404 for malformed input (not DEMO + 9 digits)', async () => {
     // UUID รูปแบบเก่า — ต้อง 404 ไม่ใช่ lookup ด้วย PK
     const res = await GET(buildRequest('019f5c00-932f-776b-9203-ac13c48c2937'), {
       params: Promise.resolve({ id: '019f5c00-932f-776b-9203-ac13c48c2937' }),

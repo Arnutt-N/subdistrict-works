@@ -46,10 +46,10 @@ cron-job.org payload:
 
 ```bash
 # 1. สร้าง DB ใหม่ (หรือใช้ที่มีอยู่)
-createdb huangua_restore
+createdb subdistrict-works_restore
 
 # 2. แตกไฟล์ + restore
-gunzip -c backups/huangua-YYYYMMDD-HHMMSS.sql.gz | psql "$DATABASE_URL"
+gunzip -c backups/subdistrict-works-YYYYMMDD-HHMMSS.sql.gz | psql "$DATABASE_URL"
 
 # 3. ตรวจสอบ
 psql "$DATABASE_URL" -c "SELECT count(*) FROM cases;"
@@ -61,7 +61,7 @@ psql "$DATABASE_URL" -c "SELECT count(*) FROM users;"
 แต่ละไฟล์มี `.sha256` checksum คู่กัน — ใช้ตรวจ integrity:
 
 ```bash
-sha256sum -c backups/huangua-YYYYMMDD-HHMMSS.sql.gz.sha256
+sha256sum -c backups/subdistrict-works-YYYYMMDD-HHMMSS.sql.gz.sha256
 ```
 
 ## Retention policy

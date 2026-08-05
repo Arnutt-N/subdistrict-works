@@ -124,7 +124,7 @@ export function AdminLayout({
                 บนมือถือ (ซึ่งกว้างเต็มที่เสมอ) จะเหลือแต่ไอคอนโดยไม่มีป้ายกำกับ */}
             <span className={cn('min-w-0', collapsed && 'lg:hidden')}>
               <span className="block truncate text-sm font-bold text-ink">
-                อบต.หัวงัว
+                Subdistrict Works
               </span>
               <span className="block truncate text-xs text-muted">ระบบเจ้าหน้าที่</span>
             </span>

@@ -85,7 +85,7 @@ export async function processCaseFlow(
       }
       return {
         state: { ...state, step: 'location', description: text },
-        replies: [{ type: 'text', text: 'กรุณาระบุสถานที่เกิดเหตุ เช่น "หน้าวัดหัวงัว หมู่ 3" หรือส่ง location จาก LINE ได้ครับ' }],
+        replies: [{ type: 'text', text: 'กรุณาระบุสถานที่เกิดเหตุ เช่น "หน้าวัดเดโม หมู่ 3" หรือส่ง location จาก LINE ได้ครับ' }],
       };
     }
 

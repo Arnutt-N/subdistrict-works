@@ -9,7 +9,7 @@ export function Footer() {
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* About */}
           <div>
-            <h3 className="text-lg font-semibold leading-tight">กองช่าง องค์การบริหารส่วนตำบลหัวงัว</h3>
+            <h3 className="text-lg font-semibold leading-tight">กองช่าง Subdistrict Works</h3>
             <p className="mt-4 text-sm text-muted">
               ระบบรับแจ้งเหตุและติดตามงานบริการสาธารณูปโภคออนไลน์
               เพื่อการบริการที่รวดเร็ว โปร่งใส และมีประสิทธิภาพ
@@ -63,33 +63,33 @@ export function Footer() {
               <li className="flex items-start gap-2">
                 <MapPin className="mt-0.5 h-4 w-4 flex-shrink-0 text-accent" />
                 <span className="text-muted">
-                  อบต.หัวงัว อ.ยางตลาด จ.กาฬสินธุ์ 46120
+                  Subdistrict Works อ.เดโม จ.เดโม 46120
                 </span>
               </li>
               <li className="flex items-center gap-2">
                 <Phone className="h-4 w-4 flex-shrink-0 text-accent" />
-                <a href="tel:043-123456" className="text-muted transition-colors hover:text-accent">
-                  043-123456
+                <a href="tel:0-0000-0000" className="text-muted transition-colors hover:text-accent">
+                  0-0000-0000
                 </a>
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="h-4 w-4 flex-shrink-0 text-accent" />
                 <a
-                  href="mailto:contact@huangua.go.th"
+                  href="mailto:contact@sw.demo"
                   className="text-muted transition-colors hover:text-accent"
                 >
-                  contact@huangua.go.th
+                  contact@sw.demo
                 </a>
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="h-4 w-4 flex-shrink-0 text-accent" />
                 <a
-                  href="https://facebook.com/huanguasao"
+                  href="https://facebook.com/subdistrict-workssao"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-muted transition-colors hover:text-accent"
                 >
-                  facebook.com/huanguasao
+                  facebook.com/subdistrict-workssao
                 </a>
               </li>
             </ul>
@@ -98,7 +98,7 @@ export function Footer() {
 
         <div className="mt-12 border-t pt-8 text-center text-sm text-muted">
           <p>
-            © {toBuddhistYear(new Date())} องค์การบริหารส่วนตำบลหัวงัว อ.ยางตลาด จ.กาฬสินธุ์
+            © {toBuddhistYear(new Date())} Subdistrict Works อ.เดโม จ.เดโม
             | สงวนลิขสิทธิ์
           </p>
           <p className="mt-2">

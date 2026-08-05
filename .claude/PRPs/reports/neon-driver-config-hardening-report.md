@@ -99,7 +99,7 @@ case_updates.is_public default = false  ← พิสูจน์ว่า migra
 ### 2. วิธีเตรียม DB สำหรับทดสอบ migrate
 
 - **WHAT**: แผนเขียนว่าใช้ `docker compose exec postgres psql -c "CREATE DATABASE migrate_check"` → เปลี่ยนเป็น throwaway container `postgres:17-alpine` บน port **55432** แล้วลบทิ้ง
-- **WHY**: `docker compose up postgres` ล้มเหลว 2 ชั้น — (ก) ชื่อ container `huangua-postgres` ถูกใช้โดย compose project อื่น (`per`) อยู่แล้ว (ข) port 5432 ถูก `skn-app-db-1` ของโปรเจกต์อื่นครองอยู่ การหยุดหรือลบของโปรเจกต์อื่นเป็นสิ่งที่ไม่ควรทำ
+- **WHY**: `docker compose up postgres` ล้มเหลว 2 ชั้น — (ก) ชื่อ container `sw-postgres` ถูกใช้โดย compose project อื่น (`per`) อยู่แล้ว (ข) port 5432 ถูก `skn-app-db-1` ของโปรเจกต์อื่นครองอยู่ การหยุดหรือลบของโปรเจกต์อื่นเป็นสิ่งที่ไม่ควรทำ
 - **ผลลัพธ์**: วิธีใหม่**แยกขาดกว่าเดิม** — ไม่แตะข้อมูลของทั้งสองโปรเจกต์ และลบร่องรอยหมดหลังเสร็จ
 
 ## Issues Encountered
@@ -111,7 +111,7 @@ case_updates.is_public default = false  ← พิสูจน์ว่า migra
 | port 5432 ถูกโปรเจกต์อื่นครอง | ใช้ port 55432 |
 | เผลอสร้าง volume เปล่า `subdistrict-works_postgres-data` ตอน `compose up` ล้มเหลว | ลบทิ้งแล้ว |
 
-**สภาพ Docker หลังเสร็จงาน**: container ทดสอบถูกลบหมด · `huangua-postgres` ยังหยุดอยู่เหมือนเดิม (สถานะ exit code เปลี่ยนจาก 0 → 128 จากความพยายาม start ที่ล้มเหลว — เป็นแค่ metadata ข้อมูลใน volume `per_postgres-data` ไม่ถูกแตะ) · `skn-app-db-1` ของโปรเจกต์อื่นยังรันปกติ
+**สภาพ Docker หลังเสร็จงาน**: container ทดสอบถูกลบหมด · `sw-postgres` ยังหยุดอยู่เหมือนเดิม (สถานะ exit code เปลี่ยนจาก 0 → 128 จากความพยายาม start ที่ล้มเหลว — เป็นแค่ metadata ข้อมูลใน volume `per_postgres-data` ไม่ถูกแตะ) · `skn-app-db-1` ของโปรเจกต์อื่นยังรันปกติ
 
 ## Tests Written
 

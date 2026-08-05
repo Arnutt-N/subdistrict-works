@@ -194,8 +194,8 @@ Functions:
 - \`parseDedupKey(key): { bookNo, fiscalYear } | null\`
 
 Test cases:
-- generateDedupKey('HN-2568-000123', 2568) → 'dedup:book:HN-2568-000123:2568'
-- parseDedupKey('dedup:book:HN-2568-000123:2568') → { bookNo: 'HN-2568-000123', fiscalYear: 2568 }
+- generateDedupKey('DEMO-2568-000123', 2568) → 'dedup:book:DEMO-2568-000123:2568'
+- parseDedupKey('dedup:book:DEMO-2568-000123:2568') → { bookNo: 'DEMO-2568-000123', fiscalYear: 2568 }
 - parseDedupKey('invalid') → null
 
 ### 6. Route Registry (P0-19, C3)

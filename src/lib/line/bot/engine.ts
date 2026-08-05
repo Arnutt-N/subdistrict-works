@@ -199,7 +199,7 @@ export async function routeBotMessage(
   if (normalized.startsWith('ติดตาม')) {
     const code = text.replace(/ติดตาม\s*/i, '').trim().toUpperCase();
     if (code) return trackCase(db, code);
-    return [{ type: 'text', text: 'กรุณาระบุรหัสติดตาม เช่น "ติดตาม HN123456789"' }];
+    return [{ type: 'text', text: 'กรุณาระบุรหัสติดตาม เช่น "ติดตาม DEMO123456789"' }];
   }
 
   const [user] = await db.select().from(lineUsers).where(eq(lineUsers.id, lineUserPk)).limit(1);
@@ -230,7 +230,7 @@ export async function routeBotMessage(
 
   return [{
     type: 'text',
-    text: 'ขออภัยครับ ไม่เข้าใจคำถาม\n\nลองพิมพ์:\n• "แจ้งเรื่อง" — แจ้งเรื่องร้องเรียน\n• "ติดตาม HNxxxxxxxxx" — ตรวจสอบสถานะ\n• "ติดต่อเจ้าหน้าที่" — พูดคุยกับเจ้าหน้าที่',
+    text: 'ขออภัยครับ ไม่เข้าใจคำถาม\n\nลองพิมพ์:\n• "แจ้งเรื่อง" — แจ้งเรื่องร้องเรียน\n• "ติดตาม DEMOxxxxxxxxx" — ตรวจสอบสถานะ\n• "ติดต่อเจ้าหน้าที่" — พูดคุยกับเจ้าหน้าที่',
   }];
 }
 

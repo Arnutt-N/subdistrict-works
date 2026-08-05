@@ -70,7 +70,7 @@ describe('POST /api/cases/submit', () => {
           categoryId,
           title: `ทดสอบ submit สำเร็จ ${Date.now()}`,
           description: 'รายละเอียดทดสอบ submit สำเร็จ',
-          location: 'ทดสอบ ตำบลหัวงัว',
+          location: 'ทดสอบ ตำบลเดโม',
           consent: true,
         },
         testIp(1)
@@ -81,7 +81,7 @@ describe('POST /api/cases/submit', () => {
     const body = await res.json();
     expect(body.success).toBe(true);
     expect(typeof body.caseId).toBe('string');
-    expect(body.trackingCode).toMatch(/^HN\d{9}$/);
+    expect(body.trackingCode).toMatch(/^DEMO\d{9}$/);
     createdCaseIds.push(body.caseId);
   });
 

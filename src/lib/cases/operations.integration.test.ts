@@ -23,7 +23,7 @@ async function createTestCase(status: 'pending' | 'received' | 'in_progress' | '
     status,
     title: `ทดสอบ applyCaseUpdate ${id}`,
     description: 'integration test',
-    location: 'ตำบลหัวงัว',
+    location: 'ตำบลเดโม',
     categoryId: 'test-category',
     submittedBy: 'test-citizen',
   });

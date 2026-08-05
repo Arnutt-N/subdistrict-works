@@ -16,7 +16,7 @@ import { ALL_ROLES } from '../auth/roles';
 import { CONVERSATION_MODES } from '../line/chat-modes';
 
 /**
- * Schema — อบต.หัวงัว citizen-help (PostgreSQL)
+ * Schema — Subdistrict Works citizen-help (PostgreSQL)
  * P0 Foundation: core tables + audit + RLS simulation via application layer
  *
  * Migrated from SQLite dialect → PostgreSQL dialect (self-hosted via Docker).
@@ -182,7 +182,7 @@ export const provinces = pgTable(
   'provinces',
   {
     id: integer('id').primaryKey(), // source PROVINCE_ID
-    code: text('code').notNull(), // e.g. "46" (กาฬสินธุ์)
+    code: text('code').notNull(), // e.g. "46" (เดโม)
     nameTh: text('name_th').notNull(),
     nameEn: text('name_en').notNull(),
   },
@@ -197,7 +197,7 @@ export const districts = pgTable(
     id: integer('id').primaryKey(), // source DISTRICT_ID
     provinceId: integer('province_id').notNull().references(() => provinces.id),
     code: text('code').notNull(),
-    districtCode: text('district_code').notNull(), // e.g. "4607" (ยางตลาด)
+    districtCode: text('district_code').notNull(), // e.g. "4607" (เดโม)
     nameTh: text('name_th').notNull(),
     nameEn: text('name_en').notNull(),
   },
@@ -284,7 +284,7 @@ export const cases = pgTable(
     dueDate: timestamp('due_date', { mode: 'date' }),
     closedAt: timestamp('closed_at', { mode: 'date' }),
 
-    // § citizen-facing tracking code: HN + 9 หลักสุ่ม (คล้าย EMS ไปรษณีย์ไทย)
+    // § citizen-facing tracking code: DEMO + 9 หลักสุ่ม (คล้าย EMS ไปรษณีย์ไทย)
     // null = เคสเก่าก่อนใช้ระบบนี้ → ปิด track (คืน 404)
     // lookup ผ่าน /api/cases/[id] ใช้ค่านี้แทน PK เพื่อไม่เปิดเผย UUID ที่เดาได้ (UUID v7 timestamp-ordered)
     trackingCode: text('tracking_code'),

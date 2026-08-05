@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 import { resetRateLimits } from './helpers/reset-rate-limits';
 
-const ADMIN_EMAIL = 'admin@huangua.go.th';
+const ADMIN_EMAIL = 'admin@sw.demo';
 const ADMIN_PASSWORD = 'ChangeMe123!'; // local dev seed password (scripts/seed.ts)
 
 test.beforeEach(async () => {

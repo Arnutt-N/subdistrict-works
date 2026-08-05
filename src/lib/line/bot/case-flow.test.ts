@@ -142,14 +142,14 @@ describe('case-flow · processCaseFlow · location step', () => {
       title: 'ถนนพัง',
       description: 'มีหลุมบ่อใหญ่',
     });
-    const result = await flow('หน้าวัดหัวงัว หมู่ 3', s);
+    const result = await flow('หน้าวัดเดโม หมู่ 3', s);
     expect(result.state?.step).toBe('confirm');
-    expect(result.state?.location).toBe('หน้าวัดหัวงัว หมู่ 3');
+    expect(result.state?.location).toBe('หน้าวัดเดโม หมู่ 3');
     const text = firstReplyText(result);
     expect(text).toContain('สรุปเรื่องร้องเรียน');
     expect(text).toContain('ถนน-ทางเท้า');
     expect(text).toContain('ถนนพัง');
-    expect(text).toContain('หน้าวัดหัวงัว');
+    expect(text).toContain('หน้าวัดเดโม');
   });
 });
 
@@ -184,7 +184,7 @@ describe('case-flow · processCaseFlow · confirm step', () => {
     expect(result.state).toBeNull();
     const text = firstReplyText(result);
     expect(text).toContain('รหัสติดตาม');
-    expect(text).toMatch(/HN\d{9}/);
+    expect(text).toMatch(/DEMO\d{9}/);
     expect(mockDb.insert).toHaveBeenCalled();
   });
 

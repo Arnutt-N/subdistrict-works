@@ -100,7 +100,7 @@ export async function requestPasswordReset(
       const resetUrl = `${getBaseUrl()}/admin/reset-password?token=${plaintext}`;
       await sendMail(
         user.email,
-        'รีเซ็ตรหัสผ่าน — อบต.หัวงัว',
+        'รีเซ็ตรหัสผ่าน — Subdistrict Works',
         buildResetEmailHtml(user.fullName, resetUrl),
       );
       await logAudit({

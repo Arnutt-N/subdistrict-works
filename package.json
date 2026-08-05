@@ -1,8 +1,8 @@
 {
-  "name": "huangua-citizen-help",
+  "name": "subdistrict-works",
   "version": "0.0.0",
   "private": true,
-  "description": "ระบบรับเรื่องร้องเรียก/ร้องทุกข์ อบต.หัวงัว (อ.ยางตลาด จ.กาฬสินธุ์) — Traffy-style ท้องถิ่น",
+  "description": "ระบบรับเรื่องร้องเรียก/ร้องทุกข์ Subdistrict Works (อ.เดโม จ.เดโม) — Traffy-style ท้องถิ่น",
   "license": "UNLICENSED",
   "type": "module",
   "packageManager": "pnpm@11.0.8",

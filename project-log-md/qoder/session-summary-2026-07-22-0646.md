@@ -1,10 +1,10 @@
-# Session Summary — อบต.หัวงัว Citizen Help System
+# Session Summary — Subdistrict Works Citizen Help System
 
 **Agent:** Qoder (qodercli)
 **Session Date:** 2026-07-22
 **Timestamp:** 06:46 → 10:30 UTC+7 (SEAST)
 **Platform:** Qoder CLI (win32 / Git Bash)
-**Project:** D:\topbliz\public\huangua-works (GitHub: Arnutt-N/huangua-works)
+**Project:** D:\topbliz\public\subdistrict-works-works (GitHub: Arnutt-N/subdistrict-works-works)
 **Working Tree:** branch `main` — clean (b7c1616)
 **Previous sessions:**
 - opencode: [`project-log-md/opencode/session-summary-2026-07-21-1455.md`](../opencode/session-summary-2026-07-21-1455.md) (PR #4 PDPA — merged แล้ว)
@@ -112,11 +112,11 @@
 
 ## 🔗 Reference Links
 
-- **GitHub repo:** https://github.com/Arnutt-N/huangua-works
-- **PR #14:** https://github.com/Arnutt-N/huangua-works/pull/14 (security hardening)
-- **PR #15:** https://github.com/Arnutt-N/huangua-works/pull/15 (geography feature)
-- **PR #16:** https://github.com/Arnutt-N/huangua-works/pull/16 (geo fetch fix)
-- **PR #17:** https://github.com/Arnutt-N/huangua-works/pull/17 (tests)
+- **GitHub repo:** https://github.com/Arnutt-N/subdistrict-works-works
+- **PR #14:** https://github.com/Arnutt-N/subdistrict-works-works/pull/14 (security hardening)
+- **PR #15:** https://github.com/Arnutt-N/subdistrict-works-works/pull/15 (geography feature)
+- **PR #16:** https://github.com/Arnutt-N/subdistrict-works-works/pull/16 (geo fetch fix)
+- **PR #17:** https://github.com/Arnutt-N/subdistrict-works-works/pull/17 (tests)
 - **Schema:** `src/lib/db/schema.ts` (14 ตาราง)
 - **Design tokens:** `src/styles/tokens.css` · **Landing reference:** `src/components/landing/Hero.tsx`
 - **Geodata vendor:** `scripts/geodata/` (~2.9MB, MIT license)

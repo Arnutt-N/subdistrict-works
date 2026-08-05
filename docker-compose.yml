@@ -1,4 +1,4 @@
-# docker-compose.yml — รัน อบต.หัวงัว citizen-help บน local ผ่าน Docker
+# docker-compose.yml — รัน Subdistrict Works citizen-help บน local ผ่าน Docker
 # ใช้: docker compose up --build   → http://localhost:3000
 # หยุด: docker compose down
 #
@@ -26,8 +26,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: huangua-citizen-help:local
-    container_name: huangua-app
+    image: subdistrict-works:local
+    container_name: subdistrict-works-app
     ports:
       - '3000:3000'
     restart: unless-stopped
@@ -50,7 +50,7 @@ services:
   # รัน `docker compose down -v` เท่านั้นที่ล้าง volume นี้ (จะเสียข้อมูลทั้งหมด)
   postgres:
     image: postgres:17-alpine
-    container_name: huangua-postgres
+    container_name: sw-postgres
     restart: unless-stopped
     ports:
       - '5433:5432'

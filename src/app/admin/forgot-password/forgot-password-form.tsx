@@ -51,7 +51,7 @@ export function ForgotPasswordForm() {
           type="email"
           icon={Mail}
           autoComplete="username"
-          placeholder="officer@huangua.go.th"
+          placeholder="officer@sw.demo"
           required
         />
       </div>

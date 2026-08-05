@@ -83,7 +83,7 @@ export function Hero() {
               transition={{ delay: reduce ? 0 : 0.4, duration: reduce ? 0 : 0.6 }}
               className="text-accent mt-3 text-base font-semibold lg:text-lg"
             >
-              กองช่าง องค์การบริหารส่วนตำบลหัวงัว
+              กองช่าง Subdistrict Works
             </motion.p>
 
             <motion.p
@@ -251,7 +251,7 @@ function HeroTrackingCard({ reduce }: { reduce: boolean }) {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-accent-100 text-xs">เลขใบแจ้ง</p>
-              <p className="text-sm font-bold">HN-XXX-XXX-XXX</p>
+              <p className="text-sm font-bold">DEMO-XXX-XXX-XXX</p>
             </div>
             {/* § พื้นขาวโปร่งคงเป็น literal — surface-raised ไม่ใช่สีขาวในธีมมืด
                 การแทนด้วย token จะทำให้ป้ายนี้กลืนหายบน gradient (tokens.css ใช้
@@ -286,7 +286,7 @@ function HeroTrackingCard({ reduce }: { reduce: boolean }) {
           {/* Location */}
           <div className="bg-surface-sunken/50 flex items-center gap-2 rounded-lg p-2.5 text-xs text-muted">
             <MapPin className="text-accent h-3.5 w-3.5 flex-shrink-0" />
-            <span className="truncate">หมู่ที่ 5 ต.หัวงัว อ.ยางตลาด จ.กาฬสินธุ์</span>
+            <span className="truncate">หมู่ที่ 5 ต.เดโม อ.เดโม จ.เดโม</span>
           </div>
 
           {/* Progress timeline */}

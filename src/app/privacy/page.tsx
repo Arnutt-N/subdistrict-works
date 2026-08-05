@@ -5,7 +5,7 @@ import { Footer } from '@/components/landing/Footer';
 
 export const metadata: Metadata = {
   title: 'นโยบายความเป็นส่วนตัว',
-  description: 'นโยบายความเป็นส่วนตัวและการคุ้มครองข้อมูลส่วนบุคคล อบต.หัวงัว (PDPA พ.ร.บ. 2562)',
+  description: 'นโยบายความเป็นส่วนตัวและการคุ้มครองข้อมูลส่วนบุคคล Subdistrict Works (PDPA พ.ร.บ. 2562)',
 };
 
 /**
@@ -34,7 +34,7 @@ export default function PrivacyPage() {
               นโยบายความเป็นส่วนตัว
             </h1>
             <p className="mt-3 text-muted">
-              องค์การบริหารส่วนตำบลหัวงัว ให้ความสำคัญกับการคุ้มครองข้อมูลส่วนบุคคล
+              Subdistrict Works ให้ความสำคัญกับการคุ้มครองข้อมูลส่วนบุคคล
               ตามกฎหมายว่าด้วยการคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562
             </p>
           </header>
@@ -73,7 +73,7 @@ export default function PrivacyPage() {
 
             <Section icon={<FileText className="h-5 w-5" />} title="3. การเก็บรักษาข้อมูล">
               <p>
-                ข้อมูลถูกเก็บรักษาในระบบฐานข้อมูลของอบต.หัวงัว
+                ข้อมูลถูกเก็บรักษาในระบบฐานข้อมูลของSubdistrict Works
                 โดยมีมาตรการรักษาความปลอดภัยตามมาตรฐาน PDPA ได้แก่:
               </p>
               <ul className="mt-3 space-y-2">
@@ -106,7 +106,7 @@ export default function PrivacyPage() {
               </p>
               <ul className="mt-3 space-y-2">
                 <li>• ใช้ระบบถอนความยินยอมออนไลน์ (ใช้รหัสติดตามงานและเลขบัตรประชาชน)</li>
-                <li>• ติดต่อเจ้าหน้าที่โดยตรงที่อบต.หัวงัว</li>
+                <li>• ติดต่อเจ้าหน้าที่โดยตรงที่Subdistrict Works</li>
               </ul>
               <p className="mt-3">
                 เมื่อถอนความยินยอมแล้ว ข้อมูลจะถูกทำให้ไม่สามารถเข้าถึงได้ผ่านระบบติดตามงาน
@@ -116,7 +116,7 @@ export default function PrivacyPage() {
 
             <Section icon={<Ban className="h-5 w-5" />} title="6. การเปิดเผยข้อมูล">
               <p>
-                อบต.หัวงัวจะไม่เปิดเผยข้อมูลส่วนบุคคลให้แก่บุคคลที่สาม
+                Subdistrict Worksจะไม่เปิดเผยข้อมูลส่วนบุคคลให้แก่บุคคลที่สาม
                 ยกเว้นในกรณีต่อไปนี้:
               </p>
               <ul className="mt-3 space-y-2">
@@ -132,17 +132,17 @@ export default function PrivacyPage() {
               <div className="mt-4 rounded-md border border-border bg-surface-raised p-5">
                 <p className="font-semibold text-ink">เจ้าหน้าที่คุ้มครองข้อมูลส่วนบุคคล (DPO)</p>
                 <p className="mt-2 text-sm text-muted">
-                  องค์การบริหารส่วนตำบลหัวงัว<br />
-                  อำเภอยางตลาด จังหวัดกาฬสินธุ์ 46120
+                  Subdistrict Works<br />
+                  อำเภอเดโม จังหวัดเดโม 46120
                 </p>
                 <div className="mt-3 space-y-1 text-sm">
                   <p className="flex items-center gap-2">
                     <Phone className="h-4 w-4 text-accent" aria-hidden="true" />
-                    <span>043-123456</span>
+                    <span>0-0000-0000</span>
                   </p>
                   <p className="flex items-center gap-2">
                     <Mail className="h-4 w-4 text-accent" aria-hidden="true" />
-                    <span>dpo@huangua.go.th</span>
+                    <span>dpo@sw.demo</span>
                   </p>
                 </div>
               </div>

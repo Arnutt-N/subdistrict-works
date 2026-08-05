@@ -11,22 +11,22 @@ function asFlex(msg: LineOutgoingMessage): FlexMsg {
 
 describe('caseStatusFlex', () => {
   it('returns a flex message with type "flex"', () => {
-    const msg = caseStatusFlex('HN123456789', 'received', 'ถนนพัง');
+    const msg = caseStatusFlex('DEMO123456789', 'received', 'ถนนพัง');
     expect(msg.type).toBe('flex');
   });
 
   it('includes tracking code in altText', () => {
-    const msg = asFlex(caseStatusFlex('HN123456789', 'received', 'ถนนพัง'));
-    expect(msg.altText).toContain('HN123456789');
+    const msg = asFlex(caseStatusFlex('DEMO123456789', 'received', 'ถนนพัง'));
+    expect(msg.altText).toContain('DEMO123456789');
   });
 
   it('includes Thai status label in altText', () => {
-    const msg = asFlex(caseStatusFlex('HN123456789', 'received', 'ถนนพัง'));
+    const msg = asFlex(caseStatusFlex('DEMO123456789', 'received', 'ถนนพัง'));
     expect(msg.altText).toContain('รับเรื่องแล้ว');
   });
 
   it('uses bubble container structure', () => {
-    const msg = asFlex(caseStatusFlex('HN123456789', 'received', 'ถนนพัง'));
+    const msg = asFlex(caseStatusFlex('DEMO123456789', 'received', 'ถนนพัง'));
     const contents = msg.contents as Record<string, unknown>;
     expect(contents.type).toBe('bubble');
     expect(contents).toHaveProperty('header');
@@ -35,21 +35,21 @@ describe('caseStatusFlex', () => {
   });
 
   it('embeds the title in the body contents', () => {
-    const msg = asFlex(caseStatusFlex('HN123456789', 'received', 'ถนนพังหน้าบ้าน'));
+    const msg = asFlex(caseStatusFlex('DEMO123456789', 'received', 'ถนนพังหน้าบ้าน'));
     const body = msg.contents.body as { contents: Array<Record<string, unknown>> };
     const titleText = body.contents.find((c) => c.text === 'ถนนพังหน้าบ้าน');
     expect(titleText).toBeDefined();
   });
 
   it('falls back to raw status string for unknown status', () => {
-    const msg = asFlex(caseStatusFlex('HN000000000', 'unknown_status', 'test'));
+    const msg = asFlex(caseStatusFlex('DEMO000000000', 'unknown_status', 'test'));
     expect(msg.altText).toContain('unknown_status');
   });
 
   it('maps all 8 known statuses to Thai labels', () => {
     const statuses = ['pending', 'received', 'reviewing', 'assigned', 'in_progress', 'done', 'closed', 'rejected'];
     for (const s of statuses) {
-      const msg = asFlex(caseStatusFlex('HN000000000', s, 't'));
+      const msg = asFlex(caseStatusFlex('DEMO000000000', s, 't'));
       expect(msg.altText).not.toContain(s + ':');
     }
   });
