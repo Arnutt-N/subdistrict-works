@@ -35,6 +35,12 @@ export function HealthClient() {
   }, []);
 
   useEffect(() => {
+  /* § eslint-disable react-hooks/set-state-in-effect — false positive ในเคสนี้
+   * fetchHealth() ไม่มี setState แบบ synchronous เลยสักตัว ทุก setData/setLoading
+   * อยู่หลัง await fetch(...) ซึ่งเป็น microtask คนละ tick กับ effect body
+   * rule ฟ้องเพราะตามเข้าไปในฟังก์ชันไม่ได้ จึงเหมามองว่าการเรียกใด ๆ ที่ setState
+   * ข้างในคือ setState ในตัว effect */
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchHealth();
     const interval = setInterval(fetchHealth, 30_000);
     return () => clearInterval(interval);

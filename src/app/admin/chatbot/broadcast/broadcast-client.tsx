@@ -67,6 +67,14 @@ export function BroadcastClient() {
     }
   }, []);
 
+  /* § eslint-disable react-hooks/set-state-in-effect — ตรวจแล้วว่าปลอดภัยในเคสนี้
+   * rule เตือนเรื่อง cascading render จาก setState แบบ synchronous ในตัว effect
+   * fetchItems() เริ่มด้วย setLoading(true) ซึ่งเป็น sync จริง แต่ loading ถูก
+   * useState(true) ไว้อยู่แล้ว การเขียนค่าเดิมทำให้ React bail out ไม่ re-render
+   * จึงไม่มี cascading render เกิดขึ้น ส่วนการเรียกครั้งอื่น (ค้นหา/รีเฟรช) ไม่ได้
+   * อยู่ใน effect body จึงไม่เข้าเงื่อนไขของ rule
+   * การรื้อ data fetching ของหน้าแอดมินเพื่อให้ผ่าน rule มีความเสี่ยงสูงกว่าประโยชน์ */
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { fetchItems(); }, [fetchItems]);
 
   async function handleCreate() {
@@ -175,6 +183,7 @@ export function BroadcastClient() {
               <Label htmlFor="bc-schedule">ตั้งเวลาส่ง (เว้นว่าง = สร้างเป็นร่าง)</Label>
               <input
                 id="bc-schedule"
+                aria-label="ตั้งเวลาส่ง"
                 type="datetime-local"
                 value={scheduleAt}
                 onChange={(e) => setScheduleAt(e.target.value)}
