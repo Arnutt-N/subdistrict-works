@@ -16,13 +16,12 @@ const PREFIX = 'DEMO';
 const DIGITS = 9;
 const MAX_VALUE = 10 ** DIGITS; // 1_000_000_000
 
-// § derive regex จาก PREFIX/DIGITS แทน hardcode เพื่อให้ตรรกะ generate กับ validate
-// ผูกกับค่าคงที่ชุดเดียวกัน (มีเทสต์ round-trip ใน case-tracking.test.ts คุมไว้อีกชั้น)
-//
-// หมายเหตุ: prefix ยังถูก hardcode ในข้อความที่ผู้ใช้เห็นอีกหลายจุด (LINE bot,
-// หน้า /track, FAQ, Hero) และในเทสต์ซึ่งควรอิสระจาก implementation อยู่แล้ว
-// การเปลี่ยน prefix จึงยังต้องไล่ทั้ง repo ไม่ใช่แก้ไฟล์นี้ไฟล์เดียวจบ
-const CODE_PATTERN = new RegExp(`^${PREFIX}\\d{${DIGITS}}$`);
+// § เขียนเป็น literal ไม่ derive จาก PREFIX/DIGITS ด้วย new RegExp
+// prefix ยังถูก hardcode ในข้อความที่ผู้ใช้เห็นอีกหลายจุด (LINE bot, /track, FAQ, Hero)
+// เวลาจะเปลี่ยน prefix เครื่องมือที่ใช้คือ grep — pattern ที่ประกอบจากตัวแปรจะ grep ไม่เจอ
+// ทำให้ตัว validator ที่เป็นเจ้าของกฎหายไปจากผลค้นหา ซึ่งอันตรายกว่าประโยชน์ที่ได้
+// การผูก generate เข้ากับ validate มีเทสต์ round-trip ใน case-tracking.test.ts คุมอยู่แล้ว
+const CODE_PATTERN = /^DEMO\d{9}$/;
 
 /**
  * สุ่ม tracking code รูปแบบ `DEMO` + 9 หลัก

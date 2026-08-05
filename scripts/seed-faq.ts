@@ -1,13 +1,15 @@
-import 'dotenv/config';
-import { drizzle } from 'drizzle-orm/postgres-js';
-import postgres from 'postgres';
-import { pgClientOptions } from '../src/lib/db/pg-options';
+import { config } from 'dotenv';
+import { getDb, closeDb } from '../src/lib/db';
 import { chatFaq } from '../src/lib/db/schema';
 import { generateId } from '../src/lib/id';
 
-const DATABASE_URL = process.env.DATABASE_URL!;
-const client = postgres(DATABASE_URL, { ...pgClientOptions });
-const db = drizzle(client);
+// § โหลด .env.local ให้ตรงกับ seed script ตัวอื่น (seed.ts / seed-geodata.ts / seed-villages.ts)
+// เดิมไฟล์นี้ใช้ `import 'dotenv/config'` ซึ่งอ่าน `.env` — ไฟล์ที่โปรเจกต์นี้ไม่มี
+// ผลคือ DATABASE_URL เป็น undefined แล้ว postgres() ตกไปใช้ default ของ libpq
+// (localhost + OS user) แบบเงียบ ๆ แทนที่จะบอกว่าไม่ได้ตั้งค่า
+config({ path: '.env.local', override: false });
+
+const db = await getDb();
 
 const FAQ_ENTRIES = [
   {
@@ -94,7 +96,7 @@ async function main() {
   }
 
   console.log(`\nDone: ${FAQ_ENTRIES.length} FAQ entries seeded.`);
-  await client.end();
+  await closeDb();
 }
 
 main().catch((err) => {

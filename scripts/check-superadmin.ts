@@ -1,9 +1,8 @@
 import { config } from 'dotenv';
 import { readFileSync } from 'node:fs';
-import postgres from 'postgres';
-import { pgClientOptions } from '../src/lib/db/pg-options';
+import { createPgClient } from '../src/lib/db/client';
 
-config({ path: '.env.local' });
+config({ path: '.env.local', override: false });
 
 const secrets = readFileSync('secrets/secret-keys.txt', 'utf8');
 const emailMatch = secrets.match(/^email=(.+)$/m);
@@ -14,7 +13,7 @@ if (!email) {
   process.exit(1);
 }
 
-const sql = postgres(process.env.DATABASE_URL!, { ...pgClientOptions });
+const sql = createPgClient();
 
 async function main(email: string) {
   // Check both the secret email and the default seed email

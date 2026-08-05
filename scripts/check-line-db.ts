@@ -1,10 +1,9 @@
 import { config } from 'dotenv';
-import postgres from 'postgres';
-import { pgClientOptions } from '../src/lib/db/pg-options';
+import { createPgClient } from '../src/lib/db/client';
 
-config({ path: '.env.local' });
+config({ path: '.env.local', override: false });
 
-const sql = postgres(process.env.DATABASE_URL!, { ...pgClientOptions });
+const sql = createPgClient();
 
 async function main() {
   const users = await sql`SELECT id, line_user_id, bot_state, created_at FROM line_users ORDER BY created_at DESC LIMIT 5`;

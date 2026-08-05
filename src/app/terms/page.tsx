@@ -46,7 +46,7 @@ export default function TermsPage() {
           <div className="space-y-10">
             <Section icon={<CheckSquare className="h-5 w-5" />} title="1. การยอมรับเงื่อนไข">
               <p>
-                การใช้ระบบรับแจ้งเหตุออนไลน์ของSubdistrict Works ถือว่าผู้ใช้ได้อ่าน
+                การใช้ระบบรับแจ้งเหตุออนไลน์ของ Subdistrict Works ถือว่าผู้ใช้ได้อ่าน
                 และยอมรับเงื่อนไขและข้อตกลงทั้งหมดในเอกสารฉบับนี้
                 หากไม่ยอมรับเงื่อนไขใดๆ ผู้ใช้ไม่ควรใช้ระบบนี้
               </p>
@@ -70,7 +70,7 @@ export default function TermsPage() {
 
             <Section icon={<Ban className="h-5 w-5" />} title="3. ข้อจำกัดความรับผิดชอบ">
               <p>
-                Subdistrict Worksจะดำเนินการเรื่องที่ได้รับแจ้งตามลำดับความสำคัญ
+                Subdistrict Works จะดำเนินการเรื่องที่ได้รับแจ้งตามลำดับความสำคัญ
                 และความเป็นไปได้ทางงบประมาณ โดยไม่รับประกัน:
               </p>
               <ul className="mt-3 space-y-2">
@@ -83,7 +83,7 @@ export default function TermsPage() {
             <Section icon={<AlertCircle className="h-5 w-5" />} title="4. การแจ้งเรื่องเท็จ">
               <p>
                 การแจ้งเรื่องอันเป็นเท็จหรือใส่ความผู้อื่นอาจมีความผิดตามกฎหมาย
-                Subdistrict Worksอาจดำเนินคดีตามกฎหมายที่เกี่ยวข้อง
+                Subdistrict Works อาจดำเนินคดีตามกฎหมายที่เกี่ยวข้อง
                 และ/หรือระงับการให้บริการแก่ผู้กระทำความผิด
               </p>
             </Section>
@@ -98,7 +98,7 @@ export default function TermsPage() {
 
             <Section icon={<FileText className="h-5 w-5" />} title="6. การแก้ไขเงื่อนไข">
               <p>
-                Subdistrict Worksสงวนสิทธิในการแก้ไขเงื่อนไขการใช้งานได้ตลอดเวลา
+                Subdistrict Works สงวนสิทธิในการแก้ไขเงื่อนไขการใช้งานได้ตลอดเวลา
                 การแก้ไขจะมีผลเมื่อเผยแพร่บนเว็บไซต์นี้
                 ผู้ใช้ควรตรวจสอบเงื่อนไขเป็นระยะ
               </p>

@@ -7,7 +7,12 @@ import type postgres from 'postgres';
  * แต่ละจุดตั้ง option เองทำให้ค่าที่สำคัญหลุดกลับไปเป็น default ได้โดยไม่มีใครสังเกต
  *
  * - prepare: false — ค่าที่ปลอดภัยกับ pooled endpoint ทุกแบบ (Neon pooler, PgBouncer,
- *   pgpool) แลกกับ query plan cache ที่หายไปเล็กน้อย ดีกว่าเสี่ยงพังทั้งระบบ
+ *   pgpool)
+ *   ⚠️ ราคาไม่ใช่แค่ plan cache: postgres-js จะตั้ง describeFirst สำหรับ query ที่มี
+ *   parameter ทุกตัว (connection.js) แปลว่า Parse/Describe กับ Bind/Execute แยกเป็น
+ *   คนละ round-trip → query ที่มี parameter เสีย RTT เป็น 2 เท่า ยอมจ่ายเพราะยังไม่ได้
+ *   ยืนยันว่า pooler ปลายทางรองรับ prepared statement — PRD เลื่อนการจูนไป Phase 4
+ *   หลังวัด baseline จริง ตอนนั้นค่อยพิจารณาแยกค่าตามชนิด endpoint
  * - max ต่ำ — serverless มีหลาย instance พร้อมกัน และ pooler จัดการ concurrency ให้
  *   อยู่แล้ว การถือ 10 connection ต่อ instance ทำให้ชน connection limit เร็วเปล่า ๆ
  * - idle_timeout — postgres-js default = null (ดู src/index.js ของ lib) คือไม่ปิด
@@ -21,12 +26,7 @@ const POOL_MAX = 5;
 const IDLE_TIMEOUT_SECONDS = 20;
 
 // § freeze กันโค้ดฝั่งแอปแก้ค่ากลางนี้โดยไม่ตั้งใจ
-//
-// ⚠️ ผู้เรียกต้อง spread ก่อนส่งเข้า postgres() เสมอ — `postgres(url, { ...pgClientOptions })`
-// เพราะ parseOptions ของ postgres-js เขียนทับ object ที่รับมาในบางเงื่อนไข
-// (`o.no_prepare && (o.prepare = false)`, `'timeout' in o && (o.idle_timeout = o.timeout)`)
-// ถ้าส่ง object ที่ freeze ไว้ตรง ๆ แล้ววันหน้ามีใครเติม key พวกนั้น จะกลายเป็น
-// TypeError กลางทางแทนที่จะทำงานได้ตามปกติ — spread ตัดปัญหาทั้งสองทางในบรรทัดเดียว
+// การ spread ก่อนส่งเข้า postgres() ทำอยู่ใน client.ts ที่เดียว ไม่ใช่ข้อตกลงที่ผู้เรียกต้องจำ
 export const pgClientOptions = Object.freeze({
   max: POOL_MAX,
   prepare: false,

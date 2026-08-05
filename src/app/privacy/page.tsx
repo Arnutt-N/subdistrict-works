@@ -73,7 +73,7 @@ export default function PrivacyPage() {
 
             <Section icon={<FileText className="h-5 w-5" />} title="3. การเก็บรักษาข้อมูล">
               <p>
-                ข้อมูลถูกเก็บรักษาในระบบฐานข้อมูลของSubdistrict Works
+                ข้อมูลถูกเก็บรักษาในระบบฐานข้อมูลของ Subdistrict Works
                 โดยมีมาตรการรักษาความปลอดภัยตามมาตรฐาน PDPA ได้แก่:
               </p>
               <ul className="mt-3 space-y-2">
@@ -106,7 +106,7 @@ export default function PrivacyPage() {
               </p>
               <ul className="mt-3 space-y-2">
                 <li>• ใช้ระบบถอนความยินยอมออนไลน์ (ใช้รหัสติดตามงานและเลขบัตรประชาชน)</li>
-                <li>• ติดต่อเจ้าหน้าที่โดยตรงที่Subdistrict Works</li>
+                <li>• ติดต่อเจ้าหน้าที่โดยตรงที่ Subdistrict Works</li>
               </ul>
               <p className="mt-3">
                 เมื่อถอนความยินยอมแล้ว ข้อมูลจะถูกทำให้ไม่สามารถเข้าถึงได้ผ่านระบบติดตามงาน
@@ -116,7 +116,7 @@ export default function PrivacyPage() {
 
             <Section icon={<Ban className="h-5 w-5" />} title="6. การเปิดเผยข้อมูล">
               <p>
-                Subdistrict Worksจะไม่เปิดเผยข้อมูลส่วนบุคคลให้แก่บุคคลที่สาม
+                Subdistrict Works จะไม่เปิดเผยข้อมูลส่วนบุคคลให้แก่บุคคลที่สาม
                 ยกเว้นในกรณีต่อไปนี้:
               </p>
               <ul className="mt-3 space-y-2">

@@ -20,10 +20,9 @@ type Spec = {
   key: string;
   label: string;
   minLen?: number;
-  serverOnly?: boolean;
 };
 
-/** พิมพ์ error แล้วหยุด build ทันที — คู่ console.error+process.exit(1) ซ้ำ 8 จุดในไฟล์นี้ */
+/** พิมพ์ error แล้วหยุด build ทันที — รวมคู่ console.error+process.exit(1) ที่ซ้ำทั้งไฟล์ */
 function fail(message: string): never {
   console.error(message);
   process.exit(1);
@@ -37,7 +36,6 @@ const required: Spec[] = [
   {
     key: 'AUTH_SECRET',
     label: 'Auth.js JWT signing secret (SERVER-ONLY — ห้าม NEXT_PUBLIC_)',
-    serverOnly: true,
     minLen: 32,
   },
   { key: 'AUTH_URL', label: 'Auth.js trusted app URL (e.g. http://localhost:3000)' },
@@ -60,11 +58,6 @@ for (const spec of required) {
   if (!v || v.startsWith('YOUR_') || v.startsWith('CHANGE_ME')) {
     errors.push(`✗ ${spec.key} — ${spec.label} (ยังเป็น placeholder)`);
     continue;
-  }
-  if (spec.serverOnly && spec.key.startsWith('NEXT_PUBLIC_')) {
-    errors.push(
-      `✗ ${spec.key} — SERVER-ONLY secret ห้ามมีคำนำหน้า NEXT_PUBLIC_ (จะรั่วสู่ client bundle)`,
-    );
   }
   if (spec.minLen && v.length < spec.minLen) {
     errors.push(
@@ -143,9 +136,7 @@ function validateAuthUrl(): void {
   if (process.env.NODE_ENV !== 'production') return;
 
   const raw = process.env.AUTH_URL;
-  if (!raw) {
-    fail('✗ AUTH_URL — production ต้องระบุ canonical https URL');
-  }
+  if (!raw) return; // ค่าว่าง/ขาดถูกดักไปแล้วใน required[] ด้านบน
 
   // § try ครอบเฉพาะ new URL() ไม่ครอบทั้งบล็อก — ถ้าครอบทั้งบล็อก แล้ววันหน้ามีใคร
   // เปลี่ยน fail() จาก process.exit ไปเป็น throw (ซึ่งสมเหตุสมผลถ้าอยากให้ stderr

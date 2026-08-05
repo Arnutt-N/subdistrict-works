@@ -169,7 +169,7 @@ export function BroadcastClient() {
           <div className="space-y-4 py-2">
             <div>
               <Label htmlFor="bc-msg">ข้อความประกาศ</Label>
-              <Textarea id="bc-msg" rows={4} value={message} onChange={(e) => setMessage(e.target.value)} placeholder="เช่น ประกาศ: Subdistrict Worksปิดทำการวันที่ 12 ส.ค." />
+              <Textarea id="bc-msg" rows={4} value={message} onChange={(e) => setMessage(e.target.value)} placeholder="เช่น ประกาศ: Subdistrict Works ปิดทำการวันที่ 12 ส.ค." />
             </div>
             <div>
               <Label htmlFor="bc-schedule">ตั้งเวลาส่ง (เว้นว่าง = สร้างเป็นร่าง)</Label>
