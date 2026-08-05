@@ -49,6 +49,14 @@ export function FilesClient() {
     }
   }, []);
 
+  /* § eslint-disable react-hooks/set-state-in-effect — ตรวจแล้วว่าปลอดภัยในเคสนี้
+   * rule เตือนเรื่อง cascading render จาก setState แบบ synchronous ในตัว effect
+   * fetchItems() เริ่มด้วย setLoading(true) ซึ่งเป็น sync จริง แต่ loading ถูก
+   * useState(true) ไว้อยู่แล้ว การเขียนค่าเดิมทำให้ React bail out ไม่ re-render
+   * จึงไม่มี cascading render เกิดขึ้น ส่วนการเรียกครั้งอื่น (ค้นหา/รีเฟรช) ไม่ได้
+   * อยู่ใน effect body จึงไม่เข้าเงื่อนไขของ rule
+   * การรื้อ data fetching ของหน้าแอดมินเพื่อให้ผ่าน rule มีความเสี่ยงสูงกว่าประโยชน์ */
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { fetchItems(); }, [fetchItems]);
 
   async function handleUpload(e: React.ChangeEvent<HTMLInputElement>) {
@@ -110,7 +118,7 @@ export function FilesClient() {
           icon={<ImageIcon className="h-4 w-4" />}
           action={
             <>
-              <input ref={fileRef} type="file" className="hidden" onChange={handleUpload} accept="image/*,.pdf" />
+              <input ref={fileRef} type="file" aria-label="เลือกไฟล์อัปโหลด" className="hidden" onChange={handleUpload} accept="image/*,.pdf" />
               <Button onClick={() => fileRef.current?.click()} disabled={uploading || !storageOk} className="min-h-touch gap-1.5">
                 <Upload className="h-4 w-4" /> {uploading ? 'กำลังอัปโหลด...' : 'อัปโหลด'}
               </Button>

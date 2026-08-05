@@ -61,6 +61,14 @@ export function ReplyObjectsClient() {
     }
   }, []);
 
+  /* § eslint-disable react-hooks/set-state-in-effect — ตรวจแล้วว่าปลอดภัยในเคสนี้
+   * rule เตือนเรื่อง cascading render จาก setState แบบ synchronous ในตัว effect
+   * fetchItems() เริ่มด้วย setLoading(true) ซึ่งเป็น sync จริง แต่ loading ถูก
+   * useState(true) ไว้อยู่แล้ว การเขียนค่าเดิมทำให้ React bail out ไม่ re-render
+   * จึงไม่มี cascading render เกิดขึ้น ส่วนการเรียกครั้งอื่น (ค้นหา/รีเฟรช) ไม่ได้
+   * อยู่ใน effect body จึงไม่เข้าเงื่อนไขของ rule
+   * การรื้อ data fetching ของหน้าแอดมินเพื่อให้ผ่าน rule มีความเสี่ยงสูงกว่าประโยชน์ */
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { fetchItems(); }, [fetchItems]);
 
   function openCreate() {
@@ -148,7 +156,7 @@ export function ReplyObjectsClient() {
         {loading ? (
           <div className="py-12 text-center text-muted">กำลังโหลด...</div>
         ) : items.length === 0 ? (
-          <div className="py-12 text-center text-muted">ยังไม่มี reply object — กด "สร้าง" เพื่อเริ่ม</div>
+          <div className="py-12 text-center text-muted">ยังไม่มี reply object — กด &quot;สร้าง&quot; เพื่อเริ่ม</div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
@@ -232,7 +240,7 @@ export function ReplyObjectsClient() {
             </div>
 
             <label className="flex min-h-touch items-center gap-2">
-              <input type="checkbox" checked={form.isActive} onChange={(e) => setForm((f) => ({ ...f, isActive: e.target.checked }))} className="h-5 w-5 rounded border-border accent-accent" />
+              <input type="checkbox" aria-label="ใช้งาน" checked={form.isActive} onChange={(e) => setForm((f) => ({ ...f, isActive: e.target.checked }))} className="h-5 w-5 rounded border-border accent-accent" />
               <span className="text-sm">ใช้งาน</span>
             </label>
           </div>

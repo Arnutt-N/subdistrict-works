@@ -115,6 +115,7 @@ export function SettingsClient() {
           <label className="flex min-h-touch items-center gap-3">
             <input
               type="checkbox"
+              aria-label="เปิดใช้งานบอทตอบอัตโนมัติ"
               checked={data.bot_enabled}
               onChange={(e) => setData({ ...data, bot_enabled: e.target.checked })}
               className="h-5 w-5 rounded border-border accent-accent"
