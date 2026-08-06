@@ -40,7 +40,7 @@ export function ProfileForm({
         <ReadOnly label="หน่วยงาน" value={departmentName ?? '—'} />
       </dl>
       <p className="mb-5 text-xs text-muted">
-        อีเมล บทบาท และหน่วยงาน แก้ไขได้โดยหัวหน้ากองหรือผู้ดูแลระบบเท่านั้น
+        อีเมล บทบาท และหน่วยงาน แก้ไขได้โดยหัวหน้าหรือผู้ดูแลระบบเท่านั้น
       </p>
 
       <form action={action} className="space-y-4">

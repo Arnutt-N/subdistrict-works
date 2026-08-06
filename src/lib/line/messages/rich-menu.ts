@@ -4,7 +4,7 @@ import { createLineRichMenu, uploadLineRichMenuImage, setDefaultLineRichMenu } f
 export const RICH_MENU_BODY = {
   size: { width: 2500, height: 1686 },
   selected: true,
-  name: 'กองช่าง Subdistrict Works Main Menu',
+  name: 'ช่าง Subdistrict Works Main Menu',
   chatBarText: 'เมนูหลัก',
   areas: [
     {

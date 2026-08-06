@@ -58,7 +58,7 @@ export const CONTRAST_PAIRS: ContrastPair[] = [
   { fg: 'muted', bg: 'surface-sunken', min: AA_TEXT, kind: 'text', where: 'หัวตาราง' },
 
   { fg: 'accent-strong', bg: 'surface-raised', min: AA_TEXT, kind: 'text', where: 'ลิงก์, ไอคอนเน้น' },
-  { fg: 'accent-strong', bg: 'accent-sunken', min: AA_TEXT, kind: 'text', where: 'badge "รับเรื่อง", RoleBadge ผู้ดูแล/หัวหน้ากอง, แท็บ hover' },
+  { fg: 'accent-strong', bg: 'accent-sunken', min: AA_TEXT, kind: 'text', where: 'badge "รับเรื่อง", RoleBadge ผู้ดูแล/หัวหน้า, แท็บ hover' },
   { fg: 'on-accent', bg: 'accent-strong', min: AA_TEXT, kind: 'text', where: 'ปุ่ม primary, แท็บที่เลือก, ตัวเลขแจ้งเตือน' },
 
   // § คู่ที่เคยพังจริง — text-* (สีเต็ม) บนพื้น *-soft ให้ ~1.5:1 ปัจจุบันบังคับใช้ *-ink เท่านั้น

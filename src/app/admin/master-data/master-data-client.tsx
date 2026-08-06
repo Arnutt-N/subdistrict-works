@@ -159,7 +159,7 @@ function DepartmentForm({ row, onDone }: { row?: DepartmentRow; onDone: () => vo
           defaultValue={row?.name}
           required
           maxLength={120}
-          placeholder="เช่น กองช่าง"
+          placeholder="เช่น ช่าง"
         />
       </div>
       <div>

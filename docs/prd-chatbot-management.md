@@ -69,7 +69,7 @@
 | ระบบล่มที่ผู้ดูแลรู้ตัวผ่าน health page | ≤ **5 นาที** | ไม่มี visibility |
 
 ### 2.3 ตัวชี้วัดคุณภาพ
-- เจ้าหน้าที่ที่ไม่ใช่เทคนิค (หัวหน้ากอง) เพิ่ม keyword/คำตอบ bot เองได้ใน dry-run
+- เจ้าหน้าที่ที่ไม่ใช่เทคนิค (หัวหน้า) เพิ่ม keyword/คำตอบ bot เองได้ใน dry-run
 - ทุก mutation ของ chatbot config ถูกบันทึกใน `audit_logs` (PDPA/ตรวจสอบได้)
 
 ---
@@ -79,7 +79,7 @@
 | Persona | RBAC subdistrict-works | ความต้องการ |
 |---|---|---|
 | **ผู้ดูแลระบบ (sysadmin)** | `superadmin` | ตั้งค่า LINE channel, จัดการ intent/reply-object/rich-menu/broadcast, ดู health |
-| **หัวหน้ากอง (supervisor)** | `head` | ดู bot dashboard, จัดการ FAQ/broadcast, approve rich-menu |
+| **หัวหน้า (supervisor)** | `head` | ดู bot dashboard, จัดการ FAQ/broadcast, approve rich-menu |
 | **เจ้าหน้าที่ (operator)** | `officer`/`chief` | ใช้ canned responses ใน live-chat (已有), อาจดู bot overview |
 
 > RBAC subdistrict-works (`src/lib/auth/roles.ts`): `citizen < officer < chief < head < superadmin`; `ADMIN_ROLES = [head, superadmin]`, `STAFF_ROLES = [officer, chief, head, superadmin]`

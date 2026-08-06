@@ -96,7 +96,7 @@ export function TransferDialog({
               rows={2}
               value={reason}
               onChange={(e) => setReason(e.target.value)}
-              placeholder="เช่น เรื่องอยู่ในความรับผิดชอบของกองช่าง"
+              placeholder="เช่น เรื่องอยู่ในความรับผิดชอบของช่าง"
             />
           </div>
         </div>

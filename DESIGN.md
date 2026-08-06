@@ -1,6 +1,6 @@
 <!-- SEED: re-run $impeccable document once tokens.css + primitives exist to capture real rendered tokens and generate .impeccable/design.json sidecar. Anchor values ด้านล่างอ้างอิง glm5-2-smart-service blue/amber palette + glassmorphism + framer-motion. ค้าง verify contrast AA ตอน implement. -->
 ---
-name: กองช่าง Subdistrict Works
+name: ช่าง Subdistrict Works
 description: ระบบรับแจ้งเหตุและติดตามงานบริการสาธารณูปโภคออนไลน์ — รวดเร็ว โปร่งใส มีประสิทธิภาพ (tech/smart + Thai royal vibe)
 colors:
   surface: "oklch(99% 0.005 255)"
@@ -97,7 +97,7 @@ motion:
   note: "ทุก animation ต้อง respect prefers-reduced-motion — disable float/pulse/shimmer/gradient-shift เมื่อ user ตั้ง reduce-motion"
 ---
 
-# กองช่าง Subdistrict Works — Design System
+# ช่าง Subdistrict Works — Design System
 
 **ตัวตน:** ระบบรับแจ้งเหตุและติดตามงานบริการสาธารณูปโภคออนไลน์ — น่าเชื่อถือ โปร่งใส มีประสิทธิภาพ (tech/smart vibe + Thai royal gold accent)
 
@@ -530,7 +530,7 @@ mobile(<sm)      tablet(sm–lg)        desktop(≥lg)
       <div>
         <div className="badge">ระบบออนไลน์ใหม่ ปี 2569</div>
         <h1 className="gradient-text">SMART SERVICE CENTER</h1>
-        <p className="subtitle">กองช่าง Subdistrict Works</p>
+        <p className="subtitle">ช่าง Subdistrict Works</p>
         <p className="description">ระบบรับแจ้งเหตุและติดตามงานบริการสาธารณูปโภคออนไลน์...</p>
         <div className="service-chips">{/* 5 chips */}</div>
         <div className="cta-buttons">

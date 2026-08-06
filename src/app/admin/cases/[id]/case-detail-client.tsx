@@ -132,7 +132,7 @@ export function CaseDetailClient({
               id="status-comment"
               name="comment"
               rows={2}
-              placeholder="เช่น ตรวจสอบแล้วอยู่ในขอบเขต ส่งต่อให้กองช่าง"
+              placeholder="เช่น ตรวจสอบแล้วอยู่ในขอบเขต ส่งต่อให้ช่าง"
             />
           </div>
           {/* § การเปลี่ยนสถานะยังคง defaultChecked ไว้โดยตั้งใจ — ต่างจากช่องความคืบหน้า
