@@ -14,6 +14,12 @@ describe('RICH_MENU_BODY', () => {
     expect(RICH_MENU_BODY.chatBarText).toBe('เมนูหลัก');
   });
 
+  // § name ถูกส่งขึ้น LINE API จริงผ่าน createLineRichMenu — ต้องไม่มีคำนำหน้า
+  // หน่วยงานหลุดกลับมา (de-identify, PR #5)
+  it('has a menu name without the department prefix', () => {
+    expect(RICH_MENU_BODY.name).toBe('Subdistrict Works Main Menu');
+  });
+
   it('has exactly 4 tappable areas (2x2 grid)', () => {
     expect(RICH_MENU_BODY.areas).toHaveLength(4);
   });
