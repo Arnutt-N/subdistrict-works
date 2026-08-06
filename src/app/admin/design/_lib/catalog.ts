@@ -40,14 +40,14 @@ export const TOKEN_GROUPS: TokenGroup[] = [
     ],
   },
   {
-    title: 'สีหลัก — น้ำเงิน 255°',
+    title: 'สีหลัก — maroon 24°',
     note: 'chroma ถูกจำกัดด้วยเพดาน sRGB ตาม lightness ดู DESIGN.md §2',
     tokens: [
       { name: '--color-accent-sunken', use: 'พื้น badge, hover' },
       { name: '--color-accent-100', use: 'พื้นไอคอน' },
       { name: '--color-accent-200', use: 'ขอบ badge' },
       { name: '--color-accent', use: 'ไอคอน, ตัวคั่น, mesh' },
-      { name: '--color-accent-700', use: 'hover ของปุ่ม' },
+      { name: '--color-accent-700', use: 'สำรองไว้สำหรับ hover ปุ่ม — ยังไม่มีที่ใช้จริง' },
       { name: '--color-accent-strong', use: 'ปุ่ม primary, ลิงก์' },
     ],
   },
