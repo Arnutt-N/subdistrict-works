@@ -9,7 +9,7 @@ export function Footer() {
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* About */}
           <div>
-            <h3 className="text-lg font-semibold leading-tight">กองช่าง Subdistrict Works</h3>
+            <h3 className="text-lg font-semibold leading-tight">ช่าง Subdistrict Works</h3>
             <p className="mt-4 text-sm text-muted">
               ระบบรับแจ้งเหตุและติดตามงานบริการสาธารณูปโภคออนไลน์
               เพื่อการบริการที่รวดเร็ว โปร่งใส และมีประสิทธิภาพ

@@ -34,7 +34,7 @@ const deptData = [
   },
   {
     id: generateId(),
-    name: 'กองคลัง',
+    name: 'คลัง',
     slug: 'finance',
     description: 'งานการเงิน บัญชี จัดเก็บรายได้ พัสดุ',
     color: 'oklch(60% 0.18 120)',
@@ -43,7 +43,7 @@ const deptData = [
   },
   {
     id: generateId(),
-    name: 'กองช่าง',
+    name: 'ช่าง',
     slug: 'public-works',
     description: 'งานก่อสร้าง ซ่อมบำรุง ถนน สะพาน อาคาร',
     color: 'oklch(58% 0.20 30)',
@@ -52,7 +52,7 @@ const deptData = [
   },
   {
     id: generateId(),
-    name: 'กองการศึกษา',
+    name: 'การศึกษา',
     slug: 'education',
     description: 'งานการศึกษา ศาสนา วัฒนธรรม กีฬา',
     color: 'oklch(62% 0.19 280)',
@@ -80,9 +80,9 @@ if (existingDept) {
 
   // § Categories (13 หมวดหมู่ตามแบบ Traffy)
 
-  const publicWorksId = deptData[2]!.id; // กองช่าง
+  const publicWorksId = deptData[2]!.id; // ช่าง
   const clerkId = deptData[0]!.id; // สำนักปลัด
-  const educationId = deptData[3]!.id; // กองการศึกษา
+  const educationId = deptData[3]!.id; // การศึกษา
 
   const categoryData = [
   {

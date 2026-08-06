@@ -13,7 +13,7 @@ import type { UserRole } from '@/lib/auth/roles';
 /** ป้ายบทบาทภาษาไทย — export เพื่อให้หน้าอื่น (เช่น /admin/profile) ใช้ชื่อเดียวกัน */
 export const ROLE_LABELS_TH: Record<UserRole, string> = {
   superadmin: 'ผู้ดูแลระบบ',
-  head: 'หัวหน้ากอง',
+  head: 'หัวหน้า',
   chief: 'หัวหน้างาน',
   officer: 'เจ้าหน้าที่',
   citizen: 'ประชาชน',

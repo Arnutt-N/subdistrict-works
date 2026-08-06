@@ -83,7 +83,7 @@ export function Hero() {
               transition={{ delay: reduce ? 0 : 0.4, duration: reduce ? 0 : 0.6 }}
               className="text-accent mt-3 text-base font-semibold lg:text-lg"
             >
-              กองช่าง Subdistrict Works
+              ช่าง Subdistrict Works
             </motion.p>
 
             <motion.p
@@ -354,7 +354,7 @@ function HeroTrackingCard({ reduce }: { reduce: boolean }) {
               </div>
               <div>
                 <p className="text-[11px] font-medium">เจ้าหน้าที่ผู้รับผิดชอบ</p>
-                <p className="text-[10px] text-muted">งานไฟฟ้า • กองช่าง</p>
+                <p className="text-[10px] text-muted">งานไฟฟ้า • ช่าง</p>
               </div>
             </div>
             <span className="text-accent text-[10px] font-medium">อัปเดต 2 นาทีที่แล้ว</span>

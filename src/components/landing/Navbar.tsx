@@ -27,14 +27,14 @@ export function Navbar() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo — บรรทัดเดียวเสมอ
               เดิมซ้อนชื่อหน่วยงาน + tagline เป็น 2 บรรทัดใน bar สูง h-16 พอชื่อยาว
-              (โดยเฉพาะ "กองช่าง Subdistrict Works" ที่ breakpoint lg)
+              (โดยเฉพาะ "ช่าง Subdistrict Works" ที่ breakpoint lg)
               ข้อความจะห่อบรรทัดแล้วดันแถวเสียทรง — ตัดเหลือบรรทัดเดียว + nowrap
               แล้วสลับความยาวชื่อตามจอแทน */}
           <Link href="/" className="flex min-w-0 items-center gap-2.5">
             <BrandMark />
             <span className="hidden truncate whitespace-nowrap text-sm font-bold sm:block">
-              <span className="lg:hidden">กองช่าง Subdistrict Works</span>
-              <span className="hidden lg:inline">กองช่าง Subdistrict Works</span>
+              <span className="lg:hidden">ช่าง Subdistrict Works</span>
+              <span className="hidden lg:inline">ช่าง Subdistrict Works</span>
             </span>
           </Link>
 
