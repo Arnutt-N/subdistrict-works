@@ -234,7 +234,7 @@
 - **Touch target ≥44px** (`min-h-touch`)
 - **Body text ≥17px** (elderly floor)
 - **Noto Sans Thai เท่านั้น** (ห้าม serif)
-- **Glassmorphism cards** + primary น้ำเงิน (The One Blue Rule)
+- **Glassmorphism cards** + primary maroon (The One Accent Rule)
 - **prefers-reduced-motion** respect ทุก animation
 - ใช้ primitives ที่มี: `AdminShell`, `AdminCard`, `KpiCard`, `Pagination`, `EmptyState`, Radix (Dialog/Select/Tabs/Toast)
 - Pattern หน้า: `page.tsx` (server, `requireStaff`) + `*-client.tsx` (client interactivity)

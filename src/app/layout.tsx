@@ -70,14 +70,14 @@ export const metadata: Metadata = {
  *
  * § ต้องเป็น hex ไม่ใช่ oklch — meta[name=theme-color] ยังไม่รองรับ oklch ในหลาย
  * browser ค่าด้านล่างจึงเป็นผลแปลงจาก token โดยตรง (ไม่ใช่สีที่เลือกเอง):
- *   light = oklch(99% 0.005 255)  → #fafcff
- *   dark  = oklch(15% 0.015 255)  → #070b11
+ *   light = oklch(99% 0.005 5)  → #fffafb
+ *   dark  = oklch(15% 0.015 5)  → #11090a
  * ถ้าเปลี่ยน --color-surface ต้องแปลงใหม่แล้วมาแก้ที่นี่ด้วย
  */
 export const viewport: Viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#fafcff' },
-    { media: '(prefers-color-scheme: dark)', color: '#070b11' },
+    { media: '(prefers-color-scheme: light)', color: '#fffafb' },
+    { media: '(prefers-color-scheme: dark)', color: '#11090a' },
   ],
 };
 
