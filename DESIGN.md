@@ -3,17 +3,17 @@
 name: Subdistrict Works
 description: ระบบรับแจ้งเหตุและติดตามงานบริการสาธารณูปโภคออนไลน์ — รวดเร็ว โปร่งใส มีประสิทธิภาพ (tech/smart + Thai royal vibe)
 colors:
-  surface: "oklch(99% 0.005 5)"
+  surface: "oklch(99% 0.005 24)"
   surface-raised: "oklch(100% 0 0)"
-  surface-sunken: "oklch(96% 0.02 5)"
-  text: "oklch(18% 0.02 5)"
-  text-muted: "oklch(47% 0.02 5)"
-  text-on-accent: "oklch(99% 0.005 5)"
-  border: "oklch(85% 0.015 5)"
-  border-strong: "oklch(64% 0.03 5)"
-  accent: "oklch(32% 0.11 5)"
-  accent-strong: "oklch(22.6% 0.078 5)"
-  accent-sunken: "oklch(96% 0.02 5)"
+  surface-sunken: "oklch(96% 0.02 24)"
+  text: "oklch(18% 0.02 24)"
+  text-muted: "oklch(47% 0.02 24)"
+  text-on-accent: "oklch(99% 0.005 24)"
+  border: "oklch(85% 0.015 24)"
+  border-strong: "oklch(64% 0.03 24)"
+  accent: "oklch(42% 0.155 24)"
+  accent-strong: "oklch(33.3% 0.131 24)"
+  accent-sunken: "oklch(96% 0.02 24)"
   accent-gold: "oklch(82% 0.14 80)"
   accent-gold-soft: "oklch(95% 0.05 80)"
   success: "oklch(55% 0.13 160)"
@@ -22,15 +22,15 @@ colors:
   warning-soft: "oklch(95% 0.05 80)"
   danger: "oklch(60% 0.22 25)"
   danger-soft: "oklch(95% 0.05 25)"
-  info: "oklch(32% 0.11 5)"
+  info: "oklch(42% 0.155 24)"
   dark:
-    surface: "oklch(15% 0.015 5)"
-    surface-raised: "oklch(20% 0.02 5)"
-    surface-sunken: "oklch(27% 0.02 5)"
-    text: "oklch(97% 0.005 5)"
-    text-muted: "oklch(70% 0.02 5)"
+    surface: "oklch(15% 0.015 24)"
+    surface-raised: "oklch(20% 0.02 24)"
+    surface-sunken: "oklch(27% 0.02 24)"
+    text: "oklch(97% 0.005 24)"
+    text-muted: "oklch(70% 0.02 24)"
     border: "oklch(100% 0 0 / 10%)"
-    accent: "oklch(70% 0.14 5)"
+    accent: "oklch(70% 0.14 24)"
     accent-gold: "oklch(78% 0.14 80)"
 typography:
   display:
@@ -87,7 +87,7 @@ elevation:
   card: "0 1px 3px 0 oklch(0% 0 0 / 0.1), 0 1px 2px -1px oklch(0% 0 0 / 0.1)"
   cardHover: "0 4px 6px -1px oklch(0% 0 0 / 0.1), 0 2px 4px -2px oklch(0% 0 0 / 0.1)"
   overlay: "0 25px 50px -12px oklch(0% 0 0 / 0.25)"
-  glowAccent: "0 0 40px -10px oklch(32% 0.11 5 / 0.5)"
+  glowAccent: "0 0 40px -10px oklch(42% 0.155 24 / 0.5)"
   glowAmber: "0 0 40px -10px oklch(82% 0.14 80 / 0.5)"
 motion:
   durationFast: "150ms"
@@ -101,7 +101,7 @@ motion:
 
 **ตัวตน:** ระบบรับแจ้งเหตุและติดตามงานบริการสาธารณูปโภคออนไลน์ — น่าเชื่อถือ โปร่งใส มีประสิทธิภาพ (tech/smart vibe + Thai royal gold accent)
 
-**อ้างอิง:** glm5-2-smart-service (glassmorphism + framer-motion) — palette ปรับเป็น maroon 5 (#370617) + amber 80
+**อ้างอิง:** glm5-2-smart-service (glassmorphism + framer-motion) — palette ปรับเป็น maroon 24 (#6A040F) + amber 80
 
 **A11y Gates (HARD — ทุกอย่างต้องผ่าน):**
 - Contrast AA (WCAG 2.1 level AA) — ทุกสี light/dark
@@ -113,7 +113,7 @@ motion:
 
 **Anti-AI-Default Reflexes (ปฏิเสธดีไซน์โหลๆ ที่ AI มักเจนให้ — ดูรายละเอียดใน §2/§3/§4/§7):**
 - **No-Cream** — พื้นห้ามใช้ cream AI-default `oklch(98% 0.01 60)` → ใช้ off-white เอียง maroon
-- **No-Muddy-Maroon** — maroon ต้องอิ่มใกล้เพดาน gamut ของ lightness นั้น (เช่น 0.11 ที่ L32%) → ห้ามน้ำตาลหม่นจืด ๆ chroma ต่ำกว่าครึ่งเพดาน ที่ให้ความรู้สึกเก่าหมอง (แทนกฎ No-Muddy-Blue ยุค blue 255 — ดู §2)
+- **No-Muddy-Maroon** — maroon ต้องอิ่มใกล้เพดาน gamut ของ lightness นั้น (เช่น 0.155 ที่ L42%) → ห้ามน้ำตาลหม่นจืด ๆ chroma ต่ำกว่าครึ่งเพดาน ที่ให้ความรู้สึกเก่าหมอง (แทนกฎ No-Muddy-Blue ยุค blue 255 — ดู §2)
 - **No-Serif** — ห้าม serif display (Fraunces/DM Serif/Playfair) → Noto Sans Thai bold
 - **No-Flat** — ห้าม flat surface → glassmorphism + mesh gradient + glow
 
@@ -129,7 +129,7 @@ motion:
 - ไม่ใช่ editorial civic magazine (serif headlines, flat surface)
 
 **ใช่:**
-- ระบบ smart/tech ที่ทันสมัย (blue primary = ราชการที่น่าเชื่อถือ ไม่ใช่ราชการเก่า)
+- ระบบ smart/tech ที่ทันสมัย (maroon primary = น่าเชื่อถือ สง่างาม ไม่ใช่ราชการเก่า)
 - Thai royal elegance (amber gold accent)
 - Glassmorphism + mesh gradient (modern premium feel)
 - Modular sections (Stats/Services/HowItWorks/LiveTracking/Testimonials/FAQ/CTA)
@@ -142,37 +142,35 @@ motion:
 > **ประวัติ:** palette เดิมเป็น emerald 160° และมีกฎ "No-Indigo" ห้ามใช้ civic blue
 > กฎนั้นถูกยกเลิกเมื่อย้ายไป blue 255° ซึ่งแก้ปัญหา accent มีค่าเท่ากับ
 > `--color-success` เป๊ะจน "ปุ่มหลัก" กับ "สถานะสำเร็จ" แยกไม่ออก
-> ปัจจุบัน palette ย้ายอีกครั้งเป็น **maroon 5° (#370617)** ตามสีแบรนด์ใหม่ —
+> ปัจจุบัน palette ย้ายอีกครั้งเป็น **maroon 24° (#6A040F)** ตามสีแบรนด์ใหม่ —
 > หมุน hue ทั้งชุดโดยคงโครง L/C ของสเกลน้ำเงินเดิม ยกเว้นตระกูล accent ฝั่ง light
-> ที่มืดลงเพื่อตรึง `--color-accent-strong` = #370617 เป๊ะ
+> ที่มืดลงเพื่อตรึง `--color-accent-strong` = #6A040F เป๊ะ
 > ข้อควรระวังเดิมยังใช้ได้: สีหลักที่ chroma ต่ำจะดูจืดและเก่า จึงตั้ง chroma
 > ให้ใกล้เพดาน sRGB gamut ของแต่ละ lightness เพื่อคงความสด
 
-**Primary: Maroon 5° (#370617)**
+**Primary: Maroon 24° (#6A040F)**
 
 | token | ค่า | ใช้ที่ | บนการ์ดขาว |
 |---|---|---|---|
-| `--color-accent-sunken` | `oklch(96% 0.02 5)` | พื้น badge, hover | — |
-| `--color-accent-100` | `oklch(94% 0.029 5)` | พื้นไอคอน | — |
-| `--color-accent-200` | `oklch(90% 0.049 5)` | ขอบ badge | — |
-| `--color-accent` | `oklch(32% 0.11 5)` | ไอคอน, ตัวคั่น, mesh | 12.9:1 |
-| `--color-accent-700` | `oklch(27% 0.095 5)` | hover ของปุ่ม | 15.2:1 |
-| `--color-accent-strong` | `oklch(22.6% 0.078 5)` = #370617 | ปุ่ม primary, ลิงก์ | 17.0:1 |
+| `--color-accent-sunken` | `oklch(96% 0.02 24)` | พื้น badge, hover | — |
+| `--color-accent-100` | `oklch(94% 0.029 24)` | พื้นไอคอน | — |
+| `--color-accent-200` | `oklch(90% 0.049 24)` | ขอบ badge | — |
+| `--color-accent` | `oklch(42% 0.155 24)` | ไอคอน, ตัวคั่น, mesh | 8.9:1 |
+| `--color-accent-700` | `oklch(37% 0.14 24)` | hover ของปุ่ม | 10.8:1 |
+| `--color-accent-strong` | `oklch(33.3% 0.131 24)` = #6A040F | ปุ่ม primary, ลิงก์ | 12.4:1 |
 
-dark mode กลับทิศ: `accent` = `oklch(70% 0.14 5)`, `accent-strong` = `oklch(75% 0.14 5)`
+dark mode กลับทิศ: `accent` = `oklch(70% 0.14 24)`, `accent-strong` = `oklch(75% 0.14 24)`
 
-**เพิ่มขั้นใหม่ต้องดูเพดาน sRGB ก่อน** — chroma ไม่ใช่ตัวเลือกอิสระ ที่ hue 5 gamut จำกัดไว้ตาม lightness:
+**เพิ่มขั้นใหม่ต้องดูเพดาน sRGB ก่อน** — chroma ไม่ใช่ตัวเลือกอิสระ ที่ hue 24 gamut จำกัดไว้ตาม lightness:
 
 | L | chroma สูงสุด (≈) | | L | chroma สูงสุด (≈) |
 |---|---|---|---|---|
 | 94% | 0.04 | | 70% | 0.17 |
-| 90% | 0.06 | | 32% | 0.13 |
-| 80% | 0.13 | | 27% | 0.11 |
-| 75% | 0.15 | | 22.6% | 0.09 |
+| 90% | 0.06 | | 42% | 0.18 |
+| 80% | 0.13 | | 37% | 0.16 |
+| 75% | 0.15 | | 33% | 0.14 |
 
 ค่าที่เกินเพดานจะถูก browser gamut-map ให้เอง (ลด chroma) แปลว่า**ตัวเลขใน token ไม่ใช่สีที่ผู้ใช้เห็น** และ `check-contrast.ts` ใช้ naive clipping ต่อ channel จึงรายงานคลาดจากที่ browser ทำเล็กน้อย
-
-> `--color-accent-strong` (42% 0.16) เกินเพดาน 0.139 อยู่ก่อนแล้ว ไม่แก้เพราะเป็นค่าที่ใช้ใน production การแก้จะทำให้สีที่เห็นขยับจริง
 
 หลังเพิ่มขั้นใหม่: map เข้า `@theme inline` (ไม่งั้นไม่มี utility) และเพิ่มคู่ใน `PAIRS` ของ `check-contrast.ts`
 
@@ -181,12 +179,12 @@ dark mode กลับทิศ: `accent` = `oklch(70% 0.14 5)`, `accent-strong`
 - `oklch(78% 0.14 80)` — amber dark mode
 
 **Surface:**
-- Light: `oklch(99% 0.005 5)` off-white ไม่ใช่ pure white
-- Dark: `oklch(15% 0.015 5)` dark maroon tint
+- Light: `oklch(99% 0.005 24)` off-white ไม่ใช่ pure white
+- Dark: `oklch(15% 0.015 24)` dark maroon tint
 
 **Text:**
-- Light: `oklch(18% 0.02 5)` cool ink
-- Dark: `oklch(97% 0.005 5)` off-white text
+- Light: `oklch(18% 0.02 24)` cool ink
+- Dark: `oklch(97% 0.005 24)` off-white text
 
 **Semantic:**
 - Success = emerald `oklch(55% 0.13 160)` — คงเขียวไว้ ตอนนี้แยกจาก accent ได้แล้ว
@@ -196,9 +194,9 @@ dark mode กลับทิศ: `accent` = `oklch(70% 0.14 5)`, `accent-strong`
 
 **สีเต็ม vs สีข้อความ:** `--color-*` เป็น "สีเต็ม" สำหรับพื้น/ไอคอนบนพื้นเข้ม ส่วนบนพื้น `*-soft` **ต้องใช้ `*-ink` เท่านั้น** — สีเต็มบนพื้น soft ให้ 1.5–3.6:1 ซึ่งอ่านไม่ออก (เป็นบั๊กที่เกิดซ้ำมาแล้ว 3 รอบ)
 
-**The One Accent Rule:** maroon (#370617) ใช้เป็น primary ทุกที่ — CTA button, badge, progress bar, status active, link hover ห้ามใช้สีอื่นแทน (ยกเว้น amber gold accent เฉพาะ highlight/badge secondary)
+**The One Accent Rule:** maroon (#6A040F) ใช้เป็น primary ทุกที่ — CTA button, badge, progress bar, status active, link hover ห้ามใช้สีอื่นแทน (ยกเว้น amber gold accent เฉพาะ highlight/badge secondary)
 
-**The No-Cream Rule:** surface ห้ามใช้ cream AI-default `oklch(98% 0.01 60)` — ใช้ off-white `oklch(99% 0.005 5)` ที่เอียง maroon เล็กน้อยแทน
+**The No-Cream Rule:** surface ห้ามใช้ cream AI-default `oklch(98% 0.01 60)` — ใช้ off-white `oklch(99% 0.005 24)` ที่เอียง maroon เล็กน้อยแทน
 
 **Contrast Verification (MANDATORY):**
 - ตรวจ contrast ratio AA (4.5:1 text, 3:1 large text) ทุกคู่สี light/dark
@@ -250,7 +248,7 @@ dark mode กลับทิศ: `accent` = `oklch(70% 0.14 5)`, `accent-strong`
   border: 1px solid oklch(100% 0 0 / 0.3);
 }
 .dark .glass {
-  background: oklch(20% 0.02 5 / 0.6);
+  background: oklch(20% 0.02 24 / 0.6);
   border: 1px solid oklch(100% 0 0 / 0.08);
 }
 ```
@@ -260,9 +258,9 @@ dark mode กลับทิศ: `accent` = `oklch(70% 0.14 5)`, `accent-strong`
 .mesh-gradient {
   background-color: var(--background);
   background-image:
-    radial-gradient(at 12% 18%, oklch(32% 0.11 5 / 0.12) 0px, transparent 50%),
+    radial-gradient(at 12% 18%, oklch(42% 0.155 24 / 0.12) 0px, transparent 50%),
     radial-gradient(at 88% 12%, oklch(82% 0.14 80 / 0.10) 0px, transparent 50%),
-    radial-gradient(at 33% 88%, oklch(32% 0.11 5 / 0.12) 0px, transparent 50%),
+    radial-gradient(at 33% 88%, oklch(42% 0.155 24 / 0.12) 0px, transparent 50%),
     radial-gradient(at 78% 82%, oklch(82% 0.14 80 / 0.08) 0px, transparent 50%);
 }
 ```
@@ -281,7 +279,7 @@ dark mode กลับทิศ: `accent` = `oklch(70% 0.14 5)`, `accent-strong`
 
 **Glow Effects:**
 ```css
-.glow-accent { box-shadow: 0 0 40px -10px oklch(32% 0.11 5 / 0.5); }
+.glow-accent { box-shadow: 0 0 40px -10px oklch(42% 0.155 24 / 0.5); }
 .glow-amber { box-shadow: 0 0 40px -10px oklch(82% 0.14 80 / 0.5); }
 ```
 
@@ -552,7 +550,7 @@ mobile(<sm)      tablet(sm–lg)        desktop(≥lg)
 ## §7. Do's & Don'ts
 
 ### ✅ DO
-- ใช้ maroon `oklch(32% 0.11 5)` / `oklch(22.6% 0.078 5)` (#370617) เป็น primary ทุกที่ (CTA, badge, progress, link hover)
+- ใช้ maroon `oklch(42% 0.155 24)` / `oklch(33.3% 0.131 24)` (#6A040F) เป็น primary ทุกที่ (CTA, badge, progress, link hover)
 - ใช้ amber-400 gold เป็น accent highlight (badge secondary, warning, trust badge icon)
 - Glassmorphism cards (backdrop-blur + border)
 - Mesh gradient background (radial-gradient maroon/amber)
@@ -565,7 +563,7 @@ mobile(<sm)      tablet(sm–lg)        desktop(≥lg)
 ### ❌ DON'T
 - ห้ามใช้ maroon จืด chroma ต่ำกว่าครึ่งเพดาน gamut — ดูกฎ No-Muddy-Maroon §2
 - ห้ามใช้ serif display headlines (Fraunces/DM Serif) — ใช้ Noto Sans Thai bold แทน
-- ห้ามใช้ cream AI-default `oklch(98% 0.01 60)` — ใช้ off-white `oklch(99% 0.005 5)`
+- ห้ามใช้ cream AI-default `oklch(98% 0.01 60)` — ใช้ off-white `oklch(99% 0.005 24)`
 - ห้ามใช้ flat surface (flat-by-default rule ยกเลิก) — ใช้ glassmorphism/mesh แทน
 - ห้าม animation ที่ไม่ respect `prefers-reduced-motion` (CRITICAL gate)
 - ห้าม body text <17px (fail elderly floor H12)
@@ -578,7 +576,7 @@ mobile(<sm)      tablet(sm–lg)        desktop(≥lg)
 
 > ⚠️ **เอกสารส่วนนี้เป็นบันทึกประวัติ ไม่ใช่งานค้าง** — checklist ด้านล่างคือรอบ
 > migration แรก (civic indigo → emerald) ซึ่งทำเสร็จไปแล้ว ต่อมามี migration รอบสอง
-> (emerald → blue 5) ที่ทำเสร็จเช่นกัน ดู §2 สำหรับ palette ที่ใช้จริงตอนนี้
+> (emerald → blue 255) ที่ทำเสร็จเช่นกัน ดู §2 สำหรับ palette ที่ใช้จริงตอนนี้
 > ชื่อสีในรายการด้านล่างจึงสะท้อนสถานะตอนนั้น ไม่ใช่ตอนนี้
 
 - [x] `src/styles/tokens.css` — เปลี่ยน palette civic indigo → emerald-160/amber-80

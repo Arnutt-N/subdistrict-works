@@ -1,13 +1,13 @@
 /* tokens.css — Subdistrict Works design tokens (Tailwind v4 CSS-first)
- * Source of truth = DESIGN.md (maroon 5 #370617 + amber 80 + glassmorphism + framer-motion).
+ * Source of truth = DESIGN.md (maroon 24 #6A040F + amber 80 + glassmorphism + framer-motion).
  * Runtime theming light/dark ผ่าน [data-theme] ด้วย @theme inline (utilities อ้าง var ตอน runtime).
  *
- * § ประวัติ palette: emerald 160 → blue 255 → maroon 5 (#370617)
+ * § ประวัติ palette: emerald 160 → blue 255 → maroon 24 (#6A040F)
  * 1) การย้ายจาก emerald ปลดล็อก semantic ที่ชนกัน — เดิม --color-accent กับ
  *    --color-success ตั้งค่า oklch(55% 0.13 160) เหมือนกันเป๊ะ ทำให้ "ปุ่มหลัก" กับ
  *    "สถานะสำเร็จ" แยกไม่ออก ตอนนี้ success เป็นเขียวที่มีความหมายจริงอย่างเดียว
- * 2) การย้ายมา maroon 5 หมุน hue อย่างเดียวโดยคงโครง L/C ของสเกลน้ำเงินเดิม
- *    ยกเว้นตระกูล accent ฝั่ง light ที่ต้องมืดลงเพื่อตรึง accent-strong = #370617
+ * 2) การย้ายมา maroon 24 หมุน hue อย่างเดียวโดยคงโครง L/C ของสเกลน้ำเงินเดิม
+ *    ยกเว้นตระกูล accent ฝั่ง light ที่ต้องมืดลงเพื่อตรึง accent-strong = #6A040F
  * 3) hue ของ surface/ink/border หมุนตามทั้งชุด — ถ้าหมุนแค่ accent จะได้ปุ่มแดงเลือดหมู
  *    บนพื้นอมน้ำเงิน ตัวอักษรอมน้ำเงิน ซึ่งขัดกันชัดเจน */
 
@@ -19,43 +19,43 @@
 /* ---------- Raw design tokens (light = default) ---------- */
 :root {
   /* surface (The No-Cream Rule: off-white maroon tint ไม่ใช่ cream AI-default) */
-  --color-surface: oklch(99% 0.005 5);
+  --color-surface: oklch(99% 0.005 24);
   --color-surface-raised: oklch(100% 0 0);
-  --color-surface-sunken: oklch(96% 0.02 5);
+  --color-surface-sunken: oklch(96% 0.02 24);
 
   /* ink (Warm Ink maroon tint) */
-  --color-ink: oklch(18% 0.02 5);
-  --color-muted: oklch(47% 0.02 5); /* 6.6:1 บน surface (เดิม 50% = 5.8:1) */
-  --color-on-accent: oklch(99% 0.005 5);
+  --color-ink: oklch(18% 0.02 24);
+  --color-muted: oklch(47% 0.02 24); /* 6.6:1 บน surface (เดิม 50% = 5.8:1) */
+  --color-on-accent: oklch(99% 0.005 24);
 
   /* hairline
    * เดิม border 90% ให้ contrast แค่ 1.31:1 บน surface — โครงหน้าจอ "หายไป"
    * (คือสาเหตุที่แอดมินดูคลีนแต่ไม่มีมิติ) เข้มขึ้นเป็น 1.53:1 / 3.23:1
    * border-strong ≥3:1 ตาม WCAG 1.4.11 (non-text contrast ของขอบ UI component) */
-  --color-border: oklch(85% 0.015 5);
-  --color-border-strong: oklch(64% 0.03 5);
+  --color-border: oklch(85% 0.015 24);
+  --color-border-strong: oklch(64% 0.03 24);
 
-  /* accent (maroon primary — แบรนด์ #370617)
-   * accent-strong ตรึงไว้ที่ #370617 เป๊ะ (= oklch 22.6% 0.078 5) ส่วน accent
+  /* accent (maroon primary — แบรนด์ #6A040F)
+   * accent-strong ตรึงไว้ที่ #6A040F เป๊ะ (= oklch 33.3% 0.131 24) ส่วน accent
    * สว่างกว่า ~9 จุด L เพื่อคงระยะคู่เดิมของสเกลน้ำเงิน (51/42)
    * accent = ไอคอน/ตัวคั่น, accent-strong = ปุ่ม primary/ลิงก์ (ต้องผ่าน AA 4.5:1) */
-  --color-accent: oklch(32% 0.11 5);
-  --color-accent-strong: oklch(22.6% 0.078 5);
-  --color-accent-sunken: oklch(96% 0.02 5);
+  --color-accent: oklch(42% 0.155 24);
+  --color-accent-strong: oklch(33.3% 0.131 24);
+  --color-accent-sunken: oklch(96% 0.02 24);
 
   /* ขั้นเสริมของ accent — เพิ่มเฉพาะที่มีที่ใช้จริง ไม่ทำครบ 10 ขั้นแบบ Material
    *
-   * § chroma ของแต่ละขั้นถูกจำกัดด้วย sRGB gamut ที่ hue 5 ไม่ใช่ตัวเลือกอิสระ
+   * § chroma ของแต่ละขั้นถูกจำกัดด้วย sRGB gamut ที่ hue 24 ไม่ใช่ตัวเลือกอิสระ
    * (เพดานโดยประมาณ: L94%→0.04  L90%→0.06  L80%→0.13  L75%→0.15  L70%→0.17
-   *  L32%→0.13  L27%→0.11  L22.6%→0.09) ค่าที่เกินเพดานจะถูก browser gamut-map
+   *  L42%→0.18  L37%→0.16  L33%→0.14) ค่าที่เกินเพดานจะถูก browser gamut-map
    * ให้เอง (ลด chroma) แปลว่าตัวเลขใน token ไม่ใช่สีที่ผู้ใช้เห็น — และ
    * check-contrast.ts ใช้ naive clipping ต่อ channel จึงรายงานคลาดจากที่ browser
    * ทำเล็กน้อย ค่าทั้งชุดจึงคุมให้อยู่ในเพดานทุกตัว
    *
    * เพิ่มขั้นใหม่: ดูเพดานข้างบน แล้วเพิ่มคู่ใน PAIRS ของ check-contrast.ts ด้วย */
-  --color-accent-100: oklch(94% 0.029 5);
-  --color-accent-200: oklch(90% 0.049 5);
-  --color-accent-700: oklch(27% 0.095 5);
+  --color-accent-100: oklch(94% 0.029 24);
+  --color-accent-200: oklch(90% 0.049 24);
+  --color-accent-700: oklch(37% 0.14 24);
 
   /* accent gold (amber — Thai royal) */
   --color-accent-gold: oklch(82% 0.14 80);
@@ -128,29 +128,29 @@
    * (0 0 40px/-10px/0.5 กับ 0 10px 40px/-10px/0.3) การให้ utility อ้าง var จึงเคย
    * เท่ากับการเปลี่ยนเงาปุ่มทั่วระบบ 9 จุด แก้โดยยึดค่าของ utility ซึ่งเป็นค่าที่
    * ใช้จริงบนหน้าจอ แล้วให้ utility อ้าง var นี้แทน */
-  --shadow-glow-accent: 0 10px 40px -10px oklch(32% 0.11 5 / 0.3);
+  --shadow-glow-accent: 0 10px 40px -10px oklch(42% 0.155 24 / 0.3);
   --shadow-glow-amber: 0 0 40px -10px oklch(82% 0.14 80 / 0.5);
 }
 
 /* ---------- Dark theme (intentional, ไม่ default — ผู้สูงอายุกลางวัน) ---------- */
 [data-theme='dark'] {
-  --color-surface: oklch(15% 0.015 5);
-  --color-surface-raised: oklch(20% 0.02 5);
-  --color-surface-sunken: oklch(27% 0.02 5);
-  --color-ink: oklch(97% 0.005 5);
-  --color-muted: oklch(70% 0.02 5);
-  --color-on-accent: oklch(15% 0.015 5);
-  --color-border: oklch(38% 0.02 5);
-  --color-border-strong: oklch(55% 0.02 5);
+  --color-surface: oklch(15% 0.015 24);
+  --color-surface-raised: oklch(20% 0.02 24);
+  --color-surface-sunken: oklch(27% 0.02 24);
+  --color-ink: oklch(97% 0.005 24);
+  --color-muted: oklch(70% 0.02 24);
+  --color-on-accent: oklch(15% 0.015 24);
+  --color-border: oklch(38% 0.02 24);
+  --color-border-strong: oklch(55% 0.02 24);
   /* dark กลับทิศ: accent-strong สว่างกว่า accent เพราะต้องเด่นบนพื้นเข้ม */
-  --color-accent: oklch(70% 0.14 5);
-  --color-accent-strong: oklch(75% 0.14 5);
-  --color-accent-sunken: oklch(27% 0.03 5);
+  --color-accent: oklch(70% 0.14 24);
+  --color-accent-strong: oklch(75% 0.14 24);
+  --color-accent-sunken: oklch(27% 0.03 24);
   /* ขั้นเสริมกลับทิศเช่นกัน — 100/200 เป็นพื้นจึงเข้ม, 700 เป็น hover จึงสว่างกว่า strong
    * ถ้าไม่ประกาศตรงนี้จะ inherit ค่า light (94%/90%) มาเป็นพื้นสว่างบนธีมมืด */
-  --color-accent-100: oklch(27% 0.04 5);
-  --color-accent-200: oklch(33% 0.05 5);
-  --color-accent-700: oklch(80% 0.12 5);
+  --color-accent-100: oklch(27% 0.04 24);
+  --color-accent-200: oklch(33% 0.05 24);
+  --color-accent-700: oklch(80% 0.12 24);
   --color-accent-gold: oklch(78% 0.14 80);
   --color-accent-gold-soft: oklch(30% 0.05 80);
   --color-success: oklch(70% 0.14 160);
@@ -428,7 +428,7 @@
 }
 
 [data-theme='dark'] .glass {
-  background: oklch(20% 0.02 5 / 0.6);
+  background: oklch(20% 0.02 24 / 0.6);
   border: 1px solid oklch(100% 0 0 / 0.08);
 }
 
@@ -445,7 +445,7 @@
 }
 
 [data-theme='dark'] .glass-panel {
-  background: oklch(20% 0.02 5 / 0.88);
+  background: oklch(20% 0.02 24 / 0.88);
   border-color: var(--color-border);
 }
 
