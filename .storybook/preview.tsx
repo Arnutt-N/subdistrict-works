@@ -17,10 +17,16 @@ const preview: Preview = {
     },
     backgrounds: {
       options: {
-        // § อ้าง token ตรง ๆ (ไฟล์นี้ import tokens.css แล้วด้านบน) — เดิมเป็นค่าดิบ
-        // hue 245 ซึ่งตกค้างจาก palette ก่อน #55 ทำให้ทุก story ตรวจบนพื้นผิดสี
+        // § light อ้าง token ตรง ๆ ได้ แต่ dark ต้อง hardcode
+        // addon ทาสีลง `.sb-show-main` ซึ่งเป็น ancestor ของ div ที่ decorator
+        // ตั้ง [data-theme] ไว้ (ดูด้านล่าง) — var(--color-surface) จึง resolve
+        // เป็นค่าใน :root (light) เสมอ ไม่ว่าจะ toggle ธีมอะไรในทูลบาร์
+        //
+        // ⚠️ ค่า dark ด้านล่างเป็นสำเนาของ [data-theme='dark'] --color-surface
+        // ใน tokens.css ต้องแก้ตามทุกครั้งที่หมุน hue — ตกค้างมาแล้ว 2 รอบ
+        // (hue 245 → 255 → ปัจจุบัน 24)
         light: { name: 'light (default)', value: 'var(--color-surface)' },
-        dark: { name: 'dark (intentional)', value: 'oklch(15% 0.015 255)' },
+        dark: { name: 'dark (intentional)', value: 'oklch(15% 0.015 24)' },
       },
     },
     controls: { matchers: { color: /(background|color)$/i, date: /Date$/i } },

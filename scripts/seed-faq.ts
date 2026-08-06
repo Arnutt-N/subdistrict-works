@@ -80,6 +80,19 @@ const FAQ_ENTRIES = [
 ];
 
 async function main() {
+  // § guard idempotent — แบบเดียวกับ seed.ts:75
+  // เดิมเป็น insert ดิบในลูป รันซ้ำเมื่อไหร่ก็ได้แถวซ้ำทุกครั้ง ผลคือมีคำถาม
+  // เดียวกันหลายแถวที่คำตอบคนละเวอร์ชัน แล้ว matchFaq() เลือกตามคะแนนซึ่งเสมอกันได้
+  // → บอทอาจตอบเวอร์ชันเก่า ใช้ onConflict แทนไม่ได้เพราะ chat_faq ไม่มี
+  // unique constraint ใด ๆ (schema.ts:558 — question ไม่ unique) และการเพิ่ม
+  // unique index ย้อนหลังทำไม่ได้ถ้ามีแถวซ้ำอยู่ก่อนแล้ว
+  const existingFaq = (await db.select().from(chatFaq).limit(1))[0];
+  if (existingFaq) {
+    console.log('⏭  FAQ มีอยู่แล้ว — ข้าม\n');
+    await closeDb();
+    return;
+  }
+
   console.log('Seeding FAQ entries...');
 
   for (const entry of FAQ_ENTRIES) {

@@ -143,8 +143,9 @@ motion:
 > กฎนั้นถูกยกเลิกเมื่อย้ายไป blue 255° ซึ่งแก้ปัญหา accent มีค่าเท่ากับ
 > `--color-success` เป๊ะจน "ปุ่มหลัก" กับ "สถานะสำเร็จ" แยกไม่ออก
 > ปัจจุบัน palette ย้ายอีกครั้งเป็น **maroon 24° (#6A040F)** ตามสีแบรนด์ใหม่ —
-> หมุน hue ทั้งชุดโดยคงโครง L/C ของสเกลน้ำเงินเดิม ยกเว้นตระกูล accent ฝั่ง light
-> ที่มืดลงเพื่อตรึง `--color-accent-strong` = #6A040F เป๊ะ
+> หมุน hue ทั้งชุดโดยคงโครง L/C ของสเกลน้ำเงินเดิม ยกเว้นตระกูล accent — ฝั่ง light
+> มืดลงเพื่อตรึง `--color-accent-strong` ที่สีแบรนด์ #6A040F (ค่า oklch ปัดเป็น
+> `#6a0410` ต่าง 1/255 ในช่อง blue) ส่วนฝั่ง dark ลด chroma ตามเพดาน gamut ของ hue 24
 > ข้อควรระวังเดิมยังใช้ได้: สีหลักที่ chroma ต่ำจะดูจืดและเก่า จึงตั้ง chroma
 > ให้ใกล้เพดาน sRGB gamut ของแต่ละ lightness เพื่อคงความสด
 
@@ -156,19 +157,21 @@ motion:
 | `--color-accent-100` | `oklch(94% 0.029 24)` | พื้นไอคอน | — |
 | `--color-accent-200` | `oklch(90% 0.049 24)` | ขอบ badge | — |
 | `--color-accent` | `oklch(42% 0.155 24)` | ไอคอน, ตัวคั่น, mesh | 8.9:1 |
-| `--color-accent-700` | `oklch(37% 0.14 24)` | hover ของปุ่ม | 10.8:1 |
-| `--color-accent-strong` | `oklch(33.3% 0.131 24)` = #6A040F | ปุ่ม primary, ลิงก์ | 12.4:1 |
+| `--color-accent-700` | `oklch(37% 0.14 24)` | สำรองไว้สำหรับ hover ปุ่ม — ยังไม่มีที่ใช้จริง | 10.8:1 |
+| `--color-accent-strong` | `oklch(33.3% 0.131 24)` ≈ #6A040F | ปุ่ม primary, ลิงก์ | 12.4:1 |
 
 dark mode กลับทิศ: `accent` = `oklch(70% 0.14 24)`, `accent-strong` = `oklch(75% 0.14 24)`
 
 **เพิ่มขั้นใหม่ต้องดูเพดาน sRGB ก่อน** — chroma ไม่ใช่ตัวเลือกอิสระ ที่ hue 24 gamut จำกัดไว้ตาม lightness:
 
-| L | chroma สูงสุด (≈) | | L | chroma สูงสุด (≈) |
+| L | chroma สูงสุด | | L | chroma สูงสุด |
 |---|---|---|---|---|
-| 94% | 0.04 | | 70% | 0.17 |
-| 90% | 0.06 | | 42% | 0.18 |
-| 80% | 0.13 | | 37% | 0.16 |
-| 75% | 0.15 | | 33% | 0.14 |
+| 94% | 0.030 | | 70% | 0.191 |
+| 90% | 0.052 | | 42% | 0.170 |
+| 80% | 0.114 | | 37% | 0.150 |
+| 75% | 0.150 | | 33% | 0.134 |
+
+ค่าฝั่ง light อยู่ในเพดานทุกตัว — ยกเว้น dark `--color-accent-700` (`oklch(80% 0.12 24)`) ที่เกินเพดาน 0.114 และถูก gamut-map จริง คงไว้เพราะยังไม่มี component ไหนใช้ token นี้
 
 ค่าที่เกินเพดานจะถูก browser gamut-map ให้เอง (ลด chroma) แปลว่า**ตัวเลขใน token ไม่ใช่สีที่ผู้ใช้เห็น** และ `check-contrast.ts` ใช้ naive clipping ต่อ channel จึงรายงานคลาดจากที่ browser ทำเล็กน้อย
 
@@ -602,4 +605,4 @@ mobile(<sm)      tablet(sm–lg)        desktop(≥lg)
 
 ---
 
-*ออกแบบโดยอ้างอิง glm5-2-smart-service (glassmorphism + framer-motion) โดยปรับ palette เป็น blue civic + amber royal พร้อม a11y gates บังคับ (contrast AA, touch ≥44px, elderly ≥17px, reduced-motion respect)*
+*ออกแบบโดยอ้างอิง glm5-2-smart-service (glassmorphism + framer-motion) โดยปรับ palette เป็น maroon civic + amber royal พร้อม a11y gates บังคับ (contrast AA, touch ≥44px, elderly ≥17px, reduced-motion respect)*
