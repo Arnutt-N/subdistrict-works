@@ -4,9 +4,9 @@ import { cn } from '../../lib/cn';
 
 /**
  * Button — primitive หลัก (DESIGN.md §5 Buttons)
- * - ปุ่ม primary = Emerald gradient + white text
+ * - ปุ่ม primary = gradient maroon + white text
  * - touch target ≥44px (C6) ทุก variant
- * - focus-visible ring น้ำเงิน (ไม่ใช่ outline กรอบเดี่ยว)
+ * - focus-visible ring maroon (ไม่ใช่ outline กรอบเดี่ยว)
  * - ใช้ Radix Slot สำหรับ asChild (render เป็น <a>/<Link> ได้)
  */
 export type ButtonVariant = 'primary' | 'secondary' | 'destructive' | 'ghost' | 'outline';
