@@ -21,7 +21,7 @@ const base =
   'disabled:pointer-events-none disabled:opacity-50 motion-reduce:transition-none';
 
 const variantClass: Record<ButtonVariant, string> = {
-  // § primary = gradient น้ำเงิน ตาม DESIGN.md §5 / §2 "The One Blue Rule"
+  // § primary = gradient maroon ตาม DESIGN.md §5 / §2 "The One Accent Rule"
   // ก่อนหน้านี้ variant นี้ถูก implement เป็นสีทึบ bg-accent-strong ซึ่งไม่ตรง spec
   // ผลคือทุกหน้าที่อยากได้ปุ่มจริงตาม design (Hero, CTA, Navbar, login, track,
   // intake) ต้องเขียน style={{ background: 'linear-gradient(...)' }} ทับเอง
