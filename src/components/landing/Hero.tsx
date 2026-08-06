@@ -83,7 +83,7 @@ export function Hero() {
               transition={{ delay: reduce ? 0 : 0.4, duration: reduce ? 0 : 0.6 }}
               className="text-accent mt-3 text-base font-semibold lg:text-lg"
             >
-              ช่าง Subdistrict Works
+              Subdistrict Works
             </motion.p>
 
             <motion.p
