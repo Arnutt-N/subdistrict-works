@@ -123,9 +123,10 @@ migration `0014` + ปิดช่อง `seed-faq.ts`
 
 | คำถาม | สถานะ |
 |---|---|
-| production มีคำว่า "กอง" ค้างจริงไหม | ✅ **ตอบแล้ว 2026-08-06** — มี 3 departments + 1 FAQ (E14) |
-| local dev DB (docker `:5433`) มีสถานะแบบเดียวกันไหม | ❌ **ยังไม่ตอบ** — Docker daemon ไม่ได้รันอยู่ ไม่กระทบการตัดสินใจ เพราะ migration idempotent จะแก้ให้เองเมื่อใครก็ตามรัน `db:migrate` บน DB นั้น |
-| หลัง migrate แล้วต้อง redeploy Vercel ไหม | ❌ **ยังไม่ตอบ** — ชื่อหน่วยงานอ่านจาก DB ตอน request ถ้าไม่มี cache ชั้นอื่นก็ไม่ต้อง ยังไม่ได้ตรวจว่ามี `unstable_cache`/ISR ครอบ query นี้หรือไม่ **ต้องตรวจก่อนปิดงาน** |
+| production มีคำว่า "กอง" ค้างจริงไหม | ✅ **ตอบแล้ว 2026-08-06** — มี 3 departments + 1 FAQ (E14) → migration รันแล้ว 2026-08-07 เหลือ 0 ทั้งคู่ |
+| local dev DB (docker `:5433`) มีสถานะแบบเดียวกันไหม | ⏸ **ไม่ตอบ ไม่กระทบ** — Docker daemon ไม่ได้รันอยู่ migration idempotent จะแก้ให้เองเมื่อใครก็ตามรัน `db:migrate` บน DB นั้น |
+| หลัง migrate แล้วต้อง redeploy Vercel ไหม | ✅ **ตอบแล้ว: ไม่ต้อง** — `getActiveDepartments()` (`lib/queries/lookups.ts:18`) ถูกเรียกจาก `/admin/users` และ `/admin/cases/[id]` เท่านั้น ซึ่งเป็นหน้า auth-gated แบบ dynamic ไม่มี `unstable_cache` ครอบ ส่วน `revalidate = 3600` มีที่ `app/page.tsx:21` แต่หน้านั้นไม่ได้ query departments เลย |
+| ผลข้างเคียงที่พบตอนตรวจ | ⚠️ `getActiveDepartments()` เรียง `orderBy(departments.name)` — ชื่อที่สั้นลงทำให้**ลำดับใน dropdown เปลี่ยน** (เดิม กองการศึกษา→กองคลัง→กองช่าง→กำนัน→สำนักปลัด ตอนนี้ การศึกษา→กำนัน→คลัง→ช่าง→สำนักปลัด) เป็นผลตามธรรมชาติของการเรียงตามตัวอักษร ไม่ใช่บั๊ก |
 
 ## Risks
 
